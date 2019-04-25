@@ -126,7 +126,7 @@ app.get('/item', function (req, res) {
 // Not being used currently
 app.post('/', jsonParser, function (req, res) {
 	const name = req.body.name;				// req.body gets post request parameters, req.query gets get request
-	res.redirect('/index.html');
+	res.redirect('index.html');
 });
 
 app.listen(process.env.PORT);
