@@ -23,6 +23,7 @@ Last Updated: 4/24/2019
 	***************************************************************************/
 	function get() {
 		var search = document.getElementById("search").value;
+		console.log("Fuck Heroku");
 
 		// Validate input to prevent injections
 		var new_search = search.replace("<", "");
