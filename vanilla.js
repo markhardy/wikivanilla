@@ -36,11 +36,13 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
+				console.log("+");
 				displaySearchResults(json, search);
+				console.log("++");
 			})
 
 			.catch(function(error) {
-
+				console.log("-");
 			});
 	}
 
