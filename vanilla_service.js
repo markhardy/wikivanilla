@@ -56,7 +56,8 @@ connection.connect(function (err) {
 app.get('/', function(req, res){
 	res.header("Access-Control-Allow-Origin", "*");
 
-	res.send('Hello');
+	res.redirect('index.html');
+
 });
 
 
@@ -122,11 +123,5 @@ app.get('/item', function (req, res) {
 	});
 })
 
-
-// Not being used currently
-app.post('/', jsonParser, function (req, res) {
-	const name = req.body.name;				// req.body gets post request parameters, req.query gets get request
-	res.redirect('index.html');
-});
 
 app.listen(process.env.PORT);
