@@ -12,7 +12,7 @@ Last Updated: 4/24/2019
 "use strict";
 
 (function(){
-	let host = "https://wikivanilla.herokuapp.com:"
+	let host = "https://wikivanilla.herokuapp.com"
 	let port = "process.env.PORT";
 
 
@@ -29,7 +29,7 @@ Last Updated: 4/24/2019
 		var new_search = search.replace("<", "");
 		var validated = new_search.replace(">", "");
 
-		var url = host + port + "/search?search=" + validated;
+		var url = host + "/search?search=" + validated;
 
 		fetch(url, {method : 'GET'})
 
