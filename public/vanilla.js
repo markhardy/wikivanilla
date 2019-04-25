@@ -12,7 +12,7 @@ Last Updated: 4/24/2019
 "use strict";
 
 (function(){
-	let host = "https://wikivanilla.herokuapp.com"
+	let host = "https://wikivanilla.herokuapp.com:"
 	let port = "process.env.PORT";
 
 
