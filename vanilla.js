@@ -12,6 +12,8 @@ Last Updated: 4/24/2019
 "use strict";
 
 (function(){
+	let port = "process.env.PORT";
+
 
 	/***************************************************************************
 	get()
@@ -25,7 +27,7 @@ Last Updated: 4/24/2019
 		var new_search = search.replace("<", "");
 		var validated = new_search.replace(">", "");
 
-		var url = "http://localhost:3000/search?search=" + validated;
+		var url = "http://localhost:" + port + "/search?search=" + validated;
 
 		fetch(url, {method : 'GET'})
 
@@ -46,7 +48,8 @@ Last Updated: 4/24/2019
 	forwards that data to be displayed by the client.
 	***************************************************************************/
 	function getById(item_id) {
-		var url = "http://localhost:3000/item?item_id=" + item_id;
+
+		var url = "http://localhost:" + port + "/item?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
@@ -67,7 +70,7 @@ Last Updated: 4/24/2019
 	for those creatures.
 	***************************************************************************/
 	function getDroppedBy(item_id) {
-		var url = "http://localhost:3000/loot?item_id=" + item_id;
+		var url = "http://localhost:" + port + "/loot?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
