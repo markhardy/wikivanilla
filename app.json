@@ -1,0 +1,7 @@
+{
+"name": "Wiki Vanilla",
+"description": "A Database for Vanilla WoW",
+"repository": "https://github.com/markhardy/wikivanilla",
+"logo": "https://rawgit.com/heroku/node-js-sample/master/public/node.svg",
+"keywords": ["node", "express", "static"]
+}
