@@ -12,9 +12,6 @@ Last Updated: 4/24/2019
 "use strict";
 
 (function(){
-	let host = "https://wikivanilla.herokuapp.com"
-	let port = "process.env.PORT";
-
 
 	/***************************************************************************
 	get()
@@ -23,26 +20,22 @@ Last Updated: 4/24/2019
 	***************************************************************************/
 	function get() {
 		var search = document.getElementById("search").value;
-		console.log("Fuck Heroku");
 
 		// Validate input to prevent injections
 		var new_search = search.replace("<", "");
 		var validated = new_search.replace(">", "");
 
-		var url = host + "/search?search=" + validated;
+		var url = "https://wikivanilla.herokuapp.com/search?search=" + validated;
 
 		fetch(url, {method : 'GET'})
 
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				console.log("+");
 				displaySearchResults(json, search);
-				console.log("++");
 			})
 
 			.catch(function(error) {
-				console.log("-");
 			});
 	}
 
@@ -53,7 +46,7 @@ Last Updated: 4/24/2019
 	***************************************************************************/
 	function getById(item_id) {
 
-		var url = host + port + "/item?item_id=" + item_id;
+		var url = "https://wikivanilla.herokuapp.com/item?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
@@ -74,7 +67,7 @@ Last Updated: 4/24/2019
 	for those creatures.
 	***************************************************************************/
 	function getDroppedBy(item_id) {
-		var url = host + port + "/loot?item_id=" + item_id;
+		var url = "https://wikivanilla.herokuapp.com/loot?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
