@@ -88,6 +88,7 @@ td {
 }
 
 th {
+	border: 1px solid white;
 	color: yellow;
 }
 

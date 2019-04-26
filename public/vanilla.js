@@ -105,6 +105,8 @@ Last Updated: 4/24/2019
 		heading_row.appendChild(heading_name);
 		heading_row.appendChild(heading_level);
 		heading_row.appendChild(heading_chance);
+		
+		loot.appendChild(heading_row);
 
 		// For each creature that drops an item, display its name, level and
 		// chance to drop the item into the table
@@ -132,7 +134,6 @@ Last Updated: 4/24/2019
 			drop.innerHTML = npc["ChanceOrQuestChance"];
 			row.appendChild(drop);
 			loot.appendChild(row);
-			loot.appendChild(heading_row);
 
 		}
 	}
@@ -171,12 +172,32 @@ Last Updated: 4/24/2019
 		item_subclass.innerHTML = findItemSubclass(item_query["class"], item_query["subclass"]);
 		item_subclass.classList += "subclass";
 
-		var item_armor = document.createElement("p");
-		item_armor.innerHTML = String(item_query["armor"]) + " Armor";
+		var item_damage = document.createElement("p");
 
-		var item_durability = document.createElement("p");
-		var durability = String(item_query["MaxDurability"]);
-		item_durability.innerHTML = "Durability " + durability + " / " + durability;
+		for (var i = 1, i < 6, i++) {
+			if (item_query["dmg_min" + String(i)] > 0) {
+				const i_str = String(i);
+				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
+				var out_dmg = "";
+
+				if (dmg_type > 0) {
+					out_dmg = " " + dmg_type;
+				}
+
+				item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
+			}
+		}
+
+		if (item_armor > 0) {
+			var item_armor = document.createElement("p");
+			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
+		}
+
+		if (item_durability > 0) {
+			var item_durability = document.createElement("p");
+			var durability = String(item_query["MaxDurability"]);
+			item_durability.innerHTML = "Durability " + durability + " / " + durability;
+		}
 
 		var item_req_level = document.createElement("p");
 		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
@@ -184,6 +205,10 @@ Last Updated: 4/24/2019
 		stat_box.appendChild(item_title);
 		stat_box.appendChild(item_bonding);
 		stat_box.appendChild(item_subclass);
+
+		if (item_damage.innerHTML != "") {
+			stat_box.appendChild(item_damage);
+		}
 
 		stat_box.appendChild(item_slot);
 		stat_box.appendChild(item_armor);
@@ -205,6 +230,35 @@ Last Updated: 4/24/2019
 		results.appendChild(stat_box);
 
 		getDroppedBy(requested);   // what creatures drop the item?
+	}
+
+	function findItemDamage(dmg_type) {
+		var type = "";
+		switch (dmg_type) {
+			case 0:
+				type = "Physical";
+				break;
+			case 1:
+				type = "Holy";
+				break;
+			case 2:
+				type = "Fire";
+				break;
+			case 3:
+				type = "Nature";
+				break;
+			case 4:
+				type = "Frost";
+				break;
+			case 5:
+				type = "Shadow";
+				break;
+			case 6:
+				type = "Arcane";
+				break;
+			default:
+				type = "Physical";
+		}
 	}
 
 	/***************************************************************************
