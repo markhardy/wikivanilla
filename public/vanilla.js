@@ -74,6 +74,7 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
+				console.log(json);
 				displayDroppedBy(json);
 			})
 
