@@ -193,7 +193,7 @@ Last Updated: 4/24/2019
 
 		if (item_query["delay"] > 0) {
 			var item_attack_speed = document.createElement("p");
-			const speed = item_query["delay"] / 100;
+			const speed = item_query["delay"] / 1000;
 			item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
 			item_attack_speed.classList += "attackspeed";
 			stat_box.appendChild(item_attack_speed);
