@@ -161,16 +161,20 @@ Last Updated: 4/24/2019
 		var item_title = document.createElement("p");
 		item_title.classList += quality;
 		item_title.innerHTML = item_query["name"];
+		stat_box.appendChild(item_title);
 
 		var item_bonding = document.createElement("p");
 		item_bonding.innerHTML = findItemBonding(item_query["bonding"]);
+		stat_box.appendChild(item_bonding);
 
 		var item_slot = document.createElement("p");
 		item_slot.innerHTML = findItemSlot(item_query["InventoryType"]);
+		stat_box.appendChild(item_slot);
 
 		var item_subclass = document.createElement("p");
 		item_subclass.innerHTML = findItemSubclass(item_query["class"], item_query["subclass"]);
 		item_subclass.classList += "subclass";
+		stat_box.appendChild(item_subclass);
 
 		var item_damage = document.createElement("p");
 
@@ -179,39 +183,30 @@ Last Updated: 4/24/2019
 				const i_str = String(i);
 				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
 				var out_dmg = "";
-
 				if (dmg_type > 0) {
 					out_dmg = " " + dmg_type;
 				}
-
 				item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
+				stat_box.appendChild(item_damage);
 			}
 		}
 
-		if (item_armor > 0) {
+		if (item_query["armor"] > 0) {
 			var item_armor = document.createElement("p");
 			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
+			stat_box.appendChild(item_armor);
 		}
 
-		if (item_durability > 0) {
+		if (item_query["MaxDurability"] > 0) {
 			var item_durability = document.createElement("p");
 			var durability = String(item_query["MaxDurability"]);
 			item_durability.innerHTML = "Durability " + durability + " / " + durability;
+			stat_box.appendChild(item_durability);
 		}
 
 		var item_req_level = document.createElement("p");
 		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
-
-		stat_box.appendChild(item_title);
-		stat_box.appendChild(item_bonding);
-		stat_box.appendChild(item_subclass);
-
-		if (item_damage.innerHTML != "") {
-			stat_box.appendChild(item_damage);
-		}
-
-		stat_box.appendChild(item_slot);
-		stat_box.appendChild(item_armor);
+		stat_box.appendChild(item_req_level);
 
 		// Getting stat types (stamina, strength etc) from the JSON by incrementing
 		// 1-10 and adding them
@@ -224,8 +219,6 @@ Last Updated: 4/24/2019
 			stat_box.appendChild(item_stats);
 		}
 
-		stat_box.appendChild(item_durability);
-		stat_box.appendChild(item_req_level);
 		results.appendChild(heading);
 		results.appendChild(stat_box);
 
