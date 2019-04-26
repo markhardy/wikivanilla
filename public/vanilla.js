@@ -176,18 +176,19 @@ Last Updated: 4/24/2019
 		item_subclass.classList += "subclass";
 		stat_box.appendChild(item_subclass);
 
-		var item_damage = document.createElement("p");
 
 		for (var i = 1; i < 6; i++) {
+			var item_damage = document.createElement("p");
 			if (item_query["dmg_min" + String(i)] > 0) {
 				const i_str = String(i);
 				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
 				var out_dmg = "";
 				if (dmg_type > 0) {
 					out_dmg = " " + dmg_type;
+					item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
+					stat_box.appendChild(item_damage);
+					break;
 				}
-				item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
-				stat_box.appendChild(item_damage);
 			}
 		}
 
@@ -521,7 +522,7 @@ Last Updated: 4/24/2019
 				slot_name = "One-hand";
 				break;
 			case 14:
-				slot_name = "Shield";
+				slot_name = "Off hand";
 				break;
 			case 15:
 				slot_name = "Ranged";
