@@ -131,8 +131,9 @@ Last Updated: 4/24/2019
 			row.appendChild(level);
 			drop.innerHTML = npc["ChanceOrQuestChance"];
 			row.appendChild(drop);
-			loot.appendChild(heading_row);
 			loot.appendChild(row);
+			loot.appendChild(heading_row);
+
 		}
 	}
 
