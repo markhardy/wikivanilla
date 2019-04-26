@@ -174,7 +174,7 @@ Last Updated: 4/24/2019
 
 		var item_damage = document.createElement("p");
 
-		for (var i = 1, i < 6, i++) {
+		for (var i = 1; i < 6; i++) {
 			if (item_query["dmg_min" + String(i)] > 0) {
 				const i_str = String(i);
 				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
