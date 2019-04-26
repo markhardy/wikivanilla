@@ -191,6 +191,14 @@ Last Updated: 4/24/2019
 			}
 		}
 
+		if (item_query["delay"] > 0) {
+			var item_attack_speed = document.createElement("p");
+			const speed = item_query["delay"] / 100;
+			item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
+			item_attack_speed.classList += "attackspeed";
+			stat_box.appendChild(item_attack_speed);
+		}
+
 		if (item_query["armor"] > 0) {
 			var item_armor = document.createElement("p");
 			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
