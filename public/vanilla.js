@@ -195,10 +195,11 @@ Last Updated: 4/24/2019
 					stat_box.appendChild(item_attack_speed);
 
 					var dps = document.createElement("p");
-					const mean_damage = ((item_query["dmg_max" + i_str] - item_query["dmg_min" + i_str]) / 2) + item_query["dmg_min" + i_str];
-					const damage_per_sec = mean_damage / (item_query["delay"] / 1000).toFixed(2);
-					dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
+					const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min") + i_str];
+					const damage_per_sec = mean_damage / speed;
+					dps.innerHTML = "(" + String(damage_per_sec.toFixed(1)) + " damage per second)";
 					stat_box.appendChild(dps);
+					console.log("!");
 
 					i = 6;
 				}
