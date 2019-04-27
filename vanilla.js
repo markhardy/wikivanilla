@@ -732,16 +732,16 @@ Last Updated: 4/24/2019
 		middle.innerHTML = "";
 
 		// Clean up the page if needed
-		if (results.hasChildNodes()) {
-			results.removeChild(results.childNodes[0]);
-		}
+		//if (results.hasChildNodes()) {
+		//	results.removeChild(results.childNodes[0]);
+		//}
 
 		var i = 0;
 		var query_results = json_results["result"];
+		console.log(query_results);
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
-			console.log(query_results);
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
 			if (query_type = "item") {
 				getCreature(requested);
