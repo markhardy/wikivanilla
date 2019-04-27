@@ -70,7 +70,6 @@ app.get('/loot', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	const item_id = req.query.item_id;
 	var json = {};
-	var json_out = {};
 
 	var sql_query = "SELECT c.Name, c.MinLevel, c.MaxLevel, l.ChanceOrQuestChance FROM creature_template c INNER JOIN creature_loot_template l WHERE l.item = '" + item_id + "' AND c.Entry = l.entry ORDER BY l.ChanceOrQuestChance ASC";
 
@@ -103,6 +102,24 @@ app.get('/search', function (req, res) {
 	});
 })
 
+/***************************************************************************
+get/search
+Searches the database for items the user may be looking for.
+***************************************************************************/
+app.get('/npcsearch', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	const search = req.query.search;
+	var json = {};
+
+	var sql_query = "SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name = '" + search + "' ORDER BY c.name ASC";
+
+	var result = connection.query(sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["result"] = result;
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+})
 
 /***************************************************************************
 get/item

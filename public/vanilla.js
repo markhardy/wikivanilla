@@ -32,7 +32,26 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				displaySearchResults(json, search);
+				displaySearchResults(json, search, "item");
+			})
+
+			.catch(function(error) {
+			});
+	}
+
+	function getCreature(search) {
+		// Validate input to prevent injections
+		var new_search = search.replace("<", "");
+		var validated = new_search.replace(">", "");
+
+		var url = "https://wikivanilla.herokuapp.com/npcsearch?search=" + validated;
+
+		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				displaySearchResults(json, search, "npc");
 			})
 
 			.catch(function(error) {
@@ -49,6 +68,22 @@ Last Updated: 4/24/2019
 		var url = "https://wikivanilla.herokuapp.com/item?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				displayItem(json, item_id);
+			})
+
+			.catch(function(error) {
+
+			});
+	}
+
+	function getCreature(npc_id) {
+		var url = "https://wikivanilla.herokuapp.com/npc?npc_id=" + npc_id;
+
+		fetch(url, {method : 'GET'})		
 
 			.then(checkStatus)
 			.then(function(responseText) {
@@ -82,6 +117,8 @@ Last Updated: 4/24/2019
 
 			});
 	}
+
+
 
 	/***************************************************************************
 	displayDroppedBy(Dictionary)
@@ -684,9 +721,10 @@ Last Updated: 4/24/2019
 	Takes JSON of all items that correspond to the user's search and organizes
 	those items into a table.
 	***************************************************************************/
-	function displaySearchResults(json_results, requested) {
+	function displaySearchResults(json_results, requested, query_type) {
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
+		var npc_table = document.createElement("table");
 		var results = document.getElementById("results");
 		middle.innerHTML = "";
 
@@ -701,7 +739,7 @@ Last Updated: 4/24/2019
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
-		} else {
+		} else if (query_type == "item") {
 			results_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
@@ -723,8 +761,33 @@ Last Updated: 4/24/2019
 				}
 				results_table.appendChild(row);
 				i++;
+				getCreature(requested);
 			}
 			results.appendChild(results_table);
+		} else if (query_type == "npc") {
+			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
+			for (var query_result of query_results) {
+				var row = document.createElement("tr");
+				row.innerHTML = "<td>" + query_result["Name"] + "</td><td>" + query_result["MinLevel"] + "-" + query_result["MaxLevel"] + "</td><td>" + query_result["CreatureType"] + "</td>";
+
+				// This sets the row's .id attribute to be it's entry ID in the database
+				// and adds a click event to each row
+				const npc_id = query_result["Entry"];
+				row.id = query_result[npc_id];
+				row.addEventListener("click", function() {
+					getById(npc_id);
+				});
+
+				// Make every other row a different color
+				if (i % 2 == 0) {
+					row.classList.add("even-row");
+				} else {
+					row.classList.add("odd-row");
+				}
+				npc_table.appendChild(row);
+				i++;
+			}
+			results.appendChild(npc_table);
 		}
 	}
 
