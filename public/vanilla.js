@@ -722,6 +722,7 @@ Last Updated: 4/24/2019
 	those items into a table.
 	***************************************************************************/
 	function displaySearchResults(json_results, requested, query_type) {
+		console.log(query_type);
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
 		var npc_table = document.createElement("table");
@@ -761,9 +762,10 @@ Last Updated: 4/24/2019
 				}
 				results_table.appendChild(row);
 				i++;
-				getCreature(requested);
 			}
 			results.appendChild(results_table);
+			getCreature(requested);
+
 		} else if (query_type == "npc") {
 			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
 			for (var query_result of query_results) {
