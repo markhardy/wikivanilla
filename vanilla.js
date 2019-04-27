@@ -723,7 +723,8 @@ Last Updated: 4/24/2019
 	Takes JSON of all items that correspond to the user's search and organizes
 	those items into a table.
 	***************************************************************************/
-	function displaySearchResults(json_results, requested, "npc") {
+	function displaySearchResults(json_results, requested, query_type) {
+		query_type = "npc";
 		console.log(query_type);
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
