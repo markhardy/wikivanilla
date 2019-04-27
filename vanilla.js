@@ -743,9 +743,9 @@ Last Updated: 4/24/2019
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
-			if (query_type = "item") {
-				getCreature(requested);
-			}
+			
+			getCreature(requested);
+			
 		} else if (query_type == "item") {
 			results_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
 			for (var query_result of query_results) {
@@ -783,7 +783,7 @@ Last Updated: 4/24/2019
 				const npc_id = query_result["Entry"];
 				row.id = query_result[npc_id];
 				row.addEventListener("click", function() {
-					getById(npc_id);
+					//getById(npc_id);
 				});
 
 				// Make every other row a different color
