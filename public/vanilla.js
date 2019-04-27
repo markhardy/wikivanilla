@@ -187,21 +187,22 @@ Last Updated: 4/24/2019
 					out_dmg = " " + dmg_type;
 					item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
 					stat_box.appendChild(item_damage);
-
-					var item_attack_speed = document.createElement("p");
-					const speed = item_query["delay"] / 1000;
-					item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
-					item_attack_speed.classList += "attackspeed";
-					stat_box.appendChild(item_attack_speed);
-
-					var dps = document.createElement("p");
-					const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min" + i_str]);
-					const damage_per_sec = mean_damage / speed;
-					dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
-					stat_box.appendChild(dps);
-
-					i = 6;
 				}
+				
+				var item_attack_speed = document.createElement("p");
+				const speed = item_query["delay"] / 1000;
+				item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
+				item_attack_speed.classList += "attackspeed";
+				stat_box.appendChild(item_attack_speed);
+
+				var dps = document.createElement("p");
+				const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min" + i_str]);
+				const damage_per_sec = mean_damage / speed;
+				dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
+				stat_box.appendChild(dps);
+
+				i = 6;
+				
 			}
 		}
 
