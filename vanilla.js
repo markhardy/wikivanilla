@@ -32,7 +32,28 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				displaySearchResults(json, search);
+				displaySearchResults(json, search, "item");
+			})
+
+			.catch(function(error) {
+			});
+	}
+
+	function getCreature(search) {
+		// Validate input to prevent injections
+		console.log("Get creature");
+		var new_search = search.replace("<", "");
+		var validated = new_search.replace(">", "");
+
+		var url = "https://wikivanilla.herokuapp.com/npcsearch?search=" + validated;
+
+		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				console.log(json);
+				displaySearchResults(json, search, "npc");
 			})
 
 			.catch(function(error) {
@@ -61,6 +82,22 @@ Last Updated: 4/24/2019
 			});
 	}
 
+	function getCreature(npc_id) {
+		var url = "https://wikivanilla.herokuapp.com/npc?npc_id=" + npc_id;
+
+		fetch(url, {method : 'GET'})		
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				displayItem(json, item_id);
+			})
+
+			.catch(function(error) {
+
+			});
+	}
+
 	/***************************************************************************
 	getDroppedBy(Integer)
 	Requests information on what creatures drop a particular item and gets data
@@ -74,6 +111,7 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
+				console.log(json);
 				displayDroppedBy(json);
 			})
 
@@ -82,12 +120,16 @@ Last Updated: 4/24/2019
 			});
 	}
 
+
+
 	/***************************************************************************
 	displayDroppedBy(Dictionary)
 	Formats data as far as what creature or creatures drop an item. If no 
 	creature drops the item, the table will not exist.
 	***************************************************************************/
 	function displayDroppedBy(npc_loot) {
+		console.log(npc_loot);
+		var loot = document.getElementById("loot");
 
 		const npcs = npc_loot["result"];
 
@@ -104,11 +146,12 @@ Last Updated: 4/24/2019
 		heading_row.appendChild(heading_name);
 		heading_row.appendChild(heading_level);
 		heading_row.appendChild(heading_chance);
+		
+		loot.appendChild(heading_row);
 
 		// For each creature that drops an item, display its name, level and
 		// chance to drop the item into the table
 		for (var npc of npcs) {
-			var loot = document.getElementById("loot");
 
 			const row = document.createElement("tr");
 			const name = document.createElement("td");
@@ -130,8 +173,8 @@ Last Updated: 4/24/2019
 			row.appendChild(level);
 			drop.innerHTML = npc["ChanceOrQuestChance"];
 			row.appendChild(drop);
-			loot.appendChild(heading_row);
 			loot.appendChild(row);
+
 		}
 	}
 
@@ -158,33 +201,26 @@ Last Updated: 4/24/2019
 		var item_title = document.createElement("p");
 		item_title.classList += quality;
 		item_title.innerHTML = item_query["name"];
+		stat_box.appendChild(item_title);
 
 		var item_bonding = document.createElement("p");
 		item_bonding.innerHTML = findItemBonding(item_query["bonding"]);
+		stat_box.appendChild(item_bonding);
 
 		var item_slot = document.createElement("p");
 		item_slot.innerHTML = findItemSlot(item_query["InventoryType"]);
+		stat_box.appendChild(item_slot);
 
 		var item_subclass = document.createElement("p");
 		item_subclass.innerHTML = findItemSubclass(item_query["class"], item_query["subclass"]);
 		item_subclass.classList += "subclass";
-
-		var item_armor = document.createElement("p");
-		item_armor.innerHTML = String(item_query["armor"]) + " Armor";
-
-		var item_durability = document.createElement("p");
-		var durability = String(item_query["MaxDurability"]);
-		item_durability.innerHTML = "Durability " + durability + " / " + durability;
-
-		var item_req_level = document.createElement("p");
-		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
-
-		stat_box.appendChild(item_title);
-		stat_box.appendChild(item_bonding);
 		stat_box.appendChild(item_subclass);
 
-		stat_box.appendChild(item_slot);
-		stat_box.appendChild(item_armor);
+		if (item_query["armor"] > 0) {
+			var item_armor = document.createElement("p");
+			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
+			stat_box.appendChild(item_armor);
+		}
 
 		// Getting stat types (stamina, strength etc) from the JSON by incrementing
 		// 1-10 and adding them
@@ -196,13 +232,99 @@ Last Updated: 4/24/2019
 			item_stats.innerHTML = stat_text;
 			stat_box.appendChild(item_stats);
 		}
+		
+		for (var i = 1; i < 6; i++) {
+			var item_damage = document.createElement("p");
+			if (item_query["dmg_min" + String(i)] > 0) {
+				const i_str = String(i);
+				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
+				var out_dmg = "";
+				if (dmg_type > 0) {
+					out_dmg = " " + dmg_type;
+					item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
+					stat_box.appendChild(item_damage);
+				}
 
-		stat_box.appendChild(item_durability);
+				var item_attack_speed = document.createElement("p");
+				const speed = item_query["delay"] / 1000;
+				item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
+				item_attack_speed.classList += "attackspeed";
+				stat_box.appendChild(item_attack_speed);
+
+				var dps = document.createElement("p");
+				const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min" + i_str]);
+				const damage_per_sec = mean_damage / speed;
+				dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
+				stat_box.appendChild(dps);
+
+				i = 6;
+				
+			}
+		}
+/*
+		if (item_query["delay"] > 0) {
+			var item_attack_speed = document.createElement("p");
+			const speed = item_query["delay"] / 1000;
+			item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
+			item_attack_speed.classList += "attackspeed";
+			stat_box.appendChild(item_attack_speed);
+		}
+
+		if (item_query["delay"] > 0) {
+			var dps = document.createElement("p");
+			const mean_damage = ((item_query["dmg_max"] - item_query["dmg_min"]) / 2) + item_query["dmg_min"];
+			const damage_per_sec = mean_damage / (item_query["delay"] / 1000).toFixed(2);
+			dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
+			stat_box.appendChild(dps);
+		}
+*/
+
+		if (item_query["MaxDurability"] > 0) {
+			var item_durability = document.createElement("p");
+			var durability = String(item_query["MaxDurability"]);
+			item_durability.innerHTML = "Durability " + durability + " / " + durability;
+			stat_box.appendChild(item_durability);
+		}
+
+		var item_req_level = document.createElement("p");
+		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
 		stat_box.appendChild(item_req_level);
+
+
+
 		results.appendChild(heading);
 		results.appendChild(stat_box);
 
 		getDroppedBy(requested);   // what creatures drop the item?
+	}
+
+	function findItemDamage(dmg_type) {
+		var type = "";
+		switch (dmg_type) {
+			case 0:
+				type = "Physical";
+				break;
+			case 1:
+				type = "Holy";
+				break;
+			case 2:
+				type = "Fire";
+				break;
+			case 3:
+				type = "Nature";
+				break;
+			case 4:
+				type = "Frost";
+				break;
+			case 5:
+				type = "Shadow";
+				break;
+			case 6:
+				type = "Arcane";
+				break;
+			default:
+				type = "Physical";
+		}
 	}
 
 	/***************************************************************************
@@ -464,7 +586,7 @@ Last Updated: 4/24/2019
 				slot_name = "One-hand";
 				break;
 			case 14:
-				slot_name = "Shield";
+				slot_name = "Off hand";
 				break;
 			case 15:
 				slot_name = "Ranged";
@@ -601,9 +723,11 @@ Last Updated: 4/24/2019
 	Takes JSON of all items that correspond to the user's search and organizes
 	those items into a table.
 	***************************************************************************/
-	function displaySearchResults(json_results, requested) {
+	function displaySearchResults(json_results, requested, query_type) {
+		console.log(query_type);
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
+		var npc_table = document.createElement("table");
 		var results = document.getElementById("results");
 		middle.innerHTML = "";
 
@@ -618,7 +742,10 @@ Last Updated: 4/24/2019
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
-		} else {
+			if (query_type = "item") {
+				getCreature(requested);
+			}
+		} else if (query_type == "item") {
 			results_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
@@ -642,6 +769,32 @@ Last Updated: 4/24/2019
 				i++;
 			}
 			results.appendChild(results_table);
+			getCreature(requested);
+
+		} else if (query_type == "npc") {
+			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
+			for (var query_result of query_results) {
+				var row = document.createElement("tr");
+				row.innerHTML = "<td>" + query_result["Name"] + "</td><td>" + query_result["MinLevel"] + "-" + query_result["MaxLevel"] + "</td><td>" + query_result["CreatureType"] + "</td>";
+
+				// This sets the row's .id attribute to be it's entry ID in the database
+				// and adds a click event to each row
+				const npc_id = query_result["Entry"];
+				row.id = query_result[npc_id];
+				row.addEventListener("click", function() {
+					getById(npc_id);
+				});
+
+				// Make every other row a different color
+				if (i % 2 == 0) {
+					row.classList.add("even-row");
+				} else {
+					row.classList.add("odd-row");
+				}
+				npc_table.appendChild(row);
+				i++;
+			}
+			results.appendChild(npc_table);
 		}
 	}
 
