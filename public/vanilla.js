@@ -89,6 +89,7 @@ Last Updated: 4/24/2019
 	creature drops the item, the table will not exist.
 	***************************************************************************/
 	function displayDroppedBy(npc_loot) {
+		console.log("displayloot");
 
 		const npcs = npc_loot["result"];
 
