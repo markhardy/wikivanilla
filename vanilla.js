@@ -741,6 +741,7 @@ Last Updated: 4/24/2019
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
+			console.log(query_results);
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
 			if (query_type = "item") {
 				getCreature(requested);
