@@ -176,7 +176,23 @@ Last Updated: 4/24/2019
 		item_subclass.classList += "subclass";
 		stat_box.appendChild(item_subclass);
 
+		if (item_query["armor"] > 0) {
+			var item_armor = document.createElement("p");
+			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
+			stat_box.appendChild(item_armor);
+		}
 
+		// Getting stat types (stamina, strength etc) from the JSON by incrementing
+		// 1-10 and adding them
+		for (var i = 1; i < 11; i++) {
+			var current_stat_type = "stat_type" + String(i);
+			var current_stat_value = "stat_value" + String(i);
+			var stat_text = findItemStats(item_query[current_stat_type], item_query[current_stat_value]);
+			var item_stats = document.createElement("p");
+			item_stats.innerHTML = stat_text;
+			stat_box.appendChild(item_stats);
+		}
+		
 		for (var i = 1; i < 6; i++) {
 			var item_damage = document.createElement("p");
 			if (item_query["dmg_min" + String(i)] > 0) {
@@ -188,7 +204,7 @@ Last Updated: 4/24/2019
 					item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
 					stat_box.appendChild(item_damage);
 				}
-				
+
 				var item_attack_speed = document.createElement("p");
 				const speed = item_query["delay"] / 1000;
 				item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
@@ -205,7 +221,7 @@ Last Updated: 4/24/2019
 				
 			}
 		}
-
+/*
 		if (item_query["delay"] > 0) {
 			var item_attack_speed = document.createElement("p");
 			const speed = item_query["delay"] / 1000;
@@ -213,7 +229,7 @@ Last Updated: 4/24/2019
 			item_attack_speed.classList += "attackspeed";
 			stat_box.appendChild(item_attack_speed);
 		}
-/*
+
 		if (item_query["delay"] > 0) {
 			var dps = document.createElement("p");
 			const mean_damage = ((item_query["dmg_max"] - item_query["dmg_min"]) / 2) + item_query["dmg_min"];
@@ -222,11 +238,6 @@ Last Updated: 4/24/2019
 			stat_box.appendChild(dps);
 		}
 */
-		if (item_query["armor"] > 0) {
-			var item_armor = document.createElement("p");
-			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
-			stat_box.appendChild(item_armor);
-		}
 
 		if (item_query["MaxDurability"] > 0) {
 			var item_durability = document.createElement("p");
@@ -239,16 +250,7 @@ Last Updated: 4/24/2019
 		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
 		stat_box.appendChild(item_req_level);
 
-		// Getting stat types (stamina, strength etc) from the JSON by incrementing
-		// 1-10 and adding them
-		for (var i = 1; i < 11; i++) {
-			var current_stat_type = "stat_type" + String(i);
-			var current_stat_value = "stat_value" + String(i);
-			var stat_text = findItemStats(item_query[current_stat_type], item_query[current_stat_value]);
-			var item_stats = document.createElement("p");
-			item_stats.innerHTML = stat_text;
-			stat_box.appendChild(item_stats);
-		}
+
 
 		results.appendChild(heading);
 		results.appendChild(stat_box);
