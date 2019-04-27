@@ -212,7 +212,7 @@ Last Updated: 4/24/2019
 			item_attack_speed.classList += "attackspeed";
 			stat_box.appendChild(item_attack_speed);
 		}
-
+/*
 		if (item_query["delay"] > 0) {
 			var dps = document.createElement("p");
 			const mean_damage = ((item_query["dmg_max"] - item_query["dmg_min"]) / 2) + item_query["dmg_min"];
@@ -220,7 +220,7 @@ Last Updated: 4/24/2019
 			dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
 			stat_box.appendChild(dps);
 		}
-
+*/
 		if (item_query["armor"] > 0) {
 			var item_armor = document.createElement("p");
 			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
