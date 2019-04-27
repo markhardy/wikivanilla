@@ -90,6 +90,7 @@ Last Updated: 4/24/2019
 	***************************************************************************/
 	function displayDroppedBy(npc_loot) {
 		console.log(npc_loot);
+		var loot = document.getElementById("loot");
 
 		const npcs = npc_loot["result"];
 
@@ -112,7 +113,6 @@ Last Updated: 4/24/2019
 		// For each creature that drops an item, display its name, level and
 		// chance to drop the item into the table
 		for (var npc of npcs) {
-			var loot = document.getElementById("loot");
 
 			const row = document.createElement("tr");
 			const name = document.createElement("td");
