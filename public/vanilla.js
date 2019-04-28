@@ -32,7 +32,7 @@ Last Updated: 4/24/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				displaySearchResults(json, search, "item");
+				displaySearchResults(json, search);
 			})
 
 			.catch(function(error) {
@@ -41,6 +41,7 @@ Last Updated: 4/24/2019
 
 	function getCreature(search) {
 		// Validate input to prevent injections
+		console.log("Get creature");
 		var new_search = search.replace("<", "");
 		var validated = new_search.replace(">", "");
 
@@ -52,7 +53,7 @@ Last Updated: 4/24/2019
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
 				console.log(json);
-				displaySearchResults(json, search, "npc");
+				displayCreatureSearchResults(json, search);
 			})
 
 			.catch(function(error) {
@@ -717,16 +718,52 @@ Last Updated: 4/24/2019
 		results.innerHTML = "";
 	}
 
+	function displayCreatureSearchResults(json_results, requested) {
+		var npc_results = document.getElementById("npc_results");
+		var npc_table = document.createElement("table");
+
+		var i = 0;
+		var query_results = json_results["result"];
+
+		// If the results are empty, notify the user, otherwise iterate
+		if (query_results.length == 0) {
+			npc.innerHTML = "<p>" + requested + " not found in database</p>"
+		} else {
+			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
+			for (var query_result of query_results) {
+				var row = document.createElement("tr");
+				row.innerHTML = "<td>" + query_result["Name"] + "</td><td>" + query_result["MinLevel"] + "-" + query_result["MaxLevel"] + "</td><td>" + query_result["CreatureType"] + "</td>";
+
+				// This sets the row's .id attribute to be it's entry ID in the database
+				// and adds a click event to each row
+				/*
+				const item_id = query_result["entry"];
+				row.id = query_result[item_id];
+				row.addEventListener("click", function() {
+					getById(item_id);
+				});
+				*/
+				// Make every other row a different color
+				if (i % 2 == 0) {
+					row.classList.add("even-row");
+				} else {
+					row.classList.add("odd-row");
+				}
+				npc_table.appendChild(row);
+				i++;
+			}
+			npc_results.appendChild(npc_table);
+		}
+	}
+
 	/***************************************************************************
 	displaySearchResults(Dictionary, String)
 	Takes JSON of all items that correspond to the user's search and organizes
 	those items into a table.
 	***************************************************************************/
-	function displaySearchResults(json_results, requested, query_type) {
-		console.log(query_type);
+	function displaySearchResults(json_results, requested) {
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
-		var npc_table = document.createElement("table");
 		var results = document.getElementById("results");
 		middle.innerHTML = "";
 
@@ -741,7 +778,7 @@ Last Updated: 4/24/2019
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
 			results.innerHTML = "<p>" + requested + " not found in database</p>"
-		} else if (query_type == "item") {
+		} else {
 			results_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
@@ -765,35 +802,9 @@ Last Updated: 4/24/2019
 				i++;
 			}
 			results.appendChild(results_table);
-			getCreature(requested);
-
-		} else if (query_type == "npc") {
-			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
-			for (var query_result of query_results) {
-				var row = document.createElement("tr");
-				row.innerHTML = "<td>" + query_result["Name"] + "</td><td>" + query_result["MinLevel"] + "-" + query_result["MaxLevel"] + "</td><td>" + query_result["CreatureType"] + "</td>";
-
-				// This sets the row's .id attribute to be it's entry ID in the database
-				// and adds a click event to each row
-				const npc_id = query_result["Entry"];
-				row.id = query_result[npc_id];
-				row.addEventListener("click", function() {
-					getById(npc_id);
-				});
-
-				// Make every other row a different color
-				if (i % 2 == 0) {
-					row.classList.add("even-row");
-				} else {
-					row.classList.add("odd-row");
-				}
-				npc_table.appendChild(row);
-				i++;
-			}
-			results.appendChild(npc_table);
 		}
+		getCreature(requested);
 	}
-
 
 	/***************************************************************************
 	checkStatus(response)
