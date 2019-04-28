@@ -83,7 +83,7 @@ Last Updated: 4/24/2019
 	}
 
 	function getCreature(npc_id) {
-		var url = "https://wikivanilla.herokuapp.com/npc?npc_id=" + npc_id;
+		var url = "https://wikivanilla.herokuapp.com/npcsearch?npc_id=" + npc_id;
 
 		fetch(url, {method : 'GET'})		
 
