@@ -82,22 +82,6 @@ Last Updated: 4/24/2019
 			});
 	}
 
-	function getCreature(npc_id) {
-		var url = "https://wikivanilla.herokuapp.com/npcsearch?npc_id=" + npc_id;
-
-		fetch(url, {method : 'GET'})		
-
-			.then(checkStatus)
-			.then(function(responseText) {
-				var json = JSON.parse(responseText);
-				displayItem(json, item_id);
-			})
-
-			.catch(function(error) {
-
-			});
-	}
-
 	/***************************************************************************
 	getDroppedBy(Integer)
 	Requests information on what creatures drop a particular item and gets data
