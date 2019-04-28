@@ -19,6 +19,9 @@ var pug = require('pug');
 const bodyParser = require('body-parser');
 const jsonParser = bodyParser.json();
 const mysql = require('mysql');
+const BnetStrategy = require('passport-bnet').Strategy;
+const BNET_ID = "8060d2f0f7894639b5738ea875f95fb1";
+const BNET_SECRET = "NOY9SPJooNxocG2IFeSYDv917bNShNNl";
 
 app.use(express.static('public'));
 
@@ -30,6 +33,16 @@ app.use(function(req, res, next) {
 });
 
 console.log("web service started");
+
+// Use the BnetStrategy within Passport.
+passport.use(new BnetStrategy({
+    clientID: BNET_ID,
+    clientSecret: BNET_SECRET,
+    callbackURL: "https://wikivanilla.herokuapp.com/auth/bnet/callback",
+    region: "us"
+}, function(accessToken, refreshToken, profile, done) {
+    return done(null, profile);
+}));
 
 /***************************************************************************
 *************************** MySQL Configuration ****************************
@@ -52,6 +65,63 @@ connection.connect(function (err) {
 
 /**************************************************************************/
 
+/***************************************************************************
+****************************** Blizzard  API *******************************
+***************************************************************************/
+/*app.get('/auth/bnet',
+    passport.authenticate('bnet'));
+
+app.get('/auth/bnet/callback',
+    passport.authenticate('bnet', { failureRedirect: '/' }),
+    function(req, res){
+        res.redirect('/authenticated');
+    });*/
+
+// Initialize Passport!  Also use passport.session() middleware, to support
+// persistent login sessions (recommended).
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/auth/github', passport.authenticate('github'));
+
+app.get('/auth/github/callback',
+        passport.authenticate('github', { failureRedirect: '/' }),
+        function(req, res){
+          res.redirect('/');
+        });
+
+app.get('/auth/bnet',
+        passport.authenticate('bnet'));
+
+app.get('/auth/bnet/callback',
+        passport.authenticate('bnet', { failureRedirect: '/' }),
+        function(req, res){
+          res.redirect('/');
+        });
+
+app.get('/oauthtest', function(req, res) {
+  if(req.isAuthenticated()) {
+    var output = '<h1>Express OAuth Test</h1>' + req.user.id + '<br>';
+    if(req.user.battletag) {
+      output += req.user.battletag + '<br>';
+    }
+    output += '<a href="/logout">Logout</a>';
+    res.send(output);
+  } else {
+    res.send('<h1>Express OAuth Test</h1>' +
+             '<a href="/auth/github">Login with Github</a><br>' +
+             '<a href="/auth/bnet">Login with Bnet</a>');
+  }
+});
+
+app.get('/logout', function(req, res) {
+  req.logout();
+  res.redirect('/');
+});
+
+/**************************************************************************/
+
+
 // Not used
 app.get('/', function(req, res){
 	res.header("Access-Control-Allow-Origin", "*");
@@ -69,6 +139,24 @@ if applicable.
 app.get('/loot', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	const item_id = req.query.item_id;
+	var json = {};
+
+	var sql_query = "SELECT c.Name, c.MinLevel, c.MaxLevel, l.ChanceOrQuestChance FROM creature_template c INNER JOIN creature_loot_template l WHERE l.item = '" + item_id + "' AND c.Entry = l.entry ORDER BY l.ChanceOrQuestChance ASC";
+
+	var result = connection.query(sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["result"] = result;
+
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+})
+
+app.get('/pvp', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	const character = req.query.character;
+	const realm = req.query.realm;
+
 	var json = {};
 
 	var sql_query = "SELECT c.Name, c.MinLevel, c.MaxLevel, l.ChanceOrQuestChance FROM creature_template c INNER JOIN creature_loot_template l WHERE l.item = '" + item_id + "' AND c.Entry = l.entry ORDER BY l.ChanceOrQuestChance ASC";

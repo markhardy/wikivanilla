@@ -28,7 +28,7 @@ h2 {
 	text-align: center;
 }
 
-#results {
+#results, #npc_results {
 	color: white;
 	font-family: 'Exo', sans-serif;
 	margin-left: 10%;

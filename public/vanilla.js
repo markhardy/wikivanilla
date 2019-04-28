@@ -711,7 +711,7 @@ Last Updated: 4/24/2019
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
-			npc.innerHTML = "<p>" + requested + " not found in database</p>"
+			npc_results.innerHTML = "<p>" + requested + " not found in database</p>"
 		} else {
 			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
 			for (var query_result of query_results) {
