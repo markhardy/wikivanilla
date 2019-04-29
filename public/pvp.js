@@ -50,12 +50,12 @@ Last Updated: 4/26/2019
 		const shoulder = document.createElement("p");
 		const back = document.createElement("p");
 		const chest = document.createElement("p");
-		/*
 		const wrist = document.createElement("p");
 		const hands = document.createElement("p");
 		const waist = document.createElement("p");
 		const legs = document.createElement("p");
 		const feet = document.createElement("p");
+		/*
 		const finger1 = document.createElement("p");
 		const finger2 = document.createElement("p");
 		const trinket1 = document.createElement("p");
@@ -68,7 +68,7 @@ Last Updated: 4/26/2019
 		realm_name.innerHTML = character_json["realm"];
 		level.innerHTML = character_json["level"];
 		achievement_points.innerHTML = character_json["achievementPoints"];
-		avg_item_level.innerHTML = character_json["averageItemLevel"];
+		avg_item_level.innerHTML = items["averageItemLevel"];
 
 		// Here's where it gets complicated. items holds the dictionary of all
 		// items the character has equipped and each item slot eg helm has a
@@ -79,12 +79,12 @@ Last Updated: 4/26/2019
 		shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
 		back.innerHTML = "Back: " + items["back"]["name"];
 		chest.innerHTML = "Chest: " + items["chest"]["name"];
-		/*
 		wrist.innerHTML = "Wrist: " + items["wrist"]["name"];
 		hands.innerHTML = "Hands: " + items["hands"]["name"];
 		waist.innerHTML = "Waist: " + items["waist"]["name"];
 		legs.innerHTML = "Legs: " + items["legs"]["name"];
 		feet.innerHTML = "Feet: " + items["feet"]["name"];
+		/*
 		finger1.innerHTML = "Ring: " + items["finger1"]["name"];
 		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
 		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
@@ -105,12 +105,12 @@ Last Updated: 4/26/2019
 		results.appendChild(shoulder);
 		results.appendChild(back);
 		results.appendChild(chest);
-		/*
 		results.appendChild(wrist);
 		results.appendChild(hands);
 		results.appendChild(waist);
 		results.appendChild(legs);
 		results.appendChild(feet);
+		/*
 		results.appendChild(finger1);
 		results.appendChild(finger2);
 		results.appendChild(trinket1);
