@@ -40,80 +40,132 @@ Last Updated: 4/26/2019
 	function displayCharacter(character_json) {
 		const items = character_json["items"];
 		const results = document.getElementById("results");
-		const char_name = document.createElement("h1");
-		const realm_name = document.createElement("p");
-		const level = document.createElement("p");
-		const achievement_points = document.createElement("p");
-		const avg_item_level = document.createElement("p");
-		const head = document.createElement("p");
-		const neck = document.createElement("p");
-		const shoulder = document.createElement("p");
-		const back = document.createElement("p");
-		const chest = document.createElement("p");
-		const wrist = document.createElement("p");
-		const hands = document.createElement("p");
-		const waist = document.createElement("p");
-		const legs = document.createElement("p");
-		const feet = document.createElement("p");
-		const finger1 = document.createElement("p");
-		const finger2 = document.createElement("p");
-		const trinket1 = document.createElement("p");
-		const trinket2 = document.createElement("p");
-		const mainhand = document.createElement("p");
-		const offhand = document.createElement("p");
-		//const ranged = document.createElement("p");
 
-		char_name.innerHTML = character_json["name"];
-		realm_name.innerHTML = character_json["realm"];
-		level.innerHTML = character_json["level"];
-		achievement_points.innerHTML = character_json["achievementPoints"];
-		avg_item_level.innerHTML = items["averageItemLevel"];
+		if (character_json["name"]) {
+			const char_name = document.createElement("h1");
+			char_name.innerHTML = character_json["name"];
+			results.appendChild(char_name);
+		}
 
-		// Here's where it gets complicated. items holds the dictionary of all
-		// items the character has equipped and each item slot eg helm has a
-		// dictionary of the item's attributes..
+		if (character_json["realm"]) {
+			const realm_name = document.createElement("p");
+			realm_name.innerHTML = character_json["realm"];
+			results.appendChild(realm_name);
+		}
 
-		head.innerHTML = "Head: " + items["head"]["name"];
-		neck.innerHTML = "Neck: " + items["neck"]["name"];
-		shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
-		back.innerHTML = "Back: " + items["back"]["name"];
-		chest.innerHTML = "Chest: " + items["chest"]["name"];
-		wrist.innerHTML = "Wrist: " + items["wrist"]["name"];
-		hands.innerHTML = "Hands: " + items["hands"]["name"];
-		waist.innerHTML = "Waist: " + items["waist"]["name"];
-		legs.innerHTML = "Legs: " + items["legs"]["name"];
-		feet.innerHTML = "Feet: " + items["feet"]["name"];
-		finger1.innerHTML = "Ring: " + items["finger1"]["name"];
-		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
-		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
-		trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
-		mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
-		offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
-		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
+		if (character_json["level"]) {
+			const level = document.createElement("p");
+			level.innerHTML = character_json["level"];
+			results.appendChild(level);
+		}
 
+		if (character_json["achievementPoints"]) {
+			const achievement_points = document.createElement("p");
+			achievement_points.innerHTML = character_json["achievementPoints"];
+			results.appendChild(achievement_points);
+		}
 
-		results.appendChild(char_name);
-		results.appendChild(realm_name);
-		results.appendChild(level);
-		results.appendChild(achievement_points);
-		results.appendChild(avg_item_level);
-		results.appendChild(head);
-		results.appendChild(neck);
-		results.appendChild(shoulder);
-		results.appendChild(back);
-		results.appendChild(chest);
-		results.appendChild(wrist);
-		results.appendChild(hands);
-		results.appendChild(waist);
-		results.appendChild(legs);
-		results.appendChild(feet);
-		results.appendChild(finger1);
-		results.appendChild(finger2);
-		results.appendChild(trinket1);
-		results.appendChild(trinket2);
-		results.appendChild(mainhand);
-		results.appendChild(offhand);
-		//results.appendChild(ranged);
+		if (items["averageItemLevel"]) {
+			const avg_item_level = document.createElement("p");
+			avg_item_level.innerHTML = items["averageItemLevel"];
+			results.appendChild(avg_item_level);
+		}
+
+		if (items["head"]) {
+			const head = document.createElement("p");
+			head.innerHTML = "Head: " + items["head"]["name"];
+			results.appendChild(head);
+		}
+
+		if (items["neck"]) {
+			const neck = document.createElement("p");
+			neck.innerHTML = "Neck: " + items["neck"]["name"];
+			results.appendChild(neck);
+		}
+
+		if (items["shoulder"]) {
+			const shoulder = document.createElement("p");
+			shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
+			results.appendChild(shoulder);
+		}
+
+		if (items["back"]) {
+			const back = document.createElement("p");
+			back.innerHTML = "Back: " + items["back"]["name"];
+			results.appendChild(back);
+		}
+
+		if (items["chest"]) {
+			const chest = document.createElement("p");
+			chest.innerHTML = "Chest: " + items["chest"]["name"];
+			results.appendChild(chest);
+		}
+
+		if (items["wrist"]) {
+			const wrist = document.createElement("p");
+			wrist.innerHTML = "Wrist: " + items["wrist"]["name"];
+			results.appendChild(wrist);
+		}
+
+		if (items["hands"]) {
+			const hands = document.createElement("p");
+			hands.innerHTML = "Hands: " + items["hands"]["name"];
+			results.appendChild(hands);
+		}
+
+		if (items["waist"]) {
+			const waist = document.createElement("p");
+			waist.innerHTML = "Waist: " + items["waist"]["name"];
+			results.appendChild(waist);
+		}
+
+		if (items["legs"]) {
+			const legs = document.createElement("p");
+			legs.innerHTML = "Legs: " + items["legs"]["name"];
+			results.appendChild(legs);
+		}
+
+		if (items["feet"]) {
+			const feet = document.createElement("p");
+			feet.innerHTML = "Feet: " + items["feet"]["name"];
+			results.appendChild(feet);
+		}
+
+		if (items["finger1"]) {
+			const finger1 = document.createElement("p");
+			finger1.innerHTML = "Ring: " + items["finger1"]["name"];
+			results.appendChild(finger1);
+		}
+
+		if (items["finger2"]) {
+			const finger2 = document.createElement("p");
+			finger2.innerHTML = "Ring: " + items["finger2"]["name"];
+			results.appendChild(finger2);
+		}
+
+		if (items["trinket1"]) {
+			const trinket1 = document.createElement("p");
+			trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
+			results.appendChild(trinket1);
+		}
+
+		if (items["trinket2"]) {
+			const trinket2 = document.createElement("p");
+			trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
+			results.appendChild(trinket2);
+		}
+
+		if (items["mainHand"]) {
+			const mainhand = document.createElement("p");
+			mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
+			results.appendChild(mainhand);
+		}
+
+		if (items["offHand"]) {
+			const offhand = document.createElement("p");
+			offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
+			results.appendChild(offhand);
+		}
 	}
 
 	/***************************************************************************
