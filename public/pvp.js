@@ -87,8 +87,8 @@ Last Updated: 4/26/2019
 		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
 		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
 		trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
-		mainhand.innerHTML = "Main Hand: " + items["mainhand"]["name"];
-		offhand.innerHTML = "Off Hand: " + items["offhand"]["name"];
+		mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
+		offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
 		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
 
 
