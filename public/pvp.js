@@ -50,7 +50,7 @@ Last Updated: 4/26/2019
 		const shoulder = document.createElement("p");
 		const back = document.createElement("p");
 		const chest = document.createElement("p");
-		const wrists = document.createElement("p");
+		const wrist = document.createElement("p");
 		const hands = document.createElement("p");
 		const waist = document.createElement("p");
 		const legs = document.createElement("p");
@@ -78,7 +78,7 @@ Last Updated: 4/26/2019
 		shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
 		back.innerHTML = "Back: " + items["back"]["name"];
 		chest.innerHTML = "Chest: " + items["chest"]["name"];
-		wrists.innerHTML = "Wrists: " + items["wrists"]["name"];
+		wrist.innerHTML = "Wrist: " + items["wrist"]["name"];
 		hands.innerHTML = "Hands: " + items["hands"]["name"];
 		waist.innerHTML = "Waist: " + items["waist"]["name"];
 		legs.innerHTML = "Legs: " + items["legs"]["name"];
