@@ -38,14 +38,34 @@ Last Updated: 4/26/2019
 	}
 
 	function displayCharacter(character_json) {
+		const items = character_json["items"];
 		const results = document.getElementById("results");
 		const char_name = document.createElement("h1");
-		const realm_name = document.createElement("h2");
-		const level = document.createElement("h2");
+		const realm_name = document.createElement("p");
+		const level = document.createElement("p");
+		const achievement_points = document.createElement("p");
+		const avg_item_level = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+		const head = document.createElement("p");
+
 
 		char_name.innerHTML = character_json["name"];
 		realm_name.innerHTML = character_json["realm"];
 		level.innerHTML = character_json["level"];
+		achievement_points.innerHTML = character_json["achievementPoints"];
+		avg_item_level.innerHTML = character_json["averageItemLevel"];
+		head.innerHTML = items["head"]["name"];
+
 
 		results.appendChild(char_name);
 		results.appendChild(realm_name);
@@ -70,7 +90,7 @@ Last Updated: 4/26/2019
 	        return Promise.reject(new Error(response.status+": "+response.statusText)); 
 	    } 
 	}
-	
+
 	window.onload = function() {
 		var search_btn = document.getElementById("search_btn");
 		search_btn.onclick = getCharacter;
