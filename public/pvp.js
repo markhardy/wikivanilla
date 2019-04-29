@@ -52,6 +52,25 @@ Last Updated: 4/26/2019
 		results.appendChild(level);
 	}
 
+	/***************************************************************************
+	checkStatus(response)
+	This method checks the status of the server during a query and either 
+	allows our program to continue or reports an error and handles the promise.
+
+	Parameter 1: response - The reply from the service
+	Returns a rejection of the promise with a reason or a thumbs up
+	***************************************************************************/
+	function checkStatus(response) { 
+	    if (response.status >= 200 && response.status < 300) {  
+	        return response.text();
+	    // special reject message for page not found
+	    } else if(response.status == 404) {
+	    	return Promise.reject(new Error("sorry we do not have any data"));
+	    } else {  
+	        return Promise.reject(new Error(response.status+": "+response.statusText)); 
+	    } 
+	}
+	
 	window.onload = function() {
 		var search_btn = document.getElementById("search_btn");
 		search_btn.onclick = getCharacter;
