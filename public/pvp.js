@@ -59,11 +59,10 @@ Last Updated: 4/26/2019
 		const finger2 = document.createElement("p");
 		const trinket1 = document.createElement("p");
 		const trinket2 = document.createElement("p");
-		/*
 		const mainhand = document.createElement("p");
 		const offhand = document.createElement("p");
-		const ranged = document.createElement("p");
-*/
+		//const ranged = document.createElement("p");
+
 		char_name.innerHTML = character_json["name"];
 		realm_name.innerHTML = character_json["realm"];
 		level.innerHTML = character_json["level"];
@@ -88,11 +87,9 @@ Last Updated: 4/26/2019
 		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
 		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
 		trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
-		/*
 		mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
 		offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
 		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
-*/
 
 
 		results.appendChild(char_name);
@@ -114,10 +111,9 @@ Last Updated: 4/26/2019
 		results.appendChild(finger2);
 		results.appendChild(trinket1);
 		results.appendChild(trinket2);
-		/*
 		results.appendChild(mainhand);
 		results.appendChild(offhand);
-		//results.appendChild(ranged);*/
+		//results.appendChild(ranged);
 	}
 
 	/***************************************************************************
