@@ -46,6 +46,10 @@ Last Updated: 4/26/2019
 		const achievement_points = document.createElement("p");
 		const avg_item_level = document.createElement("p");
 		const head = document.createElement("p");
+		const neck = document.createElement("p");
+		const shoulder = document.createElement("p");
+		const back = document.createElement("p");
+		/*
 		const head = document.createElement("p");
 		const head = document.createElement("p");
 		const head = document.createElement("p");
@@ -54,10 +58,7 @@ Last Updated: 4/26/2019
 		const head = document.createElement("p");
 		const head = document.createElement("p");
 		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-
+*/
 
 		char_name.innerHTML = character_json["name"];
 		realm_name.innerHTML = character_json["realm"];
@@ -70,6 +71,7 @@ Last Updated: 4/26/2019
 		results.appendChild(char_name);
 		results.appendChild(realm_name);
 		results.appendChild(level);
+		results.appendChild(head);
 	}
 
 	/***************************************************************************
