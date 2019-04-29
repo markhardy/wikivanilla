@@ -55,11 +55,11 @@ Last Updated: 4/26/2019
 		const waist = document.createElement("p");
 		const legs = document.createElement("p");
 		const feet = document.createElement("p");
-		/*
 		const finger1 = document.createElement("p");
 		const finger2 = document.createElement("p");
 		const trinket1 = document.createElement("p");
 		const trinket2 = document.createElement("p");
+		/*
 		const mainhand = document.createElement("p");
 		const offhand = document.createElement("p");
 		const ranged = document.createElement("p");
@@ -84,11 +84,11 @@ Last Updated: 4/26/2019
 		waist.innerHTML = "Waist: " + items["waist"]["name"];
 		legs.innerHTML = "Legs: " + items["legs"]["name"];
 		feet.innerHTML = "Feet: " + items["feet"]["name"];
-		/*
 		finger1.innerHTML = "Ring: " + items["finger1"]["name"];
 		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
 		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
 		trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
+		/*
 		mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
 		offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
 		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
@@ -110,11 +110,11 @@ Last Updated: 4/26/2019
 		results.appendChild(waist);
 		results.appendChild(legs);
 		results.appendChild(feet);
-		/*
 		results.appendChild(finger1);
 		results.appendChild(finger2);
 		results.appendChild(trinket1);
 		results.appendChild(trinket2);
+		/*
 		results.appendChild(mainhand);
 		results.appendChild(offhand);
 		//results.appendChild(ranged);*/
