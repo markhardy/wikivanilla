@@ -13,9 +13,9 @@ Last Updated: 4/26/2019
 (function(){
 
 	/***************************************************************************
-	get()
-	Sends a search request to the web server and passes the results to be
-	displayed to the client.
+	getCharacter()
+	Sends a request to the Blizzard API asking for information on a character
+	by sending the character name and realm name
 	***************************************************************************/
 	function getCharacter() {
 		// Removing < and > to prevent SQL injections
@@ -37,6 +37,11 @@ Last Updated: 4/26/2019
 			});
 	}
 
+	/***************************************************************************
+	displayCharacter()
+	Takes JSON data returned by the Blizzard API and uses it to display data
+	on the selected character.
+	***************************************************************************/
 	function displayCharacter(character_json) {
 		const items = character_json["items"];
 		const results = document.getElementById("results");
@@ -49,25 +54,25 @@ Last Updated: 4/26/2019
 
 		if (character_json["realm"]) {
 			const realm_name = document.createElement("p");
-			realm_name.innerHTML = character_json["realm"];
+			realm_name.innerHTML = "Realm: " + character_json["realm"];
 			results.appendChild(realm_name);
 		}
 
 		if (character_json["level"]) {
 			const level = document.createElement("p");
-			level.innerHTML = character_json["level"];
+			level.innerHTML = "Level: " + character_json["level"];
 			results.appendChild(level);
 		}
 
 		if (character_json["achievementPoints"]) {
 			const achievement_points = document.createElement("p");
-			achievement_points.innerHTML = character_json["achievementPoints"];
+			achievement_points.innerHTML = "Achievement Points: " + character_json["achievementPoints"];
 			results.appendChild(achievement_points);
 		}
 
 		if (items["averageItemLevel"]) {
 			const avg_item_level = document.createElement("p");
-			avg_item_level.innerHTML = items["averageItemLevel"];
+			avg_item_level.innerHTML = "Average Item Level: " + items["averageItemLevel"];
 			results.appendChild(avg_item_level);
 		}
 
@@ -232,6 +237,11 @@ Last Updated: 4/26/2019
 		}
 	}
 
+	/***************************************************************************
+	findItemQuality()
+	Takes an integer sent by Blizzard and translates it into a string that is 
+	used to set the item's color in the CSS file.
+	***************************************************************************/
 	function findItemQuality(quality) {
 		var item_quality = "";
 		switch (quality) {
