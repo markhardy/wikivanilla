@@ -50,6 +50,7 @@ Last Updated: 4/26/2019
 		const shoulder = document.createElement("p");
 		const back = document.createElement("p");
 		const chest = document.createElement("p");
+		/*
 		const wrist = document.createElement("p");
 		const hands = document.createElement("p");
 		const waist = document.createElement("p");
@@ -62,7 +63,7 @@ Last Updated: 4/26/2019
 		const mainhand = document.createElement("p");
 		const offhand = document.createElement("p");
 		const ranged = document.createElement("p");
-
+*/
 		char_name.innerHTML = character_json["name"];
 		realm_name.innerHTML = character_json["realm"];
 		level.innerHTML = character_json["level"];
@@ -78,6 +79,7 @@ Last Updated: 4/26/2019
 		shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
 		back.innerHTML = "Back: " + items["back"]["name"];
 		chest.innerHTML = "Chest: " + items["chest"]["name"];
+		/*
 		wrist.innerHTML = "Wrist: " + items["wrist"]["name"];
 		hands.innerHTML = "Hands: " + items["hands"]["name"];
 		waist.innerHTML = "Waist: " + items["waist"]["name"];
@@ -90,7 +92,7 @@ Last Updated: 4/26/2019
 		mainhand.innerHTML = "Main Hand: " + items["mainHand"]["name"];
 		offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
 		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
-
+*/
 
 
 		results.appendChild(char_name);
@@ -103,6 +105,7 @@ Last Updated: 4/26/2019
 		results.appendChild(shoulder);
 		results.appendChild(back);
 		results.appendChild(chest);
+		/*
 		results.appendChild(wrist);
 		results.appendChild(hands);
 		results.appendChild(waist);
@@ -114,7 +117,7 @@ Last Updated: 4/26/2019
 		results.appendChild(trinket2);
 		results.appendChild(mainhand);
 		results.appendChild(offhand);
-		//results.appendChild(ranged);
+		//results.appendChild(ranged);*/
 	}
 
 	/***************************************************************************
