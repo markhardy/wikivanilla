@@ -96,12 +96,14 @@ Last Updated: 4/26/2019
 		results.appendChild(char_name);
 		results.appendChild(realm_name);
 		results.appendChild(level);
+		results.appendChild(achievement_points);
+		results.appendChild(avg_item_level);
 		results.appendChild(head);
 		results.appendChild(neck);
 		results.appendChild(shoulder);
 		results.appendChild(back);
 		results.appendChild(chest);
-		results.appendChild(wrists);
+		results.appendChild(wrist);
 		results.appendChild(hands);
 		results.appendChild(waist);
 		results.appendChild(legs);
