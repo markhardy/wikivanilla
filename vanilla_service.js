@@ -44,7 +44,7 @@ app.use(function(req, res, next) {
 });
 
 console.log("web service started");
-
+/*
 // Use the BnetStrategy within Passport.
 passport.use(new BnetStrategy({
     clientID: BNET_ID,
@@ -54,7 +54,7 @@ passport.use(new BnetStrategy({
 }, function(accessToken, refreshToken, profile, done) {
     return done(null, profile);
 }));
-
+*/
 /***************************************************************************
 *************************** MySQL Configuration ****************************
 ***************************************************************************/
@@ -90,6 +90,7 @@ app.get('/auth/bnet/callback',
 
 // Initialize Passport!  Also use passport.session() middleware, to support
 // persistent login sessions (recommended).
+/*
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -129,7 +130,7 @@ app.get('/logout', function(req, res) {
   req.logout();
   res.redirect('/');
 });
-
+*/
 /**************************************************************************/
 
 
