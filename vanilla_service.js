@@ -23,7 +23,7 @@ const BNET_ID = "8060d2f0f7894639b5738ea875f95fb1";
 const BNET_SECRET = "NOY9SPJooNxocG2IFeSYDv917bNShNNl";
 
 // Dependcies for working with the Blizzard API //
-const Promise = require("bluebird");
+//const Promise = require("bluebird");
 const request = require("request");
 const rp = require("request-promise");
 const R = require("ramda");
