@@ -74,6 +74,7 @@ Last Updated: 4/26/2019
 		if (items["head"]) {
 			const head = document.createElement("p");
 			head.innerHTML = "Head: " + items["head"]["name"];
+			head.classList += findItemQuality(items["head"]["quality"]);
 			results.appendChild(head);
 		}
 
@@ -166,6 +167,36 @@ Last Updated: 4/26/2019
 			offhand.innerHTML = "Off Hand: " + items["offHand"]["name"];
 			results.appendChild(offhand);
 		}
+	}
+
+	function findItemQuality(quality) {
+		var item_quality = "";
+		switch (quality) {
+			case 0:
+				item_quality = "poor";
+				break;
+			case 1:
+				item_quality = "common";
+				break;
+			case 2:
+				item_quality = "uncommon";
+				break;
+			case 3:
+				item_quality = "rare";
+				break;
+			case 4:
+				item_quality = "epic";
+				break;
+			case 5:
+				item_quality = "legendary";
+				break;
+			case 6:
+				item_quality = "artifact";
+				break;
+			default:
+				item_quality = "poor";
+		}
+		return item_quality;
 	}
 
 	/***************************************************************************
