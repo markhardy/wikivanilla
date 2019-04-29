@@ -49,29 +49,70 @@ Last Updated: 4/26/2019
 		const neck = document.createElement("p");
 		const shoulder = document.createElement("p");
 		const back = document.createElement("p");
-		/*
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-		const head = document.createElement("p");
-*/
+		const chest = document.createElement("p");
+		const wrists = document.createElement("p");
+		const hands = document.createElement("p");
+		const waist = document.createElement("p");
+		const legs = document.createElement("p");
+		const feet = document.createElement("p");
+		const finger1 = document.createElement("p");
+		const finger2 = document.createElement("p");
+		const trinket1 = document.createElement("p");
+		const trinket2 = document.createElement("p");
+		const mainhand = document.createElement("p");
+		const offhand = document.createElement("p");
+		const ranged = document.createElement("p");
 
 		char_name.innerHTML = character_json["name"];
 		realm_name.innerHTML = character_json["realm"];
 		level.innerHTML = character_json["level"];
 		achievement_points.innerHTML = character_json["achievementPoints"];
 		avg_item_level.innerHTML = character_json["averageItemLevel"];
-		head.innerHTML = items["head"]["name"];
+
+		// Here's where it gets complicated. items holds the dictionary of all
+		// items the character has equipped and each item slot eg helm has a
+		// dictionary of the item's attributes..
+
+		head.innerHTML = "Head: " + items["head"]["name"];
+		neck.innerHTML = "Neck: " + items["neck"]["name"];
+		shoulder.innerHTML = "Shoulder: " + items["shoulder"]["name"];
+		back.innerHTML = "Back: " + items["back"]["name"];
+		chest.innerHTML = "Chest: " + items["chest"]["name"];
+		wrists.innerHTML = "Wrists: " + items["wrists"]["name"];
+		hands.innerHTML = "Hands: " + items["hands"]["name"];
+		waist.innerHTML = "Waist: " + items["waist"]["name"];
+		legs.innerHTML = "Legs: " + items["legs"]["name"];
+		feet.innerHTML = "Feet: " + items["feet"]["name"];
+		finger1.innerHTML = "Ring: " + items["finger1"]["name"];
+		finger2.innerHTML = "Ring: " + items["finger2"]["name"];
+		trinket1.innerHTML = "Trinket: " + items["trinket1"]["name"];
+		trinket2.innerHTML = "Trinket: " + items["trinket2"]["name"];
+		mainhand.innerHTML = "Main Hand: " + items["mainhand"]["name"];
+		offhand.innerHTML = "Off Hand: " + items["offhand"]["name"];
+		//ranged.innerHTML = "Ranged: " + items["ranged"]["name"];
+
 
 
 		results.appendChild(char_name);
 		results.appendChild(realm_name);
 		results.appendChild(level);
 		results.appendChild(head);
+		results.appendChild(neck);
+		results.appendChild(shoulder);
+		results.appendChild(back);
+		results.appendChild(chest);
+		results.appendChild(wrists);
+		results.appendChild(hands);
+		results.appendChild(waist);
+		results.appendChild(legs);
+		results.appendChild(feet);
+		results.appendChild(finger1);
+		results.appendChild(finger2);
+		results.appendChild(trinket1);
+		results.appendChild(trinket2);
+		results.appendChild(mainhand);
+		results.appendChild(offhand);
+		//results.appendChild(ranged);
 	}
 
 	/***************************************************************************
