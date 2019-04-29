@@ -73,15 +73,22 @@ Last Updated: 4/26/2019
 
 		if (items["head"]) {
 			const head = document.createElement("p");
-			head.innerHTML = "Head: " + items["head"]["name"];
-			head.classList += findItemQuality(items["head"]["quality"]);
+			const item = document.createElement("p");
+			head.innerHTML = "Head: ";
+			item.innerHTML = items["head"]["name"];
+			item.classList += findItemQuality(items["head"]["quality"]);
 			results.appendChild(head);
+			results.appendChild(item);
 		}
 
 		if (items["neck"]) {
 			const neck = document.createElement("p");
-			neck.innerHTML = "Neck: " + items["neck"]["name"];
+			const item = document.createElement("p");
+			neck.innerHTML = "Neck: ";
+			item.innerHTML = items["neck"]["name"];
+			item.classList += findItemQuality(items["neck"]["quality"]);
 			results.appendChild(neck);
+			results.appendChild(item);
 		}
 
 		if (items["shoulder"]) {
