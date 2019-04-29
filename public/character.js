@@ -1,8 +1,8 @@
 /***************************************************************************
-pvp.js
+character.js
 
-When a user searches for a character and realm, this file connect to the 
-Blizzard API and returns data on that character's PvP performance.
+When a user searches for a character and realm, this file connects to the 
+Blizzard API and returns data on that character.
 
 Created by: Mark Hardy
 Last Updated: 4/26/2019
