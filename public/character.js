@@ -79,7 +79,7 @@ Last Updated: 4/26/2019
 		if (items["head"]) {
 			const head = document.createElement("p");
 			const item = document.createElement("p");
-			head.innerHTML = "Head: ";
+\			head.innerHTML = "Head: ";
 			item.innerHTML = items["head"]["name"];
 			item.classList += findItemQuality(items["head"]["quality"]);
 			results.appendChild(head);
@@ -149,9 +149,12 @@ Last Updated: 4/26/2019
 		if (items["waist"]) {
 			const waist = document.createElement("p");
 			const item = document.createElement("p");
+			const image = document.createElement("img");
+			image.src = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
 			waist.innerHTML = "Waist: ";
 			item.innerHTML = items["waist"]["name"];
 			item.classList += findItemQuality(items["waist"]["quality"]);
+			item.appendChild(image);
 			results.appendChild(waist);
 			results.appendChild(item);
 		}
