@@ -149,7 +149,7 @@ Last Updated: 4/26/2019
 		if (items["waist"]) {
 			const waist = document.createElement("p");
 			const item = document.createElement("p");
-			var img = document.createElement("img");
+			var img = document.createElement("IMG");
 			img.src = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
 			img.alt = "Waist slot";
 			waist.innerHTML = "Waist: ";
