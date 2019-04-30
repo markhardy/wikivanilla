@@ -155,9 +155,10 @@ Last Updated: 4/26/2019
 			waist.innerHTML = "Waist: ";
 			item.innerHTML = items["waist"]["name"];
 			item.classList += findItemQuality(items["waist"]["quality"]);
-			item.appendChild(image);
 			results.appendChild(waist);
+			item.appendChild(img);
 			results.appendChild(item);
+			results.appendChild(img);
 		}
 
 		if (items["legs"]) {
