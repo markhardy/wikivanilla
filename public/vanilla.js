@@ -172,6 +172,9 @@ Last Updated: 4/24/2019
 		var results = document.getElementById("results");
 		var heading = document.createElement("h2");
 		var stat_box = document.createElement("div");
+		var img = document.createElement("img");
+		img.src = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
+		stat_box.appendChild(img);
 		stat_box.id = "stat_box";
 
 		const json = json_results["result"];
