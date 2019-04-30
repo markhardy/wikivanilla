@@ -705,14 +705,18 @@ Last Updated: 4/24/2019
 	function displayCreatureSearchResults(json_results, requested) {
 		var npc_results = document.getElementById("npc_results");
 		var npc_table = document.createElement("table");
+		var results = document.getElementById("results");
 
 		var i = 0;
 		var query_results = json_results["result"];
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
-			npc_results.innerHTML = "<p>" + requested + " not found in database</p>"
+			if (results.innerHTML = "") {
+				npc_results.innerHTML = "<p>" + requested + " not found in database</p>";
+			}
 		} else {
+			results.innerHTML = "";
 			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
