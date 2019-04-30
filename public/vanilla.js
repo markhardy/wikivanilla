@@ -712,11 +712,8 @@ Last Updated: 4/24/2019
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
-			if (results.innerHTML = "") {
-				npc_results.innerHTML = "<p>" + requested + " not found in database</p>";
-			}
+			npc_results.innerHTML = "<p>" + requested + " not found in creature database</p>"
 		} else {
-			results.innerHTML = "";
 			npc_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Level</th><th>Type</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
@@ -765,7 +762,7 @@ Last Updated: 4/24/2019
 
 		// If the results are empty, notify the user, otherwise iterate
 		if (query_results.length == 0) {
-			results.innerHTML = "<p>" + requested + " not found in database</p>"
+			results.innerHTML = "<p>" + requested + " not found in item database</p>"
 		} else {
 			results_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
 			for (var query_result of query_results) {
