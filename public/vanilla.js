@@ -697,9 +697,11 @@ Last Updated: 4/24/2019
 		var middle = document.getElementById("middle");
 		var results_table = document.createElement("table");
 		var results = document.getElementById("results");
+		var npc_results = document.getElementById("npc_results");
 		middle.innerHTML = "";
 		results_table.innerHTML = "";
 		results.innerHTML = "";
+		npc_results.innerHTML = "";
 	}
 
 	function displayCreatureSearchResults(json_results, requested) {
