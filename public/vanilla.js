@@ -194,7 +194,10 @@ Last Updated: 4/24/2019
 		stat_box.appendChild(item_bonding);
 
 		var item_slot = document.createElement("p");
-		item_slot.innerHTML = findItemSlot(item_query["InventoryType"]);
+		item_slot.innerHTML = findItemSlot(item_query["InventoryType"])[0];
+		var img = document.createElement("img");
+		img.src = findItemSlot(item_query["InventoryType"])[1];
+		stat_box.appendChild(img);
 		stat_box.appendChild(item_slot);
 
 		var item_subclass = document.createElement("p");
@@ -528,45 +531,58 @@ Last Updated: 4/24/2019
 	***************************************************************************/
 	function findItemSlot(slot) {
 		var slot_name = "";
+		var image_url = "";
+
 		switch (slot) {
 			case 0:
 				slot_name = "";
 				break;
 			case 1:
 				slot_name = "Head";
+				image_url = "https://dl.dropboxusercontent.com/s/o0480p1zmzz623s/INV_Helmet_17.png?dl=0";
 				break;
 			case 2:
 				slot_name = "Neck";
+				image_url = "https://dl.dropboxusercontent.com/s/skyovn2hv5fw0rp/INV_Jewelry_Amulet_05.png?dl=0";
 				break;
 			case 3:
 				slot_name = "Shoulder";
+				image_url = "https://dl.dropboxusercontent.com/s/rcgr7tcg84vojuj/INV_Shoulder_25.png?dl=0";
 				break;
 			case 4:
 				slot_name = "Body";
 				break;
 			case 5:
 				slot_name = "Chest";
+				image_url = "https://dl.dropboxusercontent.com/s/ziheaa27ie4548w/INV_Chest_Chain_15.png?dl=0";
 				break;
 			case 6:
 				slot_name = "Waist";
+				image_url = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
 				break;
 			case 7:
 				slot_name = "Legs";
+				image_url = "https://dl.dropboxusercontent.com/s/fvrhfrjnlltrsig/INV_Pants_01.png?dl=0";
 				break;
 			case 8:
 				slot_name = "Feet";
+				image_url = "https://dl.dropboxusercontent.com/s/0rp3ol14jwu1wry/INV_Boots_Plate_04.png?dl=0";
 				break;
 			case 9:
 				slot_name = "Wrists";
+				image_url = "https://dl.dropboxusercontent.com/s/tbpbzwzzwhozimx/INV_Bracer_13.png?dl=0";
 				break;
 			case 10:
 				slot_name = "Hands";
+				image_url = "https://dl.dropboxusercontent.com/s/6krajc4k6bcfpeb/INV_Gauntlets_09.png?dl=0";
 				break;
 			case 11:
 				slot_name = "Finger";
+				image_url = "https://dl.dropboxusercontent.com/s/iluy4hhjox90zjd/INV_Jewelry_Ring_14.png?dl=0";
 				break;
 			case 12:
 				slot_name = "Trinket";
+				image_url = "https://dl.dropboxusercontent.com/s/vcim2b0tgfhlt2o/INV_Jewelry_Talisman_09.png?dl=0";
 				break;
 			case 13:
 				slot_name = "One-hand";
@@ -579,6 +595,7 @@ Last Updated: 4/24/2019
 				break;
 			case 16:
 				slot_name = "Back";
+				image_url = "https://dl.dropboxusercontent.com/s/xh4uua6b0vibngl/INV_Misc_Cape_20.png?dl=0";
 				break;
 			case 17:
 				slot_name = "Two-hand";
@@ -588,6 +605,7 @@ Last Updated: 4/24/2019
 				break;
 			case 19:
 				slot_name = "Tabard";
+				image_url = "https://dl.dropboxusercontent.com/s/jbgkmdjiwy0a4c2/INV_Shirt_GuildTabard_01.png?dl=0";
 				break;
 			case 20:
 				slot_name = "Chest";
@@ -597,6 +615,7 @@ Last Updated: 4/24/2019
 				break;
 			case 22:
 				slot_name = "Held In Off-Hand";
+				image_url = "https://dl.dropboxusercontent.com/s/h6i5ae2909ahkp5/INV_Shield_15.png?dl=0";
 				break;
 			case 23:
 				slot_name = ""; // Holdable
@@ -612,15 +631,18 @@ Last Updated: 4/24/2019
 				break;
 			case 27:
 				slot_name = "Quiver";
+				image_url = "https://dl.dropboxusercontent.com/s/rt5q5mjjoqzj9cb/INV_Misc_Quiver_05.png?dl=0";
 				break;
 			case 28:
 				slot_name = "Relic";
+				image_url = "https://www.dropbox.com/s/78rsoi4jbzi5z2j/INV_Jewelry_Talisman_14.png?dl=0";
 				break;
 			default:
 				slot_name = "";
+				image_url = "";
 		}
 
-		return slot_name;
+		return [slot_name, image_url];
 	}
 
 	/***************************************************************************
