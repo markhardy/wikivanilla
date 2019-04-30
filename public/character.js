@@ -149,9 +149,9 @@ Last Updated: 4/26/2019
 		if (items["waist"]) {
 			const waist = document.createElement("p");
 			const item = document.createElement("p");
-			const image = document.createElement("img");
-			image.src = url("https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0");
-			image.alt = "Belt slot";
+			var img = document.createElement("img");
+			img.src = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
+			img.alt = "Waist slot";
 			waist.innerHTML = "Waist: ";
 			item.innerHTML = items["waist"]["name"];
 			item.classList += findItemQuality(items["waist"]["quality"]);
