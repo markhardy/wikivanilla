@@ -30,6 +30,19 @@ const R = require("ramda");
 const tmp = require("tmp");
 const fs = require("fs");
 
+const credentials = {
+  client: {
+    id: "8060d2f0f7894639b5738ea875f95fb1",
+    secret: "NOY9SPJooNxocG2IFeSYDv917bNShNNl"
+  },
+  auth: {
+    tokenHost: "https://us.battle.net"
+  }
+};
+let token = null;
+
+const oauth2 = require("simple-oauth2").create(credentials);
+
 const gm = require("gm").subClass({ imageMagick: true });
 // End Blizzard API Dependencies //
 
@@ -44,17 +57,7 @@ app.use(function(req, res, next) {
 });
 
 console.log("web service started");
-/*
-// Use the BnetStrategy within Passport.
-passport.use(new BnetStrategy({
-    clientID: BNET_ID,
-    clientSecret: BNET_SECRET,
-    callbackURL: "https://wikivanilla.herokuapp.com/auth/bnet/callback",
-    region: "us"
-}, function(accessToken, refreshToken, profile, done) {
-    return done(null, profile);
-}));
-*/
+
 /***************************************************************************
 *************************** MySQL Configuration ****************************
 ***************************************************************************/
@@ -74,67 +77,7 @@ connection.connect(function (err) {
 
 });
 
-/**************************************************************************/
-
-/***************************************************************************
-****************************** Blizzard  API *******************************
-***************************************************************************/
-/*app.get('/auth/bnet',
-    passport.authenticate('bnet'));
-
-app.get('/auth/bnet/callback',
-    passport.authenticate('bnet', { failureRedirect: '/' }),
-    function(req, res){
-        res.redirect('/authenticated');
-    });*/
-
-// Initialize Passport!  Also use passport.session() middleware, to support
-// persistent login sessions (recommended).
-/*
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/auth/github', passport.authenticate('github'));
-
-app.get('/auth/github/callback',
-        passport.authenticate('github', { failureRedirect: '/' }),
-        function(req, res){
-          res.redirect('/');
-        });
-
-app.get('/auth/bnet',
-        passport.authenticate('bnet'));
-
-app.get('/auth/bnet/callback',
-        passport.authenticate('bnet', { failureRedirect: '/' }),
-        function(req, res){
-          res.redirect('/');
-        });
-
-app.get('/oauthtest', function(req, res) {
-  if(req.isAuthenticated()) {
-    var output = '<h1>Express OAuth Test</h1>' + req.user.id + '<br>';
-    if(req.user.battletag) {
-      output += req.user.battletag + '<br>';
-    }
-    output += '<a href="/logout">Logout</a>';
-    res.send(output);
-  } else {
-    res.send('<h1>Express OAuth Test</h1>' +
-             '<a href="/auth/github">Login with Github</a><br>' +
-             '<a href="/auth/bnet">Login with Bnet</a>');
-  }
-});
-
-app.get('/logout', function(req, res) {
-  req.logout();
-  res.redirect('/');
-});
-*/
-/**************************************************************************/
-
-
-// Not used
+// Server the index page
 app.get('/', function(req, res){
 	res.header("Access-Control-Allow-Origin", "*");
 
@@ -211,7 +154,7 @@ app.get('/npcsearch', function (req, res) {
 	const search = req.query.search;
 	var json = {};
 
-	var sql_query = "SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name = '" + search + "' ORDER BY c.name ASC";
+	var sql_query = "SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name LIKE '" + search + "' ORDER BY c.name ASC";
 
 	var result = connection.query(sql_query, function(err, result, fields) {
 		if (err) throw err;
@@ -230,7 +173,7 @@ app.get('/item', function (req, res) {
 	const item_id = req.query.item_id;
 	var json = {};
 
-	var sql_query = "SELECT * FROM item_template i WHERE i.entry = '" + item_id + "'";
+	var sql_query = "SELECT * FROM item_template i WHERE i.entry LIKE '" + item_id + "'";
 
 	var result = connection.query(sql_query, function(err, result, fields) {
 		if (err) throw err;
@@ -240,22 +183,8 @@ app.get('/item', function (req, res) {
 	});
 })
 
-
 // Blizzard API //
-
-
-
-const credentials = {
-  client: {
-    id: "8060d2f0f7894639b5738ea875f95fb1",
-    secret: "NOY9SPJooNxocG2IFeSYDv917bNShNNl"
-  },
-  auth: {
-    tokenHost: "https://us.battle.net"
-  }
-};
-const oauth2 = require("simple-oauth2").create(credentials);
-let token = null;
+// For use later //
 
 const getToken = () => {
   if (token === null || token.expired()) {
