@@ -135,7 +135,7 @@ app.get('/search', function (req, res) {
 	const search = req.query.search;
 	var json = {};
 
-	var sql_query = "SELECT * FROM item_template i WHERE i.name LIKE '" + search + "' ORDER BY i.Quality DESC, i.name ASC";
+	var sql_query = "SELECT * FROM item_template i WHERE i.name LIKE '" + "%" + search + "%" + "' ORDER BY i.Quality DESC, i.name ASC";
 
 	var result = connection.query(sql_query, function(err, result, fields) {
 		if (err) throw err;
