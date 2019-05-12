@@ -822,7 +822,7 @@ Last Updated: 4/24/2019
 				quest_table.appendChild(row);
 				i++;
 			}
-			quest_results.appendChild(npc_table);
+			quest_results.appendChild(quest_table);
 		}
 	}
 
