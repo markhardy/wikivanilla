@@ -802,7 +802,7 @@ Last Updated: 4/24/2019
 			quest_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Title</th><th>Quest Level</th><th>Req Level</th></tr>";
 			for (var query_result of query_results) {
 				var row = document.createElement("tr");
-				row.innerHTML = "<td>" + query_result["Title"] + "</td><td>" + query_result["Quest Level"] + "-" + query_result["Req Level"] + "</td>";
+				row.innerHTML = "<td>" + query_result["Title"] + "</td><td>" + query_result["QuestLevel"] + "</td><td>" + query_result["ReqLevel"] + "</td>";
 
 				// This sets the row's .id attribute to be it's entry ID in the database
 				// and adds a click event to each row
