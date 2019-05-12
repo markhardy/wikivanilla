@@ -60,6 +60,27 @@ Last Updated: 4/24/2019
 			});
 	}
 
+	function getQuest(search) {
+		// Validate input to prevent injections
+		console.log("Get creature");
+		var new_search = search.replace("<", "");
+		var validated = new_search.replace(">", "");
+
+		var url = "https://wikivanilla.herokuapp.com/questsearch?search=" + validated;
+
+		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				console.log(json);
+				displayQuestSearchResults(json, search);
+			})
+
+			.catch(function(error) {
+			});
+	}
+
 	/***************************************************************************
 	getById(String)
 	Sends a request to the web server for a specific item's information and
@@ -762,7 +783,49 @@ Last Updated: 4/24/2019
 			}
 			npc_results.appendChild(npc_table);
 		}
+		getQuest(requested);
 	}
+
+
+	function displayQuestSearchResults(json_results, requested) {
+		var quest_results = document.getElementById("npc_results");
+		var quest_table = document.createElement("table");
+		var results = document.getElementById("results");
+
+		var i = 0;
+		var query_results = json_results["result"];
+
+		// If the results are empty, notify the user, otherwise iterate
+		if (query_results.length == 0) {
+			quest_results.innerHTML = "<p>" + requested + " not found in quest database</p>"
+		} else {
+			quest_table.innerHTML = "<caption>Results for " + requested.toUpperCase() + "</caption><tr><th>Title</th><th>Quest Level</th><th>Req Level</th></tr>";
+			for (var query_result of query_results) {
+				var row = document.createElement("tr");
+				row.innerHTML = "<td>" + query_result["Title"] + "</td><td>" + query_result["Quest Level"] + "-" + query_result["Req Level"] + "</td>";
+
+				// This sets the row's .id attribute to be it's entry ID in the database
+				// and adds a click event to each row
+				/*
+				const item_id = query_result["entry"];
+				row.id = query_result[item_id];
+				row.addEventListener("click", function() {
+					getById(item_id);
+				});
+				*/
+				// Make every other row a different color
+				if (i % 2 == 0) {
+					row.classList.add("even-row");
+				} else {
+					row.classList.add("odd-row");
+				}
+				quest_table.appendChild(row);
+				i++;
+			}
+			quest_results.appendChild(npc_table);
+		}
+	}
+
 
 	/***************************************************************************
 	displaySearchResults(Dictionary, String)
