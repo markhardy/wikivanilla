@@ -62,7 +62,7 @@ Last Updated: 4/24/2019
 
 	function getQuest(search) {
 		// Validate input to prevent injections
-		console.log("Get creature");
+		console.log("Get quest");
 		var new_search = search.replace("<", "");
 		var validated = new_search.replace(">", "");
 

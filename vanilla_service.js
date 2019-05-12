@@ -154,7 +154,26 @@ app.get('/npcsearch', function (req, res) {
 	const search = req.query.search;
 	var json = {};
 
-	var sql_query = "SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name LIKE '" + search + "' ORDER BY c.name ASC";
+	var sql_query = "SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name LIKE '" + "%" + search + "%" + "' ORDER BY c.name ASC";
+
+	var result = connection.query(sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["result"] = result;
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+})
+
+/***************************************************************************
+get/search
+Searches the database for items the user may be looking for.
+***************************************************************************/
+app.get('/questsearch', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	const search = req.query.search;
+	var json = {};
+
+	var sql_query = "SELECT q.Title, q.entry, q.MinLevel, q.QuestLevel, q.RequiredRaces FROM quest_template q WHERE q.Title LIKE '" + "%" + search + "%" + "' ORDER BY q.QuestLevel ASC";
 
 	var result = connection.query(sql_query, function(err, result, fields) {
 		if (err) throw err;
