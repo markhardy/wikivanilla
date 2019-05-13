@@ -8,8 +8,10 @@ Last Updated: 4/24/2019
 ***************************************************************************/
 body {
 	background-image: url("industrialbg.png");
-	background-repeat: repeat-y;
-	background-size: 100%, 100%;
+  	background-repeat: no-repeat;
+  	background-position: top;
+  	background-size: 100%, 100%;
+  	background-attachment: fixed;
 }
 
 h1 {

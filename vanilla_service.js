@@ -46,8 +46,13 @@ const oauth2 = require("simple-oauth2").create(credentials);
 const gm = require("gm").subClass({ imageMagick: true });
 // End Blizzard API Dependencies //
 
+const config = fs.readFileSync("config.txt", "utf8");
 
-app.use(express.static('public'));
+var options = {
+	index : "index.html"
+};
+
+app.use(express.static('public', options));
 
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
@@ -81,7 +86,7 @@ connection.connect(function (err) {
 app.get('/', function(req, res){
 	res.header("Access-Control-Allow-Origin", "*");
 
-	res.redirect('index.html');
+	//res.redirect('index.html');
 
 });
 
@@ -347,4 +352,4 @@ module.exports = app;
 
 
 
-app.listen(process.env.PORT);
+app.listen(process.env.PORT || 3000);

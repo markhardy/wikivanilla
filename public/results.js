@@ -21,7 +21,9 @@ Last Updated: 4/24/2019
 	displayed to the client.
 	***************************************************************************/
 	function get() {
-		var search = document.getElementById("search").value;
+		console.log("search.html");
+    	var parts = window.location.search.replace("?search=", "");
+		var search = parts;
 
 		// Validate input to prevent injections
 		var new_search = search.replace("<", "");
@@ -899,6 +901,7 @@ Last Updated: 4/24/2019
 	}
 
 	window.onload = function() {
+		get();
 		//var search_btn = document.getElementById("search_btn");
 		//search_btn.onclick = get;
 	}
