@@ -6,12 +6,35 @@ CSS for Wiki Vanilla and its associated pages.
 Created by: Mark Hardy
 Last Updated: 4/24/2019
 ***************************************************************************/
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px black inset !important;
+}
+
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: yellow !important;
+}
+
+::placeholder {
+	color: yellow;
+}
+
 body {
 	background-image: url("industrialbg.png");
   	background-repeat: no-repeat;
   	background-position: top;
   	background-size: 100%, 100%;
   	background-attachment: fixed;
+}
+
+button {
+	background-image: url("industrialbg.png");
+	border-color: black;
+	color: yellow;
 }
 
 h1 {
@@ -23,11 +46,27 @@ h2 {
 	font-family: 'PT Sans Narrow', Arial, sans-serif;;
 }
 
+input {
+	background-image: url("industrialbg.png");
+	border-color: yellow;
+	border-width: .5px;
+	color: yellow;
+}
+
 #middle {
 	color: #ffff00;
 	font-family: 'Exo', sans-serif;
 	margin-top: 20%;
 	text-align: center;
+}
+
+#navigation {
+	color: yellow;
+	margin: auto;
+	position: fixed;
+	top: 0;
+	text-align: center;
+	width: 100%;
 }
 
 #results, #npc_results {
@@ -37,8 +76,90 @@ h2 {
 	margin-right: 10%;
 }
 
+.push-left > p {
+	float: left;
+}
+
+#links > p {
+	float: left;
+	margin-right: .5em;
+}
+
+.top {
+	margin-top: 100px;
+}
+
+.small-box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	display: block;
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 14pt;
+	line-height: 0;
+	margin-right: 1em;
+	text-align: center;
+	width: 100px;
+}
+
+.objectives-box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	display: block;
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 14pt;
+	line-height: 0;
+	margin-right: 1em;
+	text-align: center;
+	width: 250px;
+}
+
+.item-box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	display: grid;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	line-height: 1em;
+	
+	margin-top: 100px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+	width: 30%;
+}
+
+.quest-box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	display: block;
+	float: right;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	line-height: 1em;
+	margin: auto;
+	margin-top: 100px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+	width: 30%;
+}
+
 .even-row {
-	background-color: gray;
+	background-color: #595959;
 }
 
 .odd-row {
@@ -64,7 +185,43 @@ h2 {
 
 #loot {
 	margin-top: 400px;
+}
 
+#results {
+	margin-top: 15%;
+}
+
+#tabs {
+	margin-left: 10.3%;
+}
+
+#tabs > p {
+	border-top-style: solid;
+	border-top-color: white;
+	border-top-width: : 1px;
+	border-right-style: solid;
+	border-right-color: white;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: white;
+	border-radius: 5px;
+	float: left;
+	margin-bottom: 0;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 8px;
+
+}
+
+.questlink {
+	color: yellow;
+	text-decoration: underline;
+}
+
+.link {
+	text-decoration: underline;
 }
 
 .subclass, .attackspeed {
@@ -105,6 +262,10 @@ button {
 	border-radius: 5px;
 	height: 30px;
 	width: 75px;
+}
+
+.hidden {
+	display: none;
 }
 
 /* Item Colors Corresponding to Quality */

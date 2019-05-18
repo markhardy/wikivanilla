@@ -1,0 +1,1095 @@
+1, Dun Morogh, 0, 0
+2, Longshore, 0, 40
+3, Badlands, 0, 0
+4, Blasted Lands, 0, 0
+7, Blackwater Cove, 0, 33
+8, Swamp of Sorrows, 0, 0
+9, Northshire Valley, 0, 12
+10, Duskwood, 0, 0
+11, Wetlands, 0, 0
+12, Elwynn Forest, 0, 0
+13, The World Tree, 0, 10
+14, Durotar, 1, 0
+15, Dustwallow Marsh, 1, 0
+16, Azshara, 1, 0
+17, The Barrens, 1, 0
+18, Crystal Lake, 0, 12
+19, Zul’Gurub, 0, 33
+20, Moonbrook, 0, 40
+21, Kul Tiras, 0, 0
+22, Programmer Isle, 451, 0
+23, Northshire River, 0, 12
+24, Northshire Abbey, 0, 12
+25, Blackrock Mountain, 0, 0
+26, Lighthouse, 0, 40
+28, Western Plaguelands, 0, 0
+30, Nine, 0, 0
+32, The Cemetary, 0, 10
+33, Stranglethorn Vale, 0, 0
+34, Echo Ridge Mine, 0, 12
+35, Booty Bay, 0, 33
+36, Alterac Mountains, 0, 0
+37, Lake Nazferiti, 0, 33
+38, Loch Modan, 0, 0
+40, Westfall, 0, 0
+41, Deadwind Pass, 0, 0
+42, Darkshire, 0, 10
+43, Wild Shore, 0, 33
+44, Redridge Mountains, 0, 0
+45, Arathi Highlands, 0, 0
+46, Burning Steppes, 0, 0
+47, The Hinterlands, 0, 0
+49, Dead Man’s Hole, 451, 22
+51, Searing Gorge, 0, 0
+53, Thieves Camp, 0, 12
+54, Jasperlode Mine, 0, 12
+55, Valley of Heroes UNUSED, 0, 12
+56, Heroes’ Vigil, 0, 12
+57, Fargodeep Mine, 0, 12
+59, Northshire Vineyards, 0, 12
+60, Forest’s Edge, 0, 12
+61, Thunder Falls, 0, 12
+62, Brackwell Pumpkin Patch, 0, 12
+63, The Stonefield Farm, 0, 12
+64, The Maclure Vineyards, 0, 12
+65, Dragonblight, 571, 0
+66, Zul’Drak, 571, 0
+67, The Storm Peaks, 571, 0
+68, Lake Everstill, 0, 44
+69, Lakeshire, 0, 44
+70, Stonewatch, 0, 44
+71, Stonewatch Falls, 0, 44
+72, The Dark Portal, 0, 4
+73, The Tainted Scar, 0, 4
+74, Pool of Tears, 0, 8
+75, Stonard, 0, 8
+76, Fallow Sanctuary, 0, 8
+77, Anvilmar, 0, 1
+80, Stormwind Mountains, 0, 12
+81, Jeff NE Quadrant Changed, 451, 22
+82, Jeff NW Quadrant, 451, 22
+83, Jeff SE Quadrant, 451, 22
+84, Jeff SW Quadrant, 451, 22
+85, Tirisfal Glades, 0, 0
+86, Stone Cairn Lake, 0, 12
+87, Goldshire, 0, 12
+88, Eastvale Logging Camp, 0, 12
+89, Mirror Lake Orchard, 0, 12
+91, Tower of Azora, 0, 12
+92, Mirror Lake, 0, 12
+93, Vul’Gol Ogre Mound, 0, 10
+94, Raven Hill, 0, 10
+95, Redridge Canyons, 0, 44
+96, Tower of Ilgalar, 0, 44
+97, Alther’s Mill, 0, 44
+98, Rethban Caverns, 0, 44
+99, Rebel Camp, 0, 33
+100, Nesingwary’s Expedition, 0, 33
+101, Kurzen’s Compound, 0, 33
+102, Ruins of Zul’Kunda, 0, 33
+103, Ruins of Zul’Mamwe, 0, 33
+104, The Vile Reef, 0, 33
+105, Mosh’Ogg Ogre Mound, 0, 33
+106, The Stockpile, 0, 33
+107, Saldean’s Farm, 0, 40
+108, Sentinel Hill, 0, 40
+109, Furlbrow’s Pumpkin Farm, 0, 40
+111, Jangolode Mine, 0, 40
+113, Gold Coast Quarry, 0, 40
+115, Westfall Lighthouse, 0, 40
+116, Misty Valley, 0, 8
+117, Grom’gol Base Camp, 0, 33
+118, Whelgar’s Excavation Site, 0, 11
+120, Westbrook Garrison, 0, 12
+121, Tranquil Gardens Cemetery, 0, 10
+122, Zuuldaia Ruins, 0, 33
+123, Bal’lal Ruins, 0, 33
+125, Kal’ai Ruins, 0, 33
+126, Tkashi Ruins, 0, 33
+127, Balia’mah Ruins, 0, 33
+128, Ziata’jai Ruins, 0, 33
+129, Mizjah Ruins, 0, 33
+130, Silverpine Forest, 0, 0
+131, Kharanos, 0, 1
+132, Coldridge Valley, 0, 1
+133, Gnomeregan, 0, 1
+134, Gol’Bolar Quarry, 0, 1
+135, Frostmane Hold, 0, 1
+136, The Grizzled Den, 0, 1
+137, Brewnall Village, 0, 1
+138, Misty Pine Refuge, 0, 1
+139, Eastern Plaguelands, 0, 0
+141, Teldrassil, 1, 0
+142, Ironband’s Excavation Site, 0, 38
+143, Mo’grosh Stronghold, 0, 38
+144, Thelsamar, 0, 38
+145, Algaz Gate, 0, 38
+146, Stonewrought Dam, 0, 38
+147, The Farstrider Lodge, 0, 38
+148, Darkshore, 1, 0
+149, Silver Stream Mine, 0, 38
+150, Menethil Harbor, 0, 11
+151, Designer Island, 451, 0
+152, The Bulwark, 0, 85
+153, Ruins of Lordaeron, 0, 85
+154, Deathknell, 0, 85
+155, Night Web’s Hollow, 0, 85
+156, Solliden Farmstead, 0, 85
+157, Agamand Mills, 0, 85
+158, Agamand Family Crypt, 0, 85
+159, Brill, 0, 85
+160, Whispering Gardens, 0, 85
+161, Terrace of Repose, 0, 85
+162, Brightwater Lake, 0, 85
+163, Gunther’s Retreat, 0, 85
+164, Garren’s Haunt, 0, 85
+165, Balnir Farmstead, 0, 85
+166, Cold Hearth Manor, 0, 85
+167, Crusader Outpost, 0, 85
+168, The North Coast, 0, 85
+169, Whispering Shore, 0, 85
+170, Lordamere Lake, 0, 0
+172, Fenris Isle, 0, 130
+173, Faol’s Rest, 0, 85
+186, Dolanaar, 1, 141
+187, Darnassus UNUSED, 1, 141
+188, Shadowglen, 1, 141
+189, Steelgrill’s Depot, 0, 1
+190, Hearthglen, 0, 28
+192, Northridge Lumber Camp, 0, 28
+193, Ruins of Andorhal, 0, 28
+195, School of Necromancy, 0, 28
+196, Uther’s Tomb, 0, 28
+197, Sorrow Hill, 0, 28
+198, The Weeping Cave, 0, 28
+199, Felstone Field, 0, 28
+200, Dalson’s Tears, 0, 28
+201, Gahrron’s Withering, 0, 28
+202, The Writhing Haunt, 0, 28
+203, Mardenholde Keep, 0, 28
+204, Pyrewood Village, 0, 130
+205, Dun Modr, 0, 11
+206, Utgarde Keep, 574, 0
+207, The Great Sea, 36, 0
+208, Unused Ironcladcove, 36, 0
+209, Shadowfang Keep, 33, 0
+210, Icecrown, 571, 0
+211, Iceflow Lake, 0, 1
+212, Helm’s Bed Lake, 0, 1
+213, Deep Elem Mine, 0, 130
+214, The Great Sea, 0, 0
+215, Mulgore, 1, 0
+219, Alexston Farmstead, 0, 40
+220, Red Cloud Mesa, 1, 215
+221, Camp Narache, 1, 215
+222, Bloodhoof Village, 1, 215
+223, Stonebull Lake, 1, 215
+224, Ravaged Caravan, 1, 215
+225, Red Rocks, 1, 215
+226, The Skittering Dark, 0, 130
+227, Valgan’s Field, 0, 130
+228, The Sepulcher, 0, 130
+229, Olsen’s Farthing, 0, 130
+230, The Greymane Wall, 0, 130
+231, Beren’s Peril, 0, 130
+232, The Dawning Isles, 0, 130
+233, Ambermill, 0, 130
+235, Fenris Keep, 0, 130
+236, Shadowfang Keep, 0, 130
+237, The Decrepit Ferry, 0, 130
+238, Malden’s Orchard, 0, 130
+239, The Ivar Patch, 0, 130
+240, The Dead Field, 0, 130
+241, The Rotting Orchard, 0, 10
+242, Brightwood Grove, 0, 10
+243, Forlorn Rowe, 0, 10
+244, The Whipple Estate, 0, 10
+245, The Yorgen Farmstead, 0, 10
+246, The Cauldron, 0, 51
+247, Grimesilt Dig Site, 0, 51
+249, Dreadmaul Rock, 0, 46
+250, Ruins of Thaurissan, 0, 46
+251, Flame Crest, 0, 46
+252, Blackrock Stronghold, 0, 46
+253, The Pillar of Ash, 0, 46
+254, Blackrock Mountain, 0, 46
+255, Altar of Storms, 0, 46
+256, Aldrassil, 1, 141
+257, Shadowthread Cave, 1, 141
+258, Fel Rock, 1, 141
+259, Lake Al’Ameth, 1, 141
+260, Starbreeze Village, 1, 141
+261, Gnarlpine Hold, 1, 141
+262, Ban’ethil Barrow Den, 1, 141
+263, The Cleft, 1, 141
+264, The Oracle Glade, 1, 141
+265, Wellspring River, 1, 141
+266, Wellspring Lake, 1, 141
+267, Hillsbrad Foothills, 0, 0
+268, Azshara Crater, 37, 0
+269, Dun Algaz, 0, 0
+271, Southshore, 0, 267
+272, Tarren Mill, 0, 267
+275, Durnholde Keep, 0, 267
+276, UNUSED Stonewrought Pass, 0, 0
+277, The Foothill Caverns, 0, 36
+278, Lordamere Internment Camp, 0, 36
+279, Dalaran Crater, 0, 36
+280, Strahnbrad, 0, 36
+281, Ruins of Alterac, 0, 36
+282, Crushridge Hold, 0, 36
+283, Slaughter Hollow, 0, 36
+284, The Uplands, 0, 36
+285, Southpoint Tower, 0, 267
+286, Hillsbrad Fields, 0, 267
+287, Hillsbrad, 0, 267
+288, Azurelode Mine, 0, 267
+289, Nethander Stead, 0, 267
+290, Dun Garok, 0, 267
+293, Thoradin’s Wall, 0, 0
+294, Eastern Strand, 0, 267
+295, Western Strand, 0, 267
+296, South Seas UNUSED, 0, 0
+297, Jaguero Isle, 0, 33
+298, Baradin Bay, 0, 11
+299, Menethil Bay, 0, 11
+300, Misty Reed Strand, 0, 8
+301, The Savage Coast, 0, 33
+302, The Crystal Shore, 0, 33
+303, Shell Beach, 0, 33
+305, North Tide’s Run, 0, 130
+306, South Tide’s Run, 0, 130
+307, The Overlook Cliffs, 0, 47
+308, The Forbidding Sea, 0, 0
+309, Ironbeard’s Tomb, 0, 11
+310, Crystalvein Mine, 0, 33
+311, Ruins of Aboraz, 0, 33
+312, Janeiro’s Point, 0, 33
+313, Northfold Manor, 0, 45
+314, Go’Shek Farm, 0, 45
+315, Dabyrie’s Farmstead, 0, 45
+316, Boulderfist Hall, 0, 45
+317, Witherbark Village, 0, 45
+318, Drywhisker Gorge, 0, 45
+320, Refuge Pointe, 0, 45
+321, Hammerfall, 0, 45
+322, Blackwater Shipwrecks, 0, 45
+323, O’Breen’s Camp, 0, 45
+324, Stromgarde Keep, 0, 45
+325, The Tower of Arathor, 0, 45
+326, The Sanctum, 0, 45
+327, Faldir’s Cove, 0, 45
+328, The Drowned Reef, 0, 45
+330, Thandol Span, 0, 0
+331, Ashenvale, 1, 0
+332, The Great Sea, 1, 0
+333, Circle of East Binding, 0, 45
+334, Circle of West Binding, 0, 45
+335, Circle of Inner Binding, 0, 45
+336, Circle of Outer Binding, 0, 45
+337, Apocryphan’s Rest, 0, 3
+338, Angor Fortress, 0, 3
+339, Lethlor Ravine, 0, 3
+340, Kargath, 0, 3
+341, Camp Kosh, 0, 3
+342, Camp Boff, 0, 3
+343, Camp Wurg, 0, 3
+344, Camp Cagg, 0, 3
+345, Agmond’s End, 0, 3
+346, Hammertoe’s Digsite, 0, 3
+347, Dustbelch Grotto, 0, 3
+348, Aerie Peak, 0, 47
+349, Wildhammer Keep, 0, 47
+350, Quel’Danil Lodge, 0, 47
+351, Skulk Rock, 0, 47
+352, Zun’watha, 0, 47
+353, Shadra’Alor, 0, 47
+354, Jintha’Alor, 0, 47
+355, The Altar of Zul, 0, 47
+356, Seradane, 0, 47
+357, Feralas, 1, 0
+358, Brambleblade Ravine, 1, 215
+359, Bael Modan, 1, 17
+360, The Venture Co. Mine, 1, 215
+361, Felwood, 1, 0
+362, Razor Hill, 1, 14
+363, Valley of Trials, 1, 14
+364, The Den, 1, 14
+365, Burning Blade Coven, 1, 14
+366, Kolkar Crag, 1, 14
+367, Sen’jin Village, 1, 14
+368, Echo Isles, 1, 14
+369, Thunder Ridge, 1, 14
+370, Drygulch Ravine, 1, 14
+371, Dustwind Cave, 1, 14
+372, Tiragarde Keep, 1, 14
+373, Scuttle Coast, 1, 14
+374, Bladefist Bay, 1, 14
+375, Deadeye Shore, 1, 14
+377, Southfury River, 1, 0
+378, Camp Taurajo, 1, 17
+379, Far Watch Post, 1, 17
+380, The Crossroads, 1, 17
+381, Boulder Lode Mine, 1, 17
+382, The Sludge Fen, 1, 17
+383, The Dry Hills, 1, 17
+384, Dreadmist Peak, 1, 17
+385, Northwatch Hold, 1, 17
+386, The Forgotten Pools, 1, 17
+387, Lushwater Oasis, 1, 17
+388, The Stagnant Oasis, 1, 17
+390, Field of Giants, 1, 17
+391, The Merchant Coast, 1, 17
+392, Ratchet, 1, 17
+393, Darkspear Strand, 1, 14
+394, Grizzly Hills, 571, 0
+395, Grizzlemaw, 571, 394
+396, Winterhoof Water Well, 1, 215
+397, Thunderhorn Water Well, 1, 215
+398, Wildmane Water Well, 1, 215
+399, Skyline Ridge, 1, 215
+400, Thousand Needles, 1, 0
+401, The Tidus Stair, 1, 17
+403, Shady Rest Inn, 1, 15
+404, Bael’dun Digsite, 1, 215
+405, Desolace, 1, 0
+406, Stonetalon Mountains, 1, 0
+407, Orgrimmar UNUSED, 1, 14
+408, Gillijim’s Isle, 0, 0
+409, Island of Doctor Lapidis, 0, 0
+410, Razorwind Canyon, 1, 14
+411, Bathran’s Haunt, 1, 331
+412, The Ruins of Ordil’Aran, 1, 331
+413, Maestra’s Post, 1, 331
+414, The Zoram Strand, 1, 331
+415, Astranaar, 1, 331
+416, The Shrine of Aessina, 1, 331
+417, Fire Scar Shrine, 1, 331
+418, The Ruins of Stardust, 1, 331
+419, The Howling Vale, 1, 331
+420, Silverwind Refuge, 1, 331
+421, Mystral Lake, 1, 331
+422, Fallen Sky Lake, 1, 331
+424, Iris Lake, 1, 331
+425, Moonwell, 1, 331
+426, Raynewood Retreat, 1, 331
+427, The Shady Nook, 1, 331
+428, Night Run, 1, 331
+429, Xavian, 1, 331
+430, Satyrnaar, 1, 331
+431, Splintertree Post, 1, 331
+432, The Dor’Danil Barrow Den, 1, 331
+433, Falfarren River, 1, 331
+434, Felfire Hill, 1, 331
+435, Demon Fall Canyon, 1, 331
+436, Demon Fall Ridge, 1, 331
+437, Warsong Lumber Camp, 1, 331
+438, Bough Shadow, 1, 331
+439, The Shimmering Flats, 1, 400
+440, Tanaris, 1, 0
+441, Lake Falathim, 1, 331
+442, Auberdine, 1, 148
+443, Ruins of Mathystra, 1, 148
+444, Tower of Althalaxx, 1, 148
+445, Cliffspring Falls, 1, 148
+446, Bashal’Aran, 1, 148
+447, Ameth’Aran, 1, 148
+448, Grove of the Ancients, 1, 148
+449, The Master’s Glaive, 1, 148
+450, Remtravel’s Excavation, 1, 148
+452, Mist’s Edge, 1, 148
+453, The Long Wash, 1, 148
+454, Wildbend River, 1, 148
+455, Blackwood Den, 1, 148
+456, Cliffspring River, 1, 148
+457, The Veiled Sea, 1, 0
+458, Gold Road, 1, 17
+459, Scarlet Watch Post, 0, 85
+460, Sun Rock Retreat, 1, 406
+461, Windshear Crag, 1, 406
+463, Cragpool Lake, 1, 406
+464, Mirkfallon Lake, 1, 406
+465, The Charred Vale, 1, 406
+466, Valley of the Bloodfuries, 1, 406
+467, Stonetalon Peak, 1, 406
+468, The Talon Den, 1, 406
+469, Greatwood Vale, 1, 406
+470, Thunder Bluff UNUSED, 1, 215
+471, Brave Wind Mesa, 1, 215
+472, Fire Stone Mesa, 1, 215
+473, Mantle Rock, 1, 215
+474, Hunter Rise UNUSED, 1, 215
+475, Spirit RiseUNUSED, 1, 215
+476, Elder RiseUNUSED, 1, 215
+477, Ruins of Jubuwal, 0, 33
+478, Pools of Arlithrien, 1, 141
+479, The Rustmaul Dig Site, 1, 400
+480, Camp E’thok, 1, 400
+481, Splithoof Crag, 1, 400
+482, Highperch, 1, 400
+483, The Screeching Canyon, 1, 400
+484, Freewind Post, 1, 400
+485, The Great Lift, 1, 400
+486, Galak Hold, 1, 400
+487, Roguefeather Den, 1, 400
+488, The Weathered Nook, 1, 400
+489, Thalanaar, 1, 357
+490, Un’Goro Crater, 1, 0
+491, Razorfen Kraul, 47, 0
+492, Raven Hill Cemetery, 0, 10
+493, Moonglade, 1, 0
+495, Howling Fjord, 571, 0
+496, Brackenwall Village, 1, 15
+497, Swamplight Manor, 1, 15
+498, Bloodfen Burrow, 1, 15
+499, Darkmist Cavern, 1, 15
+500, Moggle Point, 1, 15
+501, Beezil’s Wreck, 1, 15
+502, Witch Hill, 1, 15
+503, Sentry Point, 1, 15
+504, North Point Tower, 1, 15
+505, West Point Tower, 1, 15
+506, Lost Point, 1, 15
+507, Bluefen, 1, 15
+508, Stonemaul Ruins, 1, 15
+509, The Den of Flame, 1, 15
+510, The Dragonmurk, 1, 15
+511, Wyrmbog, 1, 15
+512, Blackhoof Village, 1, 15
+513, Theramore Isle, 1, 15
+514, Foothold Citadel, 1, 15
+515, Ironclad Prison, 1, 15
+516, Dustwallow Bay, 1, 15
+517, Tidefury Cove, 1, 15
+518, Dreadmurk Shore, 1, 15
+536, Addle’s Stead, 0, 10
+537, Fire Plume Ridge, 1, 490
+538, Lakkari Tar Pits, 1, 490
+539, Terror Run, 1, 490
+540, The Slithering Scar, 1, 490
+541, Marshal’s Refuge, 1, 490
+542, Fungal Rock, 1, 490
+543, Golakka Hot Springs, 1, 490
+556, The Loch, 0, 38
+576, Beggar’s Haunt, 0, 10
+596, Kodo Graveyard, 1, 405
+597, Ghost Walker Post, 1, 405
+598, Sar’theris Strand, 1, 405
+599, Thunder Axe Fortress, 1, 405
+600, Bolgan’s Hole, 1, 405
+602, Mannoroc Coven, 1, 405
+603, Sargeron, 1, 405
+604, Magram Village, 1, 405
+606, Gelkis Village, 1, 405
+607, Valley of Spears, 1, 405
+608, Nijel’s Point, 1, 405
+609, Kolkar Village, 1, 405
+616, Hyjal, 1, 0
+618, Winterspring, 1, 0
+636, Blackwolf River, 1, 406
+637, Kodo Rock, 1, 215
+638, Hidden Path, 1, 14
+639, Spirit Rock, 1, 14
+640, Shrine of the Dormant Flame, 1, 14
+656, Lake Elune’ara, 1, 493
+657, The Harborage, 0, 8
+676, Outland, 150, 0
+696, Craftsmen’s Terrace UNUSED, 1, 141
+697, Tradesmen’s Terrace UNUSED, 1, 141
+698, The Temple Gardens UNUSED, 1, 141
+699, Temple of Elune UNUSED, 1, 141
+700, Cenarion Enclave UNUSED, 1, 141
+701, Warrior’s Terrace UNUSED, 1, 141
+702, Rut’theran Village, 1, 141
+716, Ironband’s Compound, 0, 1
+717, The Stockade, 34, 0
+718, Wailing Caverns, 43, 0
+719, Blackfathom Deeps, 48, 0
+720, Fray Island, 1, 17
+721, Gnomeregan, 90, 0
+722, Razorfen Downs, 129, 0
+736, Ban’ethil Hollow, 1, 141
+796, Scarlet Monastery, 189, 0
+797, Jerod’s Landing, 0, 12
+798, Ridgepoint Tower, 0, 12
+799, The Darkened Bank, 0, 10
+800, Coldridge Pass, 0, 1
+801, Chill Breeze Valley, 0, 1
+802, Shimmer Ridge, 0, 1
+803, Amberstill Ranch, 0, 1
+804, The Tundrid Hills, 0, 1
+805, South Gate Pass, 0, 1
+806, South Gate Outpost, 0, 1
+807, North Gate Pass, 0, 1
+808, North Gate Outpost, 0, 1
+809, Gates of Ironforge, 0, 1
+810, Stillwater Pond, 0, 85
+811, Nightmare Vale, 0, 85
+812, Venomweb Vale, 0, 85
+813, The Bulwark, 0, 28
+814, Southfury River, 1, 14
+815, Southfury River, 1, 17
+816, Razormane Grounds, 1, 14
+817, Skull Rock, 1, 14
+818, Palemane Rock, 1, 215
+819, Windfury Ridge, 1, 215
+820, The Golden Plains, 1, 215
+821, The Rolling Plains, 1, 215
+836, Dun Algaz, 0, 11
+837, Dun Algaz, 0, 38
+838, North Gate Pass, 0, 38
+839, South Gate Pass, 0, 38
+856, Twilight Grove, 0, 10
+876, GM Island, 1, 0
+877, Delete ME, 1, 17
+878, Southfury River, 1, 16
+879, Southfury River, 1, 331
+880, Thandol Span, 0, 45
+881, Thandol Span, 0, 11
+896, Purgation Isle, 0, 267
+916, The Jansen Stead, 0, 40
+917, The Dead Acre, 0, 40
+918, The Molsen Farm, 0, 40
+919, Stendel’s Pond, 0, 40
+920, The Dagger Hills, 0, 40
+921, Demont’s Place, 0, 40
+922, The Dust Plains, 0, 40
+923, Stonesplinter Valley, 0, 38
+924, Valley of Kings, 0, 38
+925, Algaz Station, 0, 38
+926, Bucklebree Farm, 0, 130
+927, The Shining Strand, 0, 130
+928, North Tide’s Hollow, 0, 130
+936, Grizzlepaw Ridge, 0, 38
+956, The Verdant Fields, 169, 0
+976, Gadgetzan, 1, 440
+977, Steamwheedle Port, 1, 440
+978, Zul’Farrak, 1, 440
+979, Sandsorrow Watch, 1, 440
+980, Thistleshrub Valley, 1, 440
+981, The Gaping Chasm, 1, 440
+982, The Noxious Lair, 1, 440
+983, Dunemaul Compound, 1, 440
+984, Eastmoon Ruins, 1, 440
+985, Waterspring Field, 1, 440
+986, Zalashji’s Den, 1, 440
+987, Land’s End Beach, 1, 440
+988, Wavestrider Beach, 1, 440
+989, Uldum, 1, 440
+990, Valley of the Watchers, 1, 440
+991, Gunstan’s Post, 1, 440
+992, Southmoon Ruins, 1, 440
+996, Render’s Camp, 0, 44
+997, Render’s Valley, 0, 44
+998, Render’s Rock, 0, 44
+999, Stonewatch Tower, 0, 44
+1000, Galardell Valley, 0, 44
+1001, Lakeridge Highway, 0, 44
+1002, Three Corners, 0, 44
+1016, Direforge Hill, 0, 11
+1017, Raptor Ridge, 0, 11
+1018, Black Channel Marsh, 0, 11
+1019, The Green Belt, 0, 139
+1020, Mosshide Fen, 0, 11
+1021, Thelgen Rock, 0, 11
+1022, Bluegill Marsh, 0, 11
+1023, Saltspray Glen, 0, 11
+1024, Sundown Marsh, 0, 11
+1025, The Green Belt, 0, 11
+1036, Angerfang Encampment, 0, 11
+1037, Grim Batol, 0, 11
+1038, Dragonmaw Gates, 0, 11
+1039, The Lost Fleet, 0, 11
+1056, Darrow Hill, 0, 267
+1057, Thoradin’s Wall, 0, 267
+1076, Webwinder Path, 1, 406
+1097, The Hushed Bank, 0, 10
+1098, Manor Mistmantle, 0, 10
+1099, Camp Mojache, 1, 357
+1100, Grimtotem Compound, 1, 357
+1101, The Writhing Deep, 1, 357
+1102, Wildwind Lake, 1, 357
+1103, Gordunni Outpost, 1, 357
+1104, Mok’Gordun, 1, 357
+1105, Feral Scar Vale, 1, 357
+1106, Frayfeather Highlands, 1, 357
+1107, Idlewind Lake, 1, 357
+1108, The Forgotten Coast, 1, 357
+1109, East Pillar, 1, 357
+1110, West Pillar, 1, 357
+1111, Dream Bough, 1, 357
+1112, Jademir Lake, 1, 357
+1113, Oneiros, 1, 357
+1114, Ruins of Ravenwind, 1, 357
+1115, Rage Scar Hold, 1, 357
+1116, Feathermoon Stronghold, 1, 357
+1117, Ruins of Solarsal, 1, 357
+1118, Lower Wilds UNUSED, 1, 357
+1119, The Twin Colossals, 1, 357
+1120, Sardor Isle, 1, 357
+1121, Isle of Dread, 1, 357
+1136, High Wilderness, 1, 357
+1137, Lower Wilds, 1, 357
+1156, Southern Barrens, 1, 17
+1157, Southern Gold Road, 1, 17
+1176, Zul’Farrak, 209, 0
+1196, Utgarde Pinnacle, 575, 0
+1216, Timbermaw Hold, 1, 16
+1217, Vanndir Encampment, 1, 16
+1218, TESTAzshara, 1, 16
+1219, Legash Encampment, 1, 16
+1220, Thalassian Base Camp, 1, 16
+1221, Ruins of Eldarath, 1, 16
+1222, Hetaera’s Clutch, 1, 16
+1223, Temple of Zin-Malor, 1, 16
+1224, Bear’s Head, 1, 16
+1225, Ursolan, 1, 16
+1226, Temple of Arkkoran, 1, 16
+1227, Bay of Storms, 1, 16
+1228, The Shattered Strand, 1, 16
+1229, Tower of Eldara, 1, 16
+1230, Jagged Reef, 1, 16
+1231, Southridge Beach, 1, 16
+1232, Ravencrest Monument, 1, 16
+1233, Forlorn Ridge, 1, 16
+1234, Lake Mennar, 1, 16
+1235, Shadowsong Shrine, 1, 16
+1236, Haldarr Encampment, 1, 16
+1237, Valormok, 1, 16
+1256, The Ruined Reaches, 1, 16
+1276, The Talondeep Path, 1, 331
+1277, The Talondeep Path, 1, 406
+1296, Rocktusk Farm, 1, 14
+1297, Jaggedswine Farm, 1, 14
+1316, Razorfen Downs, 1, 17
+1336, Lost Rigger Cove, 1, 440
+1337, Uldaman, 70, 0
+1338, Lordamere Lake, 0, 130
+1339, Lordamere Lake, 0, 36
+1357, Gallows’ Corner, 0, 36
+1377, Silithus, 1, 0
+1397, Emerald Forest, 169, 0
+1417, Sunken Temple, 109, 0
+1437, Dreadmaul Hold, 0, 4
+1438, Nethergarde Keep, 0, 4
+1439, Dreadmaul Post, 0, 4
+1440, Serpent’s Coil, 0, 4
+1441, Altar of Storms, 0, 4
+1442, Firewatch Ridge, 0, 51
+1443, The Slag Pit, 0, 51
+1444, The Sea of Cinders, 0, 51
+1445, Blackrock Mountain, 0, 51
+1446, Thorium Point, 0, 51
+1457, Garrison Armory, 0, 4
+1477, The Temple of Atal’Hakkar, 109, 0
+1497, Undercity, 0, 0
+1517, Uldaman, 0, 3
+1518, Not Used Deadmines, 0, 40
+1519, Stormwind City, 0, 0
+1537, Ironforge, 0, 0
+1557, Splithoof Hold, 1, 400
+1577, The Cape of Stranglethorn, 0, 33
+1578, Southern Savage Coast, 0, 33
+1579, Unused The Deadmines 002, 0, 0
+1580, Unused Ironclad Cove 003, 0, 1579
+1581, The Deadmines, 36, 0
+1582, Ironclad Cove, 36, 1581
+1583, Blackrock Spire, 229, 0
+1584, Blackrock Depths, 230, 0
+1597, Raptor Grounds UNUSED, 1, 17
+1598, Grol’dom Farm UNUSED, 1, 17
+1599, Mor’shan Base Camp, 1, 17
+1600, Honor’s Stand UNUSED, 1, 17
+1601, Blackthorn Ridge UNUSED, 1, 17
+1602, Bramblescar UNUSED, 1, 17
+1603, Agama’gor UNUSED, 1, 17
+1617, Valley of Heroes, 0, 1519
+1637, Orgrimmar, 1, 0
+1638, Thunder Bluff, 1, 0
+1639, Elder Rise, 1, 1638
+1640, Spirit Rise, 1, 1638
+1641, Hunter Rise, 1, 1638
+1657, Darnassus, 1, 0
+1658, Cenarion Enclave, 1, 1657
+1659, Craftsmen’s Terrace, 1, 1657
+1660, Warrior’s Terrace, 1, 1657
+1661, The Temple Gardens, 1, 1657
+1662, Tradesmen’s Terrace, 1, 1657
+1677, Gavin’s Naze, 0, 36
+1678, Sofera’s Naze, 0, 36
+1679, Corrahn’s Dagger, 0, 36
+1680, The Headland, 0, 36
+1681, Misty Shore, 0, 36
+1682, Dandred’s Fold, 0, 36
+1683, Growless Cave, 0, 36
+1684, Chillwind Point, 0, 36
+1697, Raptor Grounds, 1, 17
+1698, Bramblescar, 1, 17
+1699, Thorn Hill, 1, 17
+1700, Agama’gor, 1, 17
+1701, Blackthorn Ridge, 1, 17
+1702, Honor’s Stand, 1, 17
+1703, The Mor’shan Rampart, 1, 17
+1704, Grol’dom Farm, 1, 17
+1717, Razorfen Kraul, 1, 17
+1718, The Great Lift, 1, 17
+1737, Mistvale Valley, 0, 33
+1738, Nek’mani Wellspring, 0, 33
+1739, Bloodsail Compound, 0, 33
+1740, Venture Co. Base Camp, 0, 33
+1741, Gurubashi Arena, 0, 33
+1742, Spirit Den, 0, 33
+1757, The Crimson Veil, 0, 33
+1758, The Riptide, 0, 33
+1759, The Damsel’s Luck, 0, 33
+1760, Venture Co. Operations Center, 0, 33
+1761, Deadwood Village, 1, 361
+1762, Felpaw Village, 1, 361
+1763, Jaedenar, 1, 361
+1764, Bloodvenom River, 1, 361
+1765, Bloodvenom Falls, 1, 361
+1766, Shatter Scar Vale, 1, 361
+1767, Irontree Woods, 1, 361
+1768, Irontree Cavern, 1, 361
+1769, Timbermaw Hold, 1, 361
+1770, Shadow Hold, 1, 361
+1771, Shrine of the Deceiver, 1, 361
+1777, Itharius’s Cave, 0, 8
+1778, Sorrowmurk, 0, 8
+1779, Draenil’dur Village, 0, 8
+1780, Splinterspear Junction, 0, 8
+1797, Stagalbog, 0, 8
+1798, The Shifting Mire, 0, 8
+1817, Stagalbog Cave, 0, 8
+1837, Witherbark Caverns, 0, 45
+1857, Thoradin’s Wall, 0, 45
+1858, Boulder’gor, 0, 45
+1877, Valley of Fangs, 0, 3
+1878, The Dustbowl, 0, 3
+1879, Mirage Flats, 0, 3
+1880, Featherbeard’s Hovel, 0, 47
+1881, Shindigger’s Camp, 0, 47
+1882, Plaguemist Ravine, 0, 47
+1883, Valorwind Lake, 0, 47
+1884, Agol’watha, 0, 47
+1885, Hiri’watha, 0, 47
+1886, The Creeping Ruin, 0, 47
+1887, Bogen’s Ledge, 0, 47
+1897, The Maker’s Terrace, 0, 3
+1898, Dustwind Gulch, 0, 3
+1917, Shaol’watha, 0, 47
+1937, Noonshade Ruins, 1, 440
+1938, Broken Pillar, 1, 440
+1939, Abyssal Sands, 1, 440
+1940, Southbreak Shore, 1, 440
+1941, Caverns of Time, 1, 0
+1942, The Marshlands, 1, 490
+1943, Ironstone Plateau, 1, 490
+1957, Blackchar Cave, 0, 51
+1958, Tanner Camp, 0, 51
+1959, Dustfire Valley, 0, 51
+1977, Zul’Gurub, 309, 0
+1978, Misty Reed Post, 0, 8
+1997, Bloodvenom Post, 1, 361
+1998, Talonbranch Glade, 1, 361
+2017, Stratholme, 329, 0
+2037, Quel’thalas, 0, 0
+2057, Scholomance, 289, 0
+2077, Twilight Vale, 1, 148
+2078, Twilight Shore, 1, 148
+2079, Alcaz Island, 1, 15
+2097, Darkcloud Pinnacle, 1, 400
+2098, Dawning Wood Catacombs, 0, 10
+2099, Stonewatch Keep, 0, 44
+2100, Maraudon, 349, 0
+2101, Stoutlager Inn, 0, 38
+2102, Thunderbrew Distillery, 0, 1
+2103, Menethil Keep, 0, 11
+2104, Deepwater Tavern, 0, 11
+2117, Shadow Grave, 0, 85
+2118, Brill Town Hall, 0, 85
+2119, Gallows’ End Tavern, 0, 85
+2137, The Pools of VisionUNUSED, 1, 215
+2138, Dreadmist Den, 1, 17
+2157, Bael’dun Keep, 1, 17
+2158, Emberstrife’s Den, 1, 15
+2159, Onyxia’s Lair, 1, 0
+2160, Windshear Mine, 1, 406
+2161, Roland’s Doom, 0, 10
+2177, Battle Ring, 0, 33
+2197, The Pools of Vision, 1, 1638
+2198, Shadowbreak Ravine, 1, 405
+2217, Broken Spear Village, 1, 405
+2237, Whitereach Post, 1, 400
+2238, Gornia, 1, 400
+2239, Zane’s Eye Crater, 1, 400
+2240, Mirage Raceway, 1, 400
+2241, Frostsaber Rock, 1, 618
+2242, The Hidden Grove, 1, 618
+2243, Timbermaw Post, 1, 618
+2244, Winterfall Village, 1, 618
+2245, Mazthoril, 1, 618
+2246, Frostfire Hot Springs, 1, 618
+2247, Ice Thistle Hills, 1, 618
+2248, Dun Mandarr, 1, 618
+2249, Frostwhisper Gorge, 1, 618
+2250, Owl Wing Thicket, 1, 618
+2251, Lake Kel’Theril, 1, 618
+2252, The Ruins of Kel’Theril, 1, 618
+2253, Starfall Village, 1, 618
+2254, Ban’Thallow Barrow Den, 1, 618
+2255, Everlook, 1, 618
+2256, Darkwhisper Gorge, 1, 618
+2257, Deeprun Tram, 369, 0
+2258, The Fungal Vale, 0, 139
+2259, UNUSEDThe Marris Stead, 0, 139
+2260, The Marris Stead, 0, 139
+2261, The Undercroft, 0, 139
+2262, Darrowshire, 0, 139
+2263, Crown Guard Tower, 0, 139
+2264, Corin’s Crossing, 0, 139
+2265, Scarlet Base Camp, 0, 139
+2266, Tyr’s Hand, 0, 139
+2267, The Scarlet Basilica, 0, 139
+2268, Light’s Hope Chapel, 0, 139
+2269, Browman Mill, 0, 139
+2270, The Noxious Glade, 0, 139
+2271, Eastwall Tower, 0, 139
+2272, Northdale, 0, 139
+2273, Zul’Mashar, 0, 139
+2274, Mazra’Alor, 0, 139
+2275, Northpass Tower, 0, 139
+2276, Quel’Lithien Lodge, 0, 139
+2277, Plaguewood, 0, 139
+2278, Scourgehold, 0, 139
+2279, Stratholme, 0, 139
+2280, DO NOT USE, 0, 0
+2297, Darrowmere Lake, 0, 28
+2298, Caer Darrow, 0, 28
+2299, Darrowmere Lake, 0, 139
+2300, Caverns of Time, 1, 440
+2301, Thistlefur Village, 1, 331
+2302, The Quagmire, 1, 15
+2303, Windbreak Canyon, 1, 400
+2317, South Seas, 1, 440
+2318, The Great Sea, 1, 15
+2319, The Great Sea, 1, 17
+2320, The Great Sea, 1, 14
+2321, The Great Sea, 1, 16
+2322, The Veiled Sea, 1, 141
+2323, The Veiled Sea, 1, 357
+2324, The Veiled Sea, 1, 405
+2325, The Veiled Sea, 1, 331
+2326, The Veiled Sea, 1, 148
+2337, Razor Hill Barracks, 1, 14
+2338, South Seas, 0, 33
+2339, The Great Sea, 0, 33
+2357, Bloodtooth Camp, 1, 331
+2358, Forest Song, 1, 331
+2359, Greenpaw Village, 1, 331
+2360, Silverwing Outpost, 1, 331
+2361, Nighthaven, 1, 493
+2362, Shrine of Remulos, 1, 493
+2363, Stormrage Barrow Dens, 1, 493
+2364, The Great Sea, 0, 40
+2365, The Great Sea, 0, 11
+2366, The Black Morass, 269, 0
+2367, Old Hillsbrad Foothills, 560, 0
+2368, Tarren Mill, 560, 2367
+2369, Southshore, 560, 2367
+2370, Durnholde Keep, 560, 2367
+2371, Dun Garok, 560, 2367
+2372, Hillsbrad Fields, 560, 2367
+2373, Eastern Strand, 560, 2367
+2374, Nethander Stead, 560, 2367
+2375, Darrow Hill, 560, 2367
+2376, Southpoint Tower, 560, 2367
+2377, Thoradin’s Wall, 560, 2367
+2378, Western Strand, 560, 2367
+2379, Azurelode Mine, 560, 2367
+2397, The Great Sea, 0, 267
+2398, The Great Sea, 0, 130
+2399, The Great Sea, 0, 85
+2400, The Forbidding Sea, 0, 47
+2401, The Forbidding Sea, 0, 45
+2402, The Forbidding Sea, 0, 11
+2403, The Forbidding Sea, 0, 8
+2404, Tethris Aran, 1, 405
+2405, Ethel Rethor, 1, 405
+2406, Ranazjar Isle, 1, 405
+2407, Kormek’s Hut, 1, 405
+2408, Shadowprey Village, 1, 405
+2417, Blackrock Pass, 0, 46
+2418, Morgan’s Vigil, 0, 46
+2419, Slither Rock, 0, 46
+2420, Terror Wing Path, 0, 46
+2421, Draco’dar, 0, 46
+2437, Ragefire Chasm, 389, 0
+2457, Nightsong Woods, 1, 331
+2477, The Veiled Sea, 1, 1377
+2478, Morlos’Aran, 1, 361
+2479, Emerald Sanctuary, 1, 361
+2480, Jadefire Glen, 1, 361
+2481, Ruins of Constellas, 1, 361
+2497, Bitter Reaches, 1, 16
+2517, Rise of the Defiler, 0, 4
+2518, Lariss Pavilion, 1, 357
+2519, Woodpaw Hills, 1, 357
+2520, Woodpaw Den, 1, 357
+2521, Verdantis River, 1, 357
+2522, Ruins of Isildien, 1, 357
+2537, Grimtotem Post, 1, 406
+2538, Camp Aparaje, 1, 406
+2539, Malaka’jin, 1, 406
+2540, Boulderslide Ravine, 1, 406
+2541, Sishir Canyon, 1, 406
+2557, Dire Maul, 429, 0
+2558, Deadwind Ravine, 0, 41
+2559, Diamondhead River, 0, 41
+2560, Ariden’s Camp, 0, 41
+2561, The Vice, 0, 41
+2562, Karazhan, 0, 41
+2563, Morgan’s Plot, 0, 41
+2577, Dire Maul, 1, 357
+2597, Alterac Valley, 30, 0
+2617, Scrabblescrew’s Camp, 1, 405
+2618, Jadefire Run, 1, 361
+2619, Thondroril River, 0, 139
+2620, Thondroril River, 0, 28
+2621, Lake Mereldar, 0, 139
+2622, Pestilent Scar, 0, 139
+2623, The Infectis Scar, 0, 139
+2624, Blackwood Lake, 0, 139
+2625, Eastwall Gate, 0, 139
+2626, Terrorweb Tunnel, 0, 139
+2627, Terrordale, 0, 139
+2637, Kargathia Keep, 1, 331
+2657, Valley of Bones, 1, 405
+2677, Blackwing Lair, 469, 0
+2697, Deadman’s Crossing, 0, 41
+2717, Molten Core, 409, 0
+2737, The Scarab Wall, 1, 1377
+2738, Southwind Village, 1, 1377
+2739, Twilight Base Camp, 1, 1377
+2740, The Crystal Vale, 1, 1377
+2741, The Scarab Dais, 1, 1377
+2742, Hive’Ashi, 1, 1377
+2743, Hive’Zora, 1, 1377
+2744, Hive’Regal, 1, 1377
+2757, Shrine of the Fallen Warrior, 1, 17
+2777, UNUSED Alterac Valley, 0, 267
+2797, Blackfathom Deeps, 1, 331
+2817, Crystalsong Forest, 571, 0
+2837, The Master’s Cellar, 0, 41
+2838, Stonewrought Pass, 0, 51
+2839, Alterac Valley, 0, 36
+2857, The Rumble Cage, 1, 440
+2877, Chunk Test, 451, 22
+2897, Zoram’gar Outpost, 1, 331
+2917, Hall of Legends, 1, 0
+2918, Champions’ Hall, 449, 0
+2937, Grosh’gok Compound, 0, 41
+2938, Sleeping Gorge, 0, 41
+2957, Irondeep Mine, 30, 2597
+2958, Stonehearth Outpost, 30, 2597
+2959, Dun Baldar, 30, 2597
+2960, Icewing Pass, 30, 2597
+2961, Frostwolf Village, 30, 2597
+2962, Tower Point, 30, 2597
+2963, Coldtooth Mine, 30, 2597
+2964, Winterax Hold, 30, 2597
+2977, Iceblood Garrison, 30, 2597
+2978, Frostwolf Keep, 30, 2597
+2979, Tor’kren Farm, 1, 14
+3017, Frost Dagger Pass, 30, 2597
+3037, Ironstone Camp, 1, 400
+3038, Weazel’s Crater, 1, 400
+3039, Tahonda Ruins, 1, 400
+3057, Field of Strife, 30, 2597
+3058, Icewing Cavern, 30, 2597
+3077, Valor’s Rest, 1, 1377
+3097, The Swarming Pillar, 1, 1377
+3098, Twilight Post, 1, 1377
+3099, Twilight Outpost, 1, 1377
+3100, Ravaged Twilight Camp, 1, 1377
+3117, Shalzaru’s Lair, 1, 357
+3137, Talrendis Point, 1, 16
+3138, Rethress Sanctum, 1, 16
+3139, Moon Horror Den, 1, 618
+3140, Scalebeard’s Cave, 1, 16
+3157, Boulderslide Cavern, 1, 406
+3177, Warsong Labor Camp, 1, 331
+3197, Chillwind Camp, 0, 28
+3217, The Maul, 429, 2557
+3237, The Maul UNUSED, 429, 2557
+3257, Bones of Grakkarond, 1, 1377
+3277, Warsong Gulch, 489, 0
+3297, Frostwolf Graveyard, 30, 2597
+3298, Frostwolf Pass, 30, 2597
+3299, Dun Baldar Pass, 30, 2597
+3300, Iceblood Graveyard, 30, 2597
+3301, Snowfall Graveyard, 30, 2597
+3302, Stonehearth Graveyard, 30, 2597
+3303, Stormpike Graveyard, 30, 2597
+3304, Icewing Bunker, 30, 2597
+3305, Stonehearth Bunker, 30, 2597
+3306, Wildpaw Ridge, 30, 2597
+3317, Revantusk Village, 0, 47
+3318, Rock of Durotan, 30, 2597
+3319, Silverwing Grove, 1, 331
+3320, Warsong Lumber Mill, 489, 3277
+3321, Silverwing Hold, 489, 3277
+3337, Wildpaw Cavern, 30, 2597
+3338, The Veiled Cleft, 30, 2597
+3357, Yojamba Isle, 0, 33
+3358, Arathi Basin, 529, 0
+3377, The Coil, 309, 1977
+3378, Altar of Hir’eek, 309, 1977
+3379, Shadra’zaar, 309, 1977
+3380, Hakkari Grounds, 309, 1977
+3381, Naze of Shirvallah, 309, 1977
+3382, Temple of Bethekk, 309, 1977
+3383, The Bloodfire Pit, 309, 1977
+3384, Altar of the Blood God, 309, 1977
+3397, Zanza’s Rise, 309, 1977
+3398, Edge of Madness, 309, 1977
+3417, Trollbane Hall, 529, 3358
+3418, Defiler’s Den, 529, 3358
+3419, Pagle’s Pointe, 309, 1977
+3420, Farm, 529, 3358
+3421, Blacksmith, 529, 3358
+3422, Lumber Mill, 529, 3358
+3423, Gold Mine, 529, 3358
+3424, Stables, 529, 3358
+3425, Cenarion Hold, 1, 1377
+3426, Staghelm Point, 1, 1377
+3427, Bronzebeard Encampment, 1, 1377
+3428, Ahn’Qiraj, 531, 0
+3429, Ruins of Ahn’Qiraj, 509, 0
+3430, Eversong Woods, 530, 0
+3431, Sunstrider Isle, 530, 3430
+3432, Shrine of Dath’Remar, 530, 3430
+3433, Ghostlands, 530, 0
+3434, Scarab Terrace, 531, 3428
+3435, General’s Terrace, 531, 3428
+3436, The Reservoir, 531, 3428
+3437, The Hatchery, 531, 3428
+3438, The Comb, 531, 3428
+3439, Watchers’ Terrace, 531, 3428
+3440, Scarab Terrace, 509, 3429
+3441, General’s Terrace, 509, 3429
+3442, The Reservoir, 509, 3429
+3443, The Hatchery, 509, 3429
+3444, The Comb, 509, 3429
+3445, Watchers’ Terrace, 509, 3429
+3446, Twilight’s Run, 1, 1377
+3447, Ortell’s Hideout, 1, 1377
+3448, Scarab Terrace, 509, 3429
+3449, General’s Terrace, 509, 3429
+3450, The Reservoir, 509, 3429
+3451, The Hatchery, 509, 3429
+3452, The Comb, 509, 3429
+3453, Watchers’ Terrace, 509, 3429
+3454, Ruins of Ahn’Qiraj, 1, 1377
+3455, The North Sea, 530, 0
+3456, Naxxramas, 533, 0

@@ -1,5 +1,5 @@
 /***************************************************************************
-results.js
+npc.js
 
 Handles client-side programming for Wiki Vanilla search results. 
 This file's methods communicate with the vanilla_service.js backend which 
@@ -29,29 +29,356 @@ Last Updated: 5/10/2019
 	const host = "https://wikivanilla.herokuapp.com";
 
 	/***************************************************************************
-	get()
-	Sends a search request to the web server and passes the results to be
-	displayed to the client.
+	getById(String)
+	Sends a request to the web server for a specific item's information and
+	forwards that data to be displayed by the client.
 	***************************************************************************/
-	function get() {
-		var search = window.location.search.replace("?search=", "");
+	function getCreature() {
+		var npc_id = window.location.search.replace("?npc=", "");
 
-		// Validate input to prevent injections
-		var new_search = search.replace("<", "");
-		var validated = new_search.replace(">", "");
-
-		var url = host + "/search?search=" + validated;
+		var url = host + "/npc?npc_id=" + npc_id;
 
 		fetch(url, {method : 'GET'})
 
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				displaySearchResults(json, search);
+				console.log(json);
+				displayCreature(json, npc_id);
 			})
 
 			.catch(function(error) {
+
 			});
+	}
+
+	function displayCreature(json_results, requested){
+		const creature_query = json_results["result"][0];
+
+		const results = document.getElementById("results");
+		const heading = document.createElement("h1");
+		const subname = document.createElement("h2");
+		const type = document.createElement("p");
+		const npcflags = document.createElement("p");
+		const extraflags = document.createElement("p");
+		const rank = document.createElement("p");
+		const gold_range = document.createElement("p");
+		const immunes = document.createElement("p");
+
+		const trainer_type = document.createElement("p");
+		const trainer_class = document.createElement("p");
+		const trainer_race = document.createElement("p");
+		const civilian = document.createElement("p");
+
+		heading.innerHTML = creature_query["Name"];
+		subname.innerHTML = creature_query["SubName"];
+		results.appendChild(heading);
+		results.appendChild(subname);
+
+		const lvl_range_box = document.createElement("div");
+		const lvl_txt = document.createElement("p");
+		const level_range = document.createElement("p");
+		lvl_txt.innerHTML = "LVL";
+		level_range.innerHTML = creature_query["MinLevel"] + " - " + creature_query["MaxLevel"];
+		lvl_range_box.classList += "small-box";
+		lvl_range_box.appendChild(lvl_txt);
+		lvl_range_box.appendChild(level_range);
+		results.appendChild(lvl_range_box);
+
+		const hp_range_box = document.createElement("div");
+		const hp_txt = document.createElement("p");
+		const hp_range = document.createElement("p");
+		hp_txt.innerHTML = "HP";
+		hp_range.innerHTML = creature_query["MinLevelHealth"] + " - " + creature_query["MaxLevelHealth"];
+		hp_range_box.classList += "small-box";
+		hp_range_box.appendChild(hp_txt);
+		hp_range_box.appendChild(hp_range);
+		results.appendChild(hp_range_box);
+
+		const mana_range_box = document.createElement("div");
+		const mana_txt = document.createElement("p");
+		const mana_range = document.createElement("p");
+		mana_txt.innerHTML = "MANA";
+		mana_range.innerHTML = creature_query["MinLevelMana"] + " - " + creature_query["MaxLevelMana"];
+		mana_range_box.classList += "small-box";
+		mana_range_box.appendChild(mana_txt);
+		mana_range_box.appendChild(mana_range);
+		results.appendChild(mana_range_box);
+
+		const melee_damage_range_box = document.createElement("div");
+		const melee_damage_txt = document.createElement("p");
+		const melee_damage_range = document.createElement("p");
+		melee_damage_txt.innerHTML = "MELEE";
+		melee_damage_range.innerHTML = creature_query["MinMeleeDmg"] + " - " + creature_query["MaxMeleeDmg"];
+		melee_damage_range_box.classList += "small-box";
+		melee_damage_range_box.appendChild(melee_damage_txt);
+		melee_damage_range_box.appendChild(melee_damage_range);
+		results.appendChild(melee_damage_range_box);
+
+		const ranged_damage_range_box = document.createElement("div");
+		const ranged_damage_txt = document.createElement("p");
+		const ranged_damage_range = document.createElement("p");
+		ranged_damage_txt.innerHTML = "RANGED";
+		ranged_damage_range.innerHTML = creature_query["MinRangedDmg"] + " - " + creature_query["MaxRangedDmg"];
+		ranged_damage_range_box.classList += "small-box";
+		ranged_damage_range_box.appendChild(ranged_damage_txt);
+		ranged_damage_range_box.appendChild(ranged_damage_range);
+		results.appendChild(ranged_damage_range_box);
+
+		const melee_ap_range_box = document.createElement("div");
+		const melee_ap_txt = document.createElement("p");
+		const melee_ap_range = document.createElement("p");
+		melee_ap_txt.innerHTML = "AP";
+		melee_ap_range.innerHTML = creature_query["MeleeAttackPower"];
+		melee_ap_range_box.classList += "small-box";
+		melee_ap_range_box.appendChild(melee_ap_txt);
+		melee_ap_range_box.appendChild(melee_ap_range);
+		results.appendChild(melee_ap_range_box);
+
+		const ranged_ap_range_box = document.createElement("div");
+		const ranged_ap_txt = document.createElement("p");
+		const ranged_ap_range = document.createElement("p");
+		ranged_ap_txt.innerHTML = "RNG-AP";
+		ranged_ap_range.innerHTML = creature_query["RangedAttackPower"];
+		ranged_ap_range_box.classList += "small-box";
+		ranged_ap_range_box.appendChild(ranged_ap_txt);
+		ranged_ap_range_box.appendChild(ranged_ap_range);
+		results.appendChild(ranged_ap_range_box);
+
+		const melee_attack_time_range_box = document.createElement("div");
+		const melee_attack_time_txt = document.createElement("p");
+		const melee_attack_time_range = document.createElement("p");
+		melee_attack_time_txt.innerHTML = "SPEED";
+		melee_attack_time_range.innerHTML = parseInt(creature_query["MeleeBaseAttackTime"]) / 1000 + " sec";
+		melee_attack_time_range_box.classList += "small-box";
+		melee_attack_time_range_box.appendChild(melee_attack_time_txt);
+		melee_attack_time_range_box.appendChild(melee_attack_time_range);
+		results.appendChild(melee_attack_time_range_box);
+
+		const ranged_attack_time_range_box = document.createElement("div");
+		const ranged_attack_time_txt = document.createElement("p");
+		const ranged_attack_time_range = document.createElement("p");
+		ranged_attack_time_txt.innerHTML = "R-SPEED";
+		ranged_attack_time_range.innerHTML = parseInt(creature_query["RangedBaseAttackTime"]) / 1000 + " sec";
+		ranged_attack_time_range_box.classList += "small-box";
+		ranged_attack_time_range_box.appendChild(ranged_attack_time_txt);
+		ranged_attack_time_range_box.appendChild(ranged_attack_time_range);
+		results.appendChild(ranged_attack_time_range_box);
+
+		const armor_range_box = document.createElement("div");
+		const armor_txt = document.createElement("p");
+		const armor_range = document.createElement("p");
+		armor_txt.innerHTML = "ARMOR";
+		armor_range.innerHTML = creature_query["Armor"];
+		armor_range_box.classList += "small-box";
+		armor_range_box.appendChild(armor_txt);
+		armor_range_box.appendChild(armor_range);
+		results.appendChild(armor_range_box);
+
+		const school_box = document.createElement("div");
+		const school_txt = document.createElement("p");
+		const school = document.createElement("p");
+		school_txt.innerHTML = "SCHOOL";
+		school.innerHTML = getDamageSchool(creature_query["DamageSchool"]);
+		school_box.classList += "small-box";
+		school_box.appendChild(school_txt);
+		school_box.appendChild(school);
+		results.appendChild(school_box);
+
+		const holy_resist = document.createElement("div");
+		const fire_resist = document.createElement("div");
+		const nature_resist = document.createElement("div");
+		const frost_resist = document.createElement("div");
+		const shadow_resist = document.createElement("div");
+		const arcane_resist = document.createElement("div");
+		const holy_text = document.createElement("p");
+		const fire_text = document.createElement("p");
+		const nature_text = document.createElement("p");
+		const frost_text = document.createElement("p");
+		const shadow_text = document.createElement("p");
+		const arcane_text = document.createElement("p");
+		const holy = document.createElement("p");
+		const fire = document.createElement("p");
+		const nature = document.createElement("p");
+		const frost = document.createElement("p");
+		const shadow = document.createElement("p");
+		const arcane = document.createElement("p");
+		holy_text.innerHTML = "HOLY";
+		fire_text.innerHTML = "FIRE";
+		nature_text.innerHTML = "NATURE";
+		frost_text.innerHTML = "FROST";
+		shadow_text.innerHTML = "SHADOW";
+		arcane_text.innerHTML = "ARCANE";
+		holy.innerHTML = creature_query["ResistanceHoly"];
+		fire.innerHTML = creature_query["ResistanceFire"];
+		nature.innerHTML = creature_query["ResistanceNature"];
+		frost.innerHTML = creature_query["ResistanceFrost"];
+		shadow.innerHTML = creature_query["ResistanceShadow"];
+		arcane.innerHTML = creature_query["ResistanceArcane"];
+		holy_resist.appendChild(holy_text);
+		holy_resist.appendChild(holy);
+		fire_resist.appendChild(fire_text);
+		fire_resist.appendChild(fire);
+		nature_resist.appendChild(nature_text);
+		nature_resist.appendChild(nature);
+		frost_resist.appendChild(frost_text);
+		frost_resist.appendChild(frost);
+		shadow_resist.appendChild(shadow_text);
+		shadow_resist.appendChild(shadow);
+		arcane_resist.appendChild(arcane_text);
+		arcane_resist.appendChild(arcane);
+		holy_resist.classList += "small-box";
+		fire_resist.classList += "small-box";
+		nature_resist.classList += "small-box";
+		frost_resist.classList += "small-box";
+		shadow_resist.classList += "small-box";
+		arcane_resist.classList += "small-box";
+		results.appendChild(holy_resist);
+		results.appendChild(fire_resist);
+		results.appendChild(nature_resist);
+		results.appendChild(frost_resist);
+		results.appendChild(shadow_resist);
+		results.appendChild(arcane_resist);
+
+		const faction_box = document.createElement("div");
+		const faction_txt = document.createElement("p");
+		const faction = document.createElement("p");
+		faction_txt.innerHTML = "FACTION";
+		faction.innerHTML = getFaction(creature_query["FactionAlliance"]);
+		faction_box.classList += "objectives-box";
+		faction_box.appendChild(faction_txt);
+		faction_box.appendChild(faction);
+		results.appendChild(faction_box);
+		
+
+
+		type.innerHTML = creature_query["CreatureType"];
+		npcflags.innerHTML = creature_query["NpcFlags"];
+		extraflags.innerHTML = creature_query["ExtraFlags"];
+		rank.innerHTML = creature_query["Rank"];
+		gold_range.innerHTML = creature_query["MinLootGold"] + " - " + creature_query["MaxLootGold"];
+		immunes.innerHTML = creature_query["MechanicImmuneMask"];
+		trainer_type.innerHTML = creature_query["TrainerType"];
+		trainer_class.innerHTML = creature_query["TrainerClass"];
+		trainer_race.innerHTML = creature_query["TrainerRace"];
+		civilian.innerHTML = creature_query["Civilian"];
+
+		results.appendChild(type);
+		results.appendChild(npcflags);
+		results.appendChild(extraflags);
+		results.appendChild(rank);
+		results.appendChild(gold_range);
+		results.appendChild(immunes);
+
+		results.appendChild(trainer_type);
+		results.appendChild(trainer_class);
+		results.appendChild(trainer_race);
+		results.appendChild(civilian);
+
+	}
+
+	function getDamageSchool(school) {
+		switch (school) {
+			case 0:
+				return "Normal";
+			case 1:
+				return "Holy";
+			case 2:
+				return "Fire";
+			case 3:
+				return "Nature";
+			case 4:
+				return "Frost";
+			case 5:
+				return "Shadow";
+			case 6:
+				return "Arcane";
+			default:
+				return "Normal"; 
+		}
+	}
+
+	function getFaction(faction_id) {
+		switch (faction_id - 1) {
+			case 35:
+				return "Friendly";
+			case 168:
+				return "Hostile";
+			case 14:
+				return "Unfriendly";
+			case 7:
+				return "Neutral";
+			case 85:
+				return "Orgrimmar";
+			case 105:
+				return "Thunder Bluff";
+			case 68:
+				return "Undercity";
+			case 11:
+				return "Stormwind City";
+			case 79:
+				return "Darnassus";
+			case 55:
+				return "Ironforge";
+			case 120:
+				return "Booty Bay";
+			case 474:
+				return "Gadgetzan";
+			case 1625:
+				return "Argent Dawn";
+			case 529:
+				return "Argent Dawn";
+			case 87:
+				return "Bloodsail Buccaneers";
+			case 910:
+				return "Brood of Nozdormu";
+			case 609:
+				return "Cenarion Circle";
+			case 909:
+				return "Darkmoon Faire";
+			case 577:
+				return "Everlook";
+			case 729:
+				return "Frostwolf Clan";
+			case 369:
+				return "Gadgetzan";
+			case 92:
+				return "Gelkis Clan Centaurs";
+			case 749:
+				return "Hydraxian Waterlords";
+			case 93:
+				return "Magram Clan Centaurs";
+			case 470:
+				return "Ratchet";
+			case 349:
+				return "Ravenhold";
+			case 809:
+				return "Shen'dralar";
+			case 890:
+				return "Silverwing Sentinels";
+			case 730:
+				return "Stormpike Guard";
+			case 70:
+				return "Syndicate";
+			case 510:
+				return "The Defilers";
+			case 509:
+				return "The League of Arathor";
+			case 59:
+				return "Thorium Brotherhood";
+			case 576:
+				return "Timbermaw Hold";
+			case 889:
+				return "Warsong Outriders";
+			case 471:
+				return "Wildhammer Clan";
+			case 589:
+				return "Wintersaber Trainers";
+			case 270:
+				return "Zandalar Tribe";
+			default:
+				return "None";
+		}
 	}
 
 	/***************************************************************************
@@ -76,13 +403,69 @@ Last Updated: 5/10/2019
 			});
 	}
 
+
+
+	/***************************************************************************
+	displayDroppedBy(Dictionary)
+	Formats data as far as what creature or creatures drop an item. If no 
+	creature drops the item, the table will not exist.
+	***************************************************************************/
+	function displayDroppedBy(npc_loot) {
+		var loot = document.getElementById("loot");
+
+		const npcs = npc_loot["result"];
+
+		//  Setting up headings for a table
+		const heading_row = document.createElement("tr");
+		const heading_name = document.createElement("th");
+		const heading_level = document.createElement("th");
+		const heading_chance = document.createElement("th");
+
+		heading_name.innerHTML = "Dropped By";
+		heading_level.innerHTML = "Level";
+		heading_chance.innerHTML = "%";
+
+		heading_row.appendChild(heading_name);
+		heading_row.appendChild(heading_level);
+		heading_row.appendChild(heading_chance);
+		
+		loot.appendChild(heading_row);
+
+		// For each creature that drops an item, display its name, level and
+		// chance to drop the item into the table
+		for (var npc of npcs) {
+
+			const row = document.createElement("tr");
+			const name = document.createElement("td");
+			const level = document.createElement("td");
+			const type = document.createElement("td");
+			const drop = document.createElement("td");
+		
+			name.innerHTML = npc["Name"];
+			row.appendChild(name);
+			
+			// If Min and Max levels are the same just say it is that level
+			// rather than a range of levels
+			if (npc["MinLevel"] == npc["MaxLevel"]) {
+				level.innerHTML = npc["MinLevel"];
+			} else {
+				level.innerHTML = npc["MinLevel"] + "-" + npc["MaxLevel"];
+			}
+			
+			row.appendChild(level);
+			drop.innerHTML = npc["ChanceOrQuestChance"];
+			row.appendChild(drop);
+			loot.appendChild(row);
+
+		}
+	}
+
 	/***************************************************************************
 	displayItem(Dictionary, Integer)
 	Takes the JSON from a server request and builds a display for an item's
 	stats for the client.
 	***************************************************************************/
 	function displayItem(json_results, requested) {
-		clearPage();
 		// Set up the table
 		var results = document.getElementById("results");
 		var heading = document.createElement("h2");
@@ -609,160 +992,6 @@ Last Updated: 5/10/2019
 	}
 
 	/***************************************************************************
-	displaySearchResults(Dictionary, String)
-	Takes JSON of all items that correspond to the user's search and organizes
-	those items into a table.
-	***************************************************************************/
-	function displaySearchResults(json_results, requested) {
-		var items_table = document.createElement("table");
-		var creatures_table = document.createElement("table");
-		var quests_table = document.createElement("table");
-		var results = document.getElementById("results");
-		var caption = document.createElement("h1");
-		var tabs = document.createElement("div");
-		tabs.id = "tabs";
-		caption.id = "caption";
-		caption.innerHTML = "Results for " + requested.toUpperCase();
-		// Clean up the page if needed
-		if (results.hasChildNodes()) {
-			results.removeChild(results.childNodes[0]);
-		}
-
-		var i = 0;
-		var item_results = json_results["items"];
-		var creature_results = json_results["creatures"];
-		var quest_results = json_results["quests"];
-
-		// If the results are empty, notify the user, otherwise iterate
-		if (item_results.length == 0 && creature_results.length == 0 && quest_results.length == 0) {
-			results.innerHTML = "<p>" + requested + " not found in item database</p>"
-		} else {
-			if (item_results.length != 0) {
-				var items_tab = document.createElement("p");
-				items_tab.innerHTML = "Items";
-				items_tab.addEventListener("click", function() {
-					switchTabs("items_table");
-				});
-				tabs.appendChild(items_tab);
-
-				items_table.innerHTML = "<tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
-				items_table.id = "items_table";
-				for (var item_result of item_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + item_result["name"] + "</td><td>" + item_result["ItemLevel"] + "</td><td>" + item_result["RequiredLevel"] + "</td>";
-
-					// This sets the row's .id attribute to be it's entry ID in the database
-					// and adds a click event to each row
-					const item_id = item_result["entry"];
-					row.id = item_id;
-					row.addEventListener("click", function() {
-						window.location.href = host + "/item.html?item=" + item_id;
-					});
-
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					items_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(items_table);
-			}
-
-			if (creature_results.length != 0) {
-				var creatures_tab = document.createElement("p");
-				creatures_tab.innerHTML = "NPCs";
-				creatures_tab.addEventListener("click", function() {
-					switchTabs("creatures_table");
-				});
-				tabs.appendChild(creatures_tab);
-
-				i = 0;
-				creatures_table.innerHTML = "<tr><th>Name</th><th>Level</th><th>Type</th></tr>";
-				creatures_table.id = "creatures_table";
-				for (var creature_result of creature_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + creature_result["Name"] + "</td><td>" + creature_result["MinLevel"] + "-" + creature_result["MaxLevel"] + "</td><td>" + creature_result["CreatureType"] + "</td>";
-					const creature_id = creature_result["Entry"];
-					row.id = creature_result[creature_id];
-					row.addEventListener("click", function() {
-						window.location.href = host + "/npc.html?npc=" + creature_id;
-					});
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					creatures_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(creatures_table);
-			}
-
-			if (quest_results.length != 0) {
-				var quests_tab = document.createElement("p");
-				quests_tab.innerHTML = "Quests";
-				quests_tab.addEventListener("click", function() {
-					switchTabs("quests_table");
-				});
-				tabs.appendChild(quests_tab);
-
-				i = 0;
-				quests_table.innerHTML = "<tr><th>Title</th><th>Quest Level</th><th>Req Level</th></tr>";
-				quests_table.id = "quests_table";
-				for (var quest_result of quest_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + quest_result["Title"] + "</td><td>" + quest_result["QuestLevel"] + "</td><td>" + quest_result["MinLevel"] + "</td>";
-					const quest_id = quest_result["entry"];
-					row.id = quest_result[quest_id];
-					row.addEventListener("click", function() {
-						window.location.href = host + "/quest.html?quest=" + quest_id;
-					});
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					quests_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(quests_table);
-			}
-		}
-		initTabs();
-
-		results.insertBefore(tabs, results.childNodes[0]);
-		results.insertBefore(caption, results.childNodes[0]);
-	}
-
-	function switchTabs(tab) {
-		var results = document.getElementById("results");
-		if (results.hasChildNodes()) {
-			for (var child of results.childNodes){
-				if (child.id != tab && child.id != "tabs" && child.id != "caption") {
-					child.classList.add("hidden");
-				} else {
-					child.classList.remove("hidden");
-				}
-			}
-		}
-	}
-
-	function initTabs(){
-		var results = document.getElementById("results");
-		if (results.hasChildNodes()) {
-			for (var child of results.childNodes){
-				child.classList.add("hidden");
-			}
-		}
-		results.childNodes[0].classList.remove("hidden");
-	}
-
-	/***************************************************************************
 	checkStatus(response)
 	This method checks the status of the server during a query and either 
 	allows our program to continue or reports an error and handles the promise.
@@ -782,7 +1011,7 @@ Last Updated: 5/10/2019
 	}
 
 	window.onload = function() {
-		get();
+		getCreature();
 	}
 
 }());

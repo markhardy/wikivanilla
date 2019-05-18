@@ -73,7 +73,8 @@ const connection = mysql.createConnection({
   user     : 'root',
   password : 'A66056504',
   database : 'mangos0',
-  debug    : "true"
+  debug    : "true",
+  multipleStatements : "true"
 });
 
 connection.connect(function (err) {
@@ -140,14 +141,30 @@ app.get('/search', function (req, res) {
 	const search = req.query.search;
 	var json = {};
 
-	var sql_query = "SELECT * FROM item_template i WHERE i.name LIKE '" + "%" + search + "%" + "' ORDER BY i.Quality DESC, i.name ASC";
+	var sql_query = "SELECT * FROM item_template i WHERE i.name LIKE '" + "%" + search + "%" + "' ORDER BY i.Quality DESC, i.name ASC; SELECT c.Entry, c.Name, c.MinLevel, c.MaxLevel, c.CreatureType FROM creature_template c WHERE c.name LIKE '" + "%" + search + "%" + "' ORDER BY c.name ASC; SELECT q.Title, q.entry, q.MinLevel, q.QuestLevel, q.RequiredRaces FROM quest_template q WHERE q.Title LIKE '" + "%" + search + "%" + "' ORDER BY q.QuestLevel ASC";
 
 	var result = connection.query(sql_query, function(err, result, fields) {
 		if (err) throw err;
-		json["result"] = result;
+		json["items"] = result[0];
+		json["creatures"] = result[1];
+		json["quests"] = result[2];
 		console.log("Sent JSON to client");
 		res.send(JSON.stringify(json));
 	});
+
+/*
+	var creatures = connection.query(creatures_sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["creatures"] = creatures;
+	});
+
+	var quests = connection.query(quests_sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["quests"] = quests;
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+*/
 })
 
 /***************************************************************************
@@ -206,6 +223,144 @@ app.get('/item', function (req, res) {
 		res.send(JSON.stringify(json));
 	});
 })
+
+/***************************************************************************
+get/creature
+Queries the database for information on a specific creature.
+***************************************************************************/
+app.get('/npc', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	const npc_id = req.query.npc_id;
+	var json = {};
+
+	var sql_query = "SELECT * FROM creature_template c WHERE c.Entry = '" + npc_id + "'";
+
+	var result = connection.query(sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["result"] = result;
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+})
+
+/***************************************************************************
+get/creature
+Queries the database for information on a specific creature.
+***************************************************************************/
+app.get('/quest', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	const quest_id = req.query.quest_id;
+	var json = {};
+
+	var sql_query = "SELECT * FROM quest_template q WHERE q.entry = '" + quest_id + "'";
+
+	var result = connection.query(sql_query, function(err, result, fields) {
+		if (err) throw err;
+		json["result"] = result;
+    json["zones"] = findZones();
+		console.log("Sent JSON to client");
+		res.send(JSON.stringify(json));
+	});
+})
+
+/***************************************************************************
+get/creature
+Queries the database for information on a specific creature.
+***************************************************************************/
+app.get('/prev_quest', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  const prev_quest_id = req.query.prev_quest_id;
+  var json = {};
+
+  var sql_query = "SELECT q.Title, q.Entry FROM quest_template q WHERE q.entry = '" + prev_quest_id + "'";
+
+  var result = connection.query(sql_query, function(err, result, fields) {
+    if (err) throw err;
+    json["result"] = result;
+    console.log("Sent JSON to client");
+    res.send(JSON.stringify(json));
+  });
+})
+
+/***************************************************************************
+get/creature
+Queries the database for information on a specific creature.
+***************************************************************************/
+app.get('/itemlink', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  const item_id1 = req.query.item_id1;
+  const item_id2 = req.query.item_id2;
+  const item_id3 = req.query.item_id3;
+  const item_id4 = req.query.item_id4;
+  const item_id5 = req.query.item_id5;
+  const item_id6 = req.query.item_id6;
+
+  var json = {};
+
+  var sql_query = "";
+  if (item_id2 == "0") {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'";
+  } else if (item_id3 == "0") {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id2 + "'";
+  } else if (item_id4 == "0") {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id2 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id3 + "'";
+  } else if (item_id5 == "0") {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id2 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id3 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id4 + "'";
+  } else if (item_id6 == "0") {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id2 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id3 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id4 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id5 + "'";
+  } else {
+    sql_query = "SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id1 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id2 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id3 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id4 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id5 + "'; SELECT i.name, i.entry, i.Quality FROM item_template i WHERE i.entry = '" + item_id6 + "'";
+  }
+
+  var result = connection.query(sql_query, function(err, result, fields) {
+    if (err) throw err;
+
+    if (result[0]) {
+      json["item1"] = result[0];
+    }
+
+    if (result[1]) {
+      json["item2"] = result[1];
+    }
+
+    if (result[2]) {
+      json["item3"] = result[2];
+    }
+
+    if (result[3]) {
+      json["item4"] = result[3];
+    }
+
+    if (result[4]) {
+      json["item5"] = result[4];
+    }
+
+    if (result[5]) {
+      json["item6"] = result[5];
+    }
+
+    console.log("Sent JSON to client");
+    res.send(JSON.stringify(json));
+  });
+})
+
+function findZones() {
+  let zones = {};
+
+  // go through file and find books 
+  let file = fs.readFileSync("files/zones_vanilla.txt", 'utf8');
+  let lines = file.split("\n");
+
+  for (var line of lines) {
+      var new_line = line.split(", ");
+      var values = [];
+      values.push(new_line[1]);
+      values.push(new_line[2]);
+      values.push(new_line[3]);
+      zones[new_line[0]] = values;
+    }
+    return zones;
+  }
 
 // Blizzard API //
 // For use later //

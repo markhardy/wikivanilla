@@ -29,28 +29,28 @@ Last Updated: 5/10/2019
 	const host = "https://wikivanilla.herokuapp.com";
 
 	/***************************************************************************
-	get()
-	Sends a search request to the web server and passes the results to be
-	displayed to the client.
+	getById(String)
+	Sends a request to the web server for a specific item's information and
+	forwards that data to be displayed by the client.
 	***************************************************************************/
-	function get() {
-		var search = window.location.search.replace("?search=", "");
+	function getItem() {
+		console.log(window.location.search);
+		var item_id = window.location.search.replace("?item=", "");
+		console.log("get");
 
-		// Validate input to prevent injections
-		var new_search = search.replace("<", "");
-		var validated = new_search.replace(">", "");
-
-		var url = host + "/search?search=" + validated;
+		var url = host + "/item?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				displaySearchResults(json, search);
+				console.log(json);
+				displayItem(json, item_id);
 			})
 
 			.catch(function(error) {
+
 			});
 	}
 
@@ -76,13 +76,69 @@ Last Updated: 5/10/2019
 			});
 	}
 
+
+
+	/***************************************************************************
+	displayDroppedBy(Dictionary)
+	Formats data as far as what creature or creatures drop an item. If no 
+	creature drops the item, the table will not exist.
+	***************************************************************************/
+	function displayDroppedBy(npc_loot) {
+		var loot = document.getElementById("loot");
+
+		const npcs = npc_loot["result"];
+
+		//  Setting up headings for a table
+		const heading_row = document.createElement("tr");
+		const heading_name = document.createElement("th");
+		const heading_level = document.createElement("th");
+		const heading_chance = document.createElement("th");
+
+		heading_name.innerHTML = "Dropped By";
+		heading_level.innerHTML = "Level";
+		heading_chance.innerHTML = "%";
+
+		heading_row.appendChild(heading_name);
+		heading_row.appendChild(heading_level);
+		heading_row.appendChild(heading_chance);
+		
+		loot.appendChild(heading_row);
+
+		// For each creature that drops an item, display its name, level and
+		// chance to drop the item into the table
+		for (var npc of npcs) {
+
+			const row = document.createElement("tr");
+			const name = document.createElement("td");
+			const level = document.createElement("td");
+			const type = document.createElement("td");
+			const drop = document.createElement("td");
+		
+			name.innerHTML = npc["Name"];
+			row.appendChild(name);
+			
+			// If Min and Max levels are the same just say it is that level
+			// rather than a range of levels
+			if (npc["MinLevel"] == npc["MaxLevel"]) {
+				level.innerHTML = npc["MinLevel"];
+			} else {
+				level.innerHTML = npc["MinLevel"] + "-" + npc["MaxLevel"];
+			}
+			
+			row.appendChild(level);
+			drop.innerHTML = npc["ChanceOrQuestChance"];
+			row.appendChild(drop);
+			loot.appendChild(row);
+
+		}
+	}
+
 	/***************************************************************************
 	displayItem(Dictionary, Integer)
 	Takes the JSON from a server request and builds a display for an item's
 	stats for the client.
 	***************************************************************************/
 	function displayItem(json_results, requested) {
-		clearPage();
 		// Set up the table
 		var results = document.getElementById("results");
 		var heading = document.createElement("h2");
@@ -609,160 +665,6 @@ Last Updated: 5/10/2019
 	}
 
 	/***************************************************************************
-	displaySearchResults(Dictionary, String)
-	Takes JSON of all items that correspond to the user's search and organizes
-	those items into a table.
-	***************************************************************************/
-	function displaySearchResults(json_results, requested) {
-		var items_table = document.createElement("table");
-		var creatures_table = document.createElement("table");
-		var quests_table = document.createElement("table");
-		var results = document.getElementById("results");
-		var caption = document.createElement("h1");
-		var tabs = document.createElement("div");
-		tabs.id = "tabs";
-		caption.id = "caption";
-		caption.innerHTML = "Results for " + requested.toUpperCase();
-		// Clean up the page if needed
-		if (results.hasChildNodes()) {
-			results.removeChild(results.childNodes[0]);
-		}
-
-		var i = 0;
-		var item_results = json_results["items"];
-		var creature_results = json_results["creatures"];
-		var quest_results = json_results["quests"];
-
-		// If the results are empty, notify the user, otherwise iterate
-		if (item_results.length == 0 && creature_results.length == 0 && quest_results.length == 0) {
-			results.innerHTML = "<p>" + requested + " not found in item database</p>"
-		} else {
-			if (item_results.length != 0) {
-				var items_tab = document.createElement("p");
-				items_tab.innerHTML = "Items";
-				items_tab.addEventListener("click", function() {
-					switchTabs("items_table");
-				});
-				tabs.appendChild(items_tab);
-
-				items_table.innerHTML = "<tr><th>Name</th><th>Item Level</th><th>Required Level</th></tr>";
-				items_table.id = "items_table";
-				for (var item_result of item_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + item_result["name"] + "</td><td>" + item_result["ItemLevel"] + "</td><td>" + item_result["RequiredLevel"] + "</td>";
-
-					// This sets the row's .id attribute to be it's entry ID in the database
-					// and adds a click event to each row
-					const item_id = item_result["entry"];
-					row.id = item_id;
-					row.addEventListener("click", function() {
-						window.location.href = host + "/item.html?item=" + item_id;
-					});
-
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					items_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(items_table);
-			}
-
-			if (creature_results.length != 0) {
-				var creatures_tab = document.createElement("p");
-				creatures_tab.innerHTML = "NPCs";
-				creatures_tab.addEventListener("click", function() {
-					switchTabs("creatures_table");
-				});
-				tabs.appendChild(creatures_tab);
-
-				i = 0;
-				creatures_table.innerHTML = "<tr><th>Name</th><th>Level</th><th>Type</th></tr>";
-				creatures_table.id = "creatures_table";
-				for (var creature_result of creature_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + creature_result["Name"] + "</td><td>" + creature_result["MinLevel"] + "-" + creature_result["MaxLevel"] + "</td><td>" + creature_result["CreatureType"] + "</td>";
-					const creature_id = creature_result["Entry"];
-					row.id = creature_result[creature_id];
-					row.addEventListener("click", function() {
-						window.location.href = host + "/npc.html?npc=" + creature_id;
-					});
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					creatures_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(creatures_table);
-			}
-
-			if (quest_results.length != 0) {
-				var quests_tab = document.createElement("p");
-				quests_tab.innerHTML = "Quests";
-				quests_tab.addEventListener("click", function() {
-					switchTabs("quests_table");
-				});
-				tabs.appendChild(quests_tab);
-
-				i = 0;
-				quests_table.innerHTML = "<tr><th>Title</th><th>Quest Level</th><th>Req Level</th></tr>";
-				quests_table.id = "quests_table";
-				for (var quest_result of quest_results) {
-					var row = document.createElement("tr");
-					row.innerHTML = "<td>" + quest_result["Title"] + "</td><td>" + quest_result["QuestLevel"] + "</td><td>" + quest_result["MinLevel"] + "</td>";
-					const quest_id = quest_result["entry"];
-					row.id = quest_result[quest_id];
-					row.addEventListener("click", function() {
-						window.location.href = host + "/quest.html?quest=" + quest_id;
-					});
-					// Make every other row a different color
-					if (i % 2 == 0) {
-						row.classList.add("even-row");
-					} else {
-						row.classList.add("odd-row");
-					}
-					quests_table.appendChild(row);
-					i++;
-				}
-				results.appendChild(quests_table);
-			}
-		}
-		initTabs();
-
-		results.insertBefore(tabs, results.childNodes[0]);
-		results.insertBefore(caption, results.childNodes[0]);
-	}
-
-	function switchTabs(tab) {
-		var results = document.getElementById("results");
-		if (results.hasChildNodes()) {
-			for (var child of results.childNodes){
-				if (child.id != tab && child.id != "tabs" && child.id != "caption") {
-					child.classList.add("hidden");
-				} else {
-					child.classList.remove("hidden");
-				}
-			}
-		}
-	}
-
-	function initTabs(){
-		var results = document.getElementById("results");
-		if (results.hasChildNodes()) {
-			for (var child of results.childNodes){
-				child.classList.add("hidden");
-			}
-		}
-		results.childNodes[0].classList.remove("hidden");
-	}
-
-	/***************************************************************************
 	checkStatus(response)
 	This method checks the status of the server during a query and either 
 	allows our program to continue or reports an error and handles the promise.
@@ -782,7 +684,7 @@ Last Updated: 5/10/2019
 	}
 
 	window.onload = function() {
-		get();
+		getItem();
 	}
 
 }());
