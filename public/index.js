@@ -26,7 +26,7 @@ Last Updated: 4/24/2019
 		return host;
 	}
 
-	//const host = getHost();
+	//const host = "http://127.0.0.1:3000";
 	const host = "https://wikivanilla.herokuapp.com";
 
 

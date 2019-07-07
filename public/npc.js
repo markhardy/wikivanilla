@@ -25,7 +25,7 @@ Last Updated: 5/10/2019
 		return host;
 	}
 
-	//const host = getHost();
+	//const host = "http://127.0.0.1:3000";
 	const host = "https://wikivanilla.herokuapp.com";
 
 	/***************************************************************************
@@ -43,7 +43,6 @@ Last Updated: 5/10/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				console.log(json);
 				displayCreature(json, npc_id);
 			})
 
@@ -52,17 +51,108 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	function getLoot(loot_id) {
+		var url = host + "/npc_loot?loot_id=" + loot_id;
+
+		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				displayLoot(json);
+			})
+
+			.catch(function(error) {
+
+			});
+	}
+
+	function displayLoot(json) {
+		var loot = json[0];
+		var results = document.getElementById("results");
+		var loot_table = document.createElement("table");
+		const loot_caption = document.createElement("caption");
+		loot_caption.innerHTML = "Loot Table";
+		loot_table.id = "loot";
+		loot_table.classList.add("search-table");
+		loot_table.appendChild(loot_caption);
+
+		//  Setting up headings for a table
+		const heading_row = document.createElement("tr");
+		const heading_name = document.createElement("th");
+		const heading_req_level = document.createElement("th");
+		const heading_item_level = document.createElement("th");
+		const heading_type = document.createElement("th");
+		const heading_chance = document.createElement("th");
+		heading_row.classList.add("search-tr");
+		heading_name.classList.add("search-th");
+		heading_req_level.classList.add("search-th");
+		heading_item_level.classList.add("search-th");
+		heading_type.classList.add("search-th");
+		heading_chance.classList.add("search-th");
+
+		heading_name.innerHTML = "Name";
+		heading_req_level.innerHTML = "Required Level";
+		heading_item_level.innerHTML = "Item Level";
+		heading_type.innerHTML = "Type";
+		heading_chance.innerHTML = "%";
+
+		heading_row.appendChild(heading_name);
+		heading_row.appendChild(heading_req_level);
+		heading_row.appendChild(heading_item_level);
+		heading_row.appendChild(heading_type);
+		heading_row.appendChild(heading_chance);
+		loot_table.appendChild(heading_row);
+
+		// For each creature that drops an item, display its name, level and
+		// chance to drop the item into the table
+		for (var item of loot) {
+			const row = document.createElement("tr");
+			const name = document.createElement("td");
+			const req_level = document.createElement("td");
+			const item_level = document.createElement("td");
+			const type = document.createElement("td");
+			const drop = document.createElement("td");
+			row.classList.add("search-tr");
+			name.classList.add("search-td");
+			req_level.classList.add("search-td");
+			item_level.classList.add("search-td");
+			type.classList.add("search-td");
+			drop.classList.add("search-td");
+			name.classList.add(findItemQuality(item["Quality"]));
+			name.id = "search";
+			name.type = "search";
+			name.name = "search";
+			name.innerHTML = "<a href='#' data-wowhead='item=" + String(item["entry"]) + "&amp;domain=classic'>[" + item["name"] + "]</a>";
+			row.appendChild(name);
+			req_level.innerHTML = item["RequiredLevel"];
+			item_level.innerHTML = item["ItemLevel"];
+			
+			row.appendChild(req_level);
+			row.append(item_level);
+
+			type.innerHTML = findItemSubclass(item["class"], item["subclass"]);
+			row.appendChild(type);
+
+			drop.innerHTML = item["ChanceOrQuestChance"];
+			row.appendChild(drop);
+
+			row.addEventListener("click", function() {
+				window.location.href = host + "/item.html?item=" + item["entry"];
+			});
+			loot_table.appendChild(row);
+
+		}
+		results.appendChild(loot_table);
+	}
+
 	function displayCreature(json_results, requested){
 		const creature_query = json_results["result"][0];
 
 		const results = document.getElementById("results");
 		const heading = document.createElement("h1");
 		const subname = document.createElement("h2");
-		const type = document.createElement("p");
-		const npcflags = document.createElement("p");
-		const extraflags = document.createElement("p");
-		const rank = document.createElement("p");
-		const gold_range = document.createElement("p");
+
 		const immunes = document.createElement("p");
 
 		const trainer_type = document.createElement("p");
@@ -75,199 +165,153 @@ Last Updated: 5/10/2019
 		results.appendChild(heading);
 		results.appendChild(subname);
 
-		const lvl_range_box = document.createElement("div");
-		const lvl_txt = document.createElement("p");
-		const level_range = document.createElement("p");
-		lvl_txt.innerHTML = "LVL";
-		level_range.innerHTML = creature_query["MinLevel"] + " - " + creature_query["MaxLevel"];
-		lvl_range_box.classList += "small-box";
-		lvl_range_box.appendChild(lvl_txt);
-		lvl_range_box.appendChild(level_range);
-		results.appendChild(lvl_range_box);
-
 		const hp_range_box = document.createElement("div");
 		const hp_txt = document.createElement("p");
 		const hp_range = document.createElement("p");
 		hp_txt.innerHTML = "HP";
 		hp_range.innerHTML = creature_query["MinLevelHealth"] + " - " + creature_query["MaxLevelHealth"];
-		hp_range_box.classList += "small-box";
-		hp_range_box.appendChild(hp_txt);
+		hp_range_box.classList += "HP-box";
 		hp_range_box.appendChild(hp_range);
 		results.appendChild(hp_range_box);
 
-		const mana_range_box = document.createElement("div");
-		const mana_txt = document.createElement("p");
-		const mana_range = document.createElement("p");
-		mana_txt.innerHTML = "MANA";
-		mana_range.innerHTML = creature_query["MinLevelMana"] + " - " + creature_query["MaxLevelMana"];
-		mana_range_box.classList += "small-box";
-		mana_range_box.appendChild(mana_txt);
-		mana_range_box.appendChild(mana_range);
-		results.appendChild(mana_range_box);
+		if (creature_query["MaxLevelMana"] > 0) {
+			const mana_range_box = document.createElement("div");
+			const mana_txt = document.createElement("p");
+			const mana_range = document.createElement("p");
+			mana_txt.innerHTML = "MANA";
+			mana_range.innerHTML = creature_query["MinLevelMana"] + " - " + creature_query["MaxLevelMana"];
+			mana_range_box.classList += "mana-box";
+			mana_range_box.appendChild(mana_range);
+			results.appendChild(mana_range_box);
+		}
 
-		const melee_damage_range_box = document.createElement("div");
-		const melee_damage_txt = document.createElement("p");
-		const melee_damage_range = document.createElement("p");
-		melee_damage_txt.innerHTML = "MELEE";
-		melee_damage_range.innerHTML = creature_query["MinMeleeDmg"] + " - " + creature_query["MaxMeleeDmg"];
-		melee_damage_range_box.classList += "small-box";
-		melee_damage_range_box.appendChild(melee_damage_txt);
-		melee_damage_range_box.appendChild(melee_damage_range);
-		results.appendChild(melee_damage_range_box);
+		var melee_dmg = "0";
+		if (creature_query["MaxMeleeDmg"] > 0) {
+			melee_dmg = +creature_query["MinMeleeDmg"].toFixed(2) + " - " + +creature_query["MaxMeleeDmg"].toFixed(2);
+		}
 
-		const ranged_damage_range_box = document.createElement("div");
-		const ranged_damage_txt = document.createElement("p");
-		const ranged_damage_range = document.createElement("p");
-		ranged_damage_txt.innerHTML = "RANGED";
-		ranged_damage_range.innerHTML = creature_query["MinRangedDmg"] + " - " + creature_query["MaxRangedDmg"];
-		ranged_damage_range_box.classList += "small-box";
-		ranged_damage_range_box.appendChild(ranged_damage_txt);
-		ranged_damage_range_box.appendChild(ranged_damage_range);
-		results.appendChild(ranged_damage_range_box);
+		var ranged_dmg = "0";
+		if (creature_query["MaxRangedDmg"] > 0) {
+			ranged_dmg = +creature_query["MinRangedDmg"].toFixed(2) + " - " + +creature_query["MaxRangedDmg"].toFixed(2);
+		}
 
-		const melee_ap_range_box = document.createElement("div");
-		const melee_ap_txt = document.createElement("p");
-		const melee_ap_range = document.createElement("p");
-		melee_ap_txt.innerHTML = "AP";
-		melee_ap_range.innerHTML = creature_query["MeleeAttackPower"];
-		melee_ap_range_box.classList += "small-box";
-		melee_ap_range_box.appendChild(melee_ap_txt);
-		melee_ap_range_box.appendChild(melee_ap_range);
-		results.appendChild(melee_ap_range_box);
+		var level = "";
+		if (creature_query["MinLevel"] == creature_query["MaxLevel"]) {
+			level = creature_query["MinLevel"];
+		} else {
+			level = creature_query["MinLevel"] + " - " + creature_query["MaxLevel"];
+		}
 
-		const ranged_ap_range_box = document.createElement("div");
-		const ranged_ap_txt = document.createElement("p");
-		const ranged_ap_range = document.createElement("p");
-		ranged_ap_txt.innerHTML = "RNG-AP";
-		ranged_ap_range.innerHTML = creature_query["RangedAttackPower"];
-		ranged_ap_range_box.classList += "small-box";
-		ranged_ap_range_box.appendChild(ranged_ap_txt);
-		ranged_ap_range_box.appendChild(ranged_ap_range);
-		results.appendChild(ranged_ap_range_box);
+		var armor_val = creature_query["Armor"];
+		const stat_names = ["Level", "Melee Damage", "Ranged Damage", "Armor", "Holy Resistance", "Fire Resistance", "Frost Resistance", "Nature Resistance", "Shadow Resistance", "Arcane Resistance"];
+		const stats = [level, melee_dmg, ranged_dmg, armor_val, creature_query["ResistanceHoly"], creature_query["ResistanceFire"], creature_query["ResistanceFrost"], creature_query["ResistanceNature"], creature_query["ResistanceShadow"], creature_query["ResistanceArcane"]];
+		const stat_icons = ["INV_Mushroom_11.png", "INV_Sword_24.png", "INV_Weapon_Bow_05.png", "INV_Shield_06.png", "Spell_Holy_HolyProtection.png", "Spell_Fire_Fire.png", "Spell_Frost_FrostShock.png", "Spell_Nature_ProtectionformNature.png", "Spell_Shadow_AntiShadow.png", "Spell_Nature_WispSplode.png"]
+		const stats_box = document.createElement("table");
+		const caption = document.createElement("caption");
+		caption.innerHTML = "Stats";
+		stats_box.appendChild(caption);
 
-		const melee_attack_time_range_box = document.createElement("div");
-		const melee_attack_time_txt = document.createElement("p");
-		const melee_attack_time_range = document.createElement("p");
-		melee_attack_time_txt.innerHTML = "SPEED";
-		melee_attack_time_range.innerHTML = parseInt(creature_query["MeleeBaseAttackTime"]) / 1000 + " sec";
-		melee_attack_time_range_box.classList += "small-box";
-		melee_attack_time_range_box.appendChild(melee_attack_time_txt);
-		melee_attack_time_range_box.appendChild(melee_attack_time_range);
-		results.appendChild(melee_attack_time_range_box);
+		for (var i = 0; i < stats.length; i++) {
+			const tooltip_text = document.createElement("span");
+			tooltip_text.classList.add("tooltiptext")
+			tooltip_text.innerHTML += stat_names[i];
+			const stat_row = document.createElement("tr");
+			const stat = document.createElement("td");
+			const stat_val = document.createElement("td");
+			stat_row.classList.add("tooltip");
+			stat.classList.add("resistance-td");
+			stat_val.classList.add("resistance-td");
+			const stat_icon = document.createElement("img");
+			stats_box.classList.add("resistance-box");
+			stat_icon.classList.add("resistance-icon");
+			stat_icon.src = "/icons/" + stat_icons[i];
+			stat_icon.alt = stat_names[i];
+			stat.appendChild(stat_icon);
+			stat_val.innerHTML += stats[i];
 
-		const ranged_attack_time_range_box = document.createElement("div");
-		const ranged_attack_time_txt = document.createElement("p");
-		const ranged_attack_time_range = document.createElement("p");
-		ranged_attack_time_txt.innerHTML = "R-SPEED";
-		ranged_attack_time_range.innerHTML = parseInt(creature_query["RangedBaseAttackTime"]) / 1000 + " sec";
-		ranged_attack_time_range_box.classList += "small-box";
-		ranged_attack_time_range_box.appendChild(ranged_attack_time_txt);
-		ranged_attack_time_range_box.appendChild(ranged_attack_time_range);
-		results.appendChild(ranged_attack_time_range_box);
+			stat_row.appendChild(stat);
+			stat_row.appendChild(stat_val);
+			stat_row.appendChild(tooltip_text);
 
-		const armor_range_box = document.createElement("div");
-		const armor_txt = document.createElement("p");
-		const armor_range = document.createElement("p");
-		armor_txt.innerHTML = "ARMOR";
-		armor_range.innerHTML = creature_query["Armor"];
-		armor_range_box.classList += "small-box";
-		armor_range_box.appendChild(armor_txt);
-		armor_range_box.appendChild(armor_range);
-		results.appendChild(armor_range_box);
+			stats_box.append(stat_row);
+		}
 
-		const school_box = document.createElement("div");
-		const school_txt = document.createElement("p");
-		const school = document.createElement("p");
-		school_txt.innerHTML = "SCHOOL";
-		school.innerHTML = getDamageSchool(creature_query["DamageSchool"]);
-		school_box.classList += "small-box";
-		school_box.appendChild(school_txt);
-		school_box.appendChild(school);
-		results.appendChild(school_box);
+		const min_money = creature_query["MinLootGold"];
+		const max_money = creature_query["MaxLootGold"];
 
-		const holy_resist = document.createElement("div");
-		const fire_resist = document.createElement("div");
-		const nature_resist = document.createElement("div");
-		const frost_resist = document.createElement("div");
-		const shadow_resist = document.createElement("div");
-		const arcane_resist = document.createElement("div");
-		const holy_text = document.createElement("p");
-		const fire_text = document.createElement("p");
-		const nature_text = document.createElement("p");
-		const frost_text = document.createElement("p");
-		const shadow_text = document.createElement("p");
-		const arcane_text = document.createElement("p");
-		const holy = document.createElement("p");
-		const fire = document.createElement("p");
-		const nature = document.createElement("p");
-		const frost = document.createElement("p");
-		const shadow = document.createElement("p");
-		const arcane = document.createElement("p");
-		holy_text.innerHTML = "HOLY";
-		fire_text.innerHTML = "FIRE";
-		nature_text.innerHTML = "NATURE";
-		frost_text.innerHTML = "FROST";
-		shadow_text.innerHTML = "SHADOW";
-		arcane_text.innerHTML = "ARCANE";
-		holy.innerHTML = creature_query["ResistanceHoly"];
-		fire.innerHTML = creature_query["ResistanceFire"];
-		nature.innerHTML = creature_query["ResistanceNature"];
-		frost.innerHTML = creature_query["ResistanceFrost"];
-		shadow.innerHTML = creature_query["ResistanceShadow"];
-		arcane.innerHTML = creature_query["ResistanceArcane"];
-		holy_resist.appendChild(holy_text);
-		holy_resist.appendChild(holy);
-		fire_resist.appendChild(fire_text);
-		fire_resist.appendChild(fire);
-		nature_resist.appendChild(nature_text);
-		nature_resist.appendChild(nature);
-		frost_resist.appendChild(frost_text);
-		frost_resist.appendChild(frost);
-		shadow_resist.appendChild(shadow_text);
-		shadow_resist.appendChild(shadow);
-		arcane_resist.appendChild(arcane_text);
-		arcane_resist.appendChild(arcane);
-		holy_resist.classList += "small-box";
-		fire_resist.classList += "small-box";
-		nature_resist.classList += "small-box";
-		frost_resist.classList += "small-box";
-		shadow_resist.classList += "small-box";
-		arcane_resist.classList += "small-box";
-		results.appendChild(holy_resist);
-		results.appendChild(fire_resist);
-		results.appendChild(nature_resist);
-		results.appendChild(frost_resist);
-		results.appendChild(shadow_resist);
-		results.appendChild(arcane_resist);
+		const avg_money = ((min_money + max_money) / 2).toFixed(0);
 
-		const faction_box = document.createElement("div");
-		const faction_txt = document.createElement("p");
-		const faction = document.createElement("p");
-		faction_txt.innerHTML = "FACTION";
-		faction.innerHTML = getFaction(creature_query["FactionAlliance"]);
-		faction_box.classList += "objectives-box";
-		faction_box.appendChild(faction_txt);
-		faction_box.appendChild(faction);
-		results.appendChild(faction_box);
-		
+		const wealth = document.createElement("div");
+
+		const gold_icon = document.createElement("img");
+		gold_icon.classList.add("money-icon");
+		gold_icon.src = "/icons/INV_Misc_Coin_02.png";
+		gold_icon.alt = "Gold";
+		wealth.appendChild(gold_icon);
+		wealth.innerHTML += Math.floor(avg_money / 10000);
+
+		const silver_icon = document.createElement("img");
+		silver_icon.classList.add("money-icon");
+		silver_icon.src = "/icons/INV_Misc_Coin_04.png";
+		silver_icon.alt = "Silver";
+		wealth.appendChild(silver_icon);
+		wealth.innerHTML += Math.floor(avg_money / 100);
+
+		const copper_icon = document.createElement("img");
+		copper_icon.classList.add("money-icon");
+		copper_icon.src = "/icons/INV_Misc_Coin_06.png";
+		copper_icon.alt = "Copper";
+		wealth.appendChild(copper_icon);
+		wealth.innerHTML += Math.floor(avg_money);
+
+		const tooltip_text = document.createElement("span");
+		tooltip_text.classList.add("tooltiptext")
+		tooltip_text.innerHTML += "Wealth";
+		wealth.classList.add("tooltip");
+		wealth.appendChild(tooltip_text);
+
+		if (creature_query["MechanicImmuneMask"] > 0) {
+			immunes.innerHTML = "Immunities: " + getImmunities(creature_query["MechanicImmuneMask"]);
+		}
+
+		if (creature_query["TrainerType"] > 0) {
+			trainer_type.innerHTML = getTrainerType(creature_query["TrainerType"], creature_query["TrainerRace"]) + " Trainer";
+		}
+
+		if (creature_query["TrainerClass"] > 0) {
+			trainer_class.innerHTML = getTrainerClass(creature_query["TrainerClass"]) + " Trainer";
+		}
+
+		stats_box.appendChild(wealth);
+
+		results.appendChild(stats_box);
 
 
-		type.innerHTML = creature_query["CreatureType"];
-		npcflags.innerHTML = creature_query["NpcFlags"];
-		extraflags.innerHTML = creature_query["ExtraFlags"];
-		rank.innerHTML = creature_query["Rank"];
-		gold_range.innerHTML = creature_query["MinLootGold"] + " - " + creature_query["MaxLootGold"];
-		immunes.innerHTML = creature_query["MechanicImmuneMask"];
-		trainer_type.innerHTML = creature_query["TrainerType"];
-		trainer_class.innerHTML = creature_query["TrainerClass"];
-		trainer_race.innerHTML = creature_query["TrainerRace"];
-		civilian.innerHTML = creature_query["Civilian"];
+		if (creature_query["FactionAlliance"] > 0) {
 
-		results.appendChild(type);
-		results.appendChild(npcflags);
-		results.appendChild(extraflags);
-		results.appendChild(rank);
-		results.appendChild(gold_range);
+		}
+
+		var faction_name = getFaction(creature_query["FactionAlliance"]);
+		if (faction_name != "None") {
+			const faction = document.createElement("p");
+			faction.innerHTML = "Faction: " + faction_name;
+		}
+
+		if (creature_query["CreatureType"] > 0) {
+			const type_npc = document.createElement("p");
+			type_npc.innerHTML = getType(creature_query["CreatureType"]);
+		}
+
+		if (creature_query["NpcFlags"] > 0) {
+			const npcflags = document.createElement("p");
+			npcflags.innerHTML = getFlags(creature_query["NpcFlags"]);
+		}
+
+		if (creature_query["Rank"] > 0) {
+			const rank = document.createElement("p");
+			rank.innerHTML = getRank(creature_query["Rank"]);
+		}
+
 		results.appendChild(immunes);
 
 		results.appendChild(trainer_type);
@@ -275,6 +319,276 @@ Last Updated: 5/10/2019
 		results.appendChild(trainer_race);
 		results.appendChild(civilian);
 
+		getLoot(creature_query["LootId"]);
+	}
+
+	function getTrainerClass(trainer_class) {
+		switch (trainer_class) {
+			case 1:
+				return "Warrior";
+			case 2:
+				return "Paladin";
+			case 3:
+				return "Hunter";
+			case 4:
+				return "Rogue";
+			case 5:
+				return "Priest";
+			case 7:
+				return "Shaman";
+			case 8:
+				return "Mage";
+			case 9:
+				return "Warlock";
+			case 11:
+				return "Druid";
+			default:
+				return "Class";
+
+		}
+	}
+
+	function getTrainerType(trainer_type, trainer_race) {
+		switch (trainer_type) {
+			case 1:
+				switch (trainer_race) {
+					case 1:
+						return "Human Riding";
+					case 2:
+						return "Orcish Riding";
+					case 3:
+						return "Dwarven Riding";
+					case 4:
+						return "Night Elf Riding";
+					case 5:
+						return "Undead Riding";
+					case 6:
+						return "Tauren Riding";
+					case 7:
+						return "Gnomish Riding";
+					case 8:
+						return "Troll Riding";
+					default:
+						return "Riding";
+				}
+
+			case 2:
+				return "Trade Skill";
+			case 3:
+				return "Pet";
+			default:
+				return "";
+		}
+	}
+
+	function getImmunities(immune_mask) {
+		switch (immune_mask) {
+			case 0:
+				return "";
+			case 1:
+				return "Charm";
+			case 2:
+				return "Confused";
+			case 4:
+				return "Disarm";
+			case 8:
+				return "Distract";
+			case 16:
+				return "Fear";
+			case 32:
+				return "Fumble";
+			case 64:
+				return "Root";
+			case 128:
+				return "Pacify";
+			case 256:
+				return "Silence";
+			case 512:
+				return "Sleep";
+			case 1024:
+				return "Snare";
+			case 2048:
+				return "Stun";
+			case 4096:
+				return "Freeze";
+			case 8192:
+				return "Knockdown";
+			case 16384:
+				return "Bleed";
+			case 32768:
+				return "Bandage";
+			case 65536:
+				return "Polymorph";
+			case 131072:
+				return "Banish";
+			case 262144:
+				return "Shield";
+			case 524288:
+				return "Shackle";
+			case 1048576:
+				return "Mount";
+			case 2097152:
+				return "Persuade";
+			case 4194304:
+				return "Turn";
+			case 8388608:
+				return "Horror";
+			case 16777216:
+				return "Invulnerability";
+			case 33554432:
+				return "Interrupt";
+			case 67108864:
+				return "Daze";
+			case 134217728:
+				return "Discovery";
+			case 536870912:
+				return "Sap";
+			default:
+				return "";
+		}
+	}
+
+	function getReact(faction_id) {
+		if (faction_id == 35 || faction_id == 776 || faction_id == 914 || faction_id == 874 || faction_id == 875 || faction_id == 814 || faction_id == 855 || faction_id == 854 || faction_id == 794 || faction_id == 735 || faction_id == 695 || faction_id == 674 || faction_id == 69 || faction_id == 390 || faction_id == 120 || faction_id == 121 || faction_id == 474 || faction_id == 1625 || faction_id == 529 || faction_id == 474 || faction_id == 475 || faction_id == 476) {
+			return ["friendly", "friendly"];
+		}
+		else if (faction_id == 11 || faction_id == 774 || faction_id == 694 || faction_id == 412 || faction_id == 124 || faction_id == 123 || faction_id == 122 || faction_id == 12 || faction_id == 55 || faction_id == 56 || faction_id == 57) {
+			return ["friendly", "hostile"];
+
+		} else if (faction_id == 104 || faction_id == 877 || faction_id == 714 || faction_id == 125 || faction_id == 126 || faction_id == 68 || faction_id == 105 || faction_id == 85) {
+			return ["hostile", "friendly"];
+		} else if (faction_id == 15 || faction_id == 31){
+			return ["neutral", "neutral"];
+		}
+		}
+
+	function getRank(rank) {
+		switch(rank) {
+			case 0:
+				return "Normal";
+			case 1:
+				return "Elite";
+			case 2:
+				return "Rare Elite";
+			case 3:
+				return "World Boss";
+			case 4:
+				return "Rare";
+			default:
+				return "Normal";
+		}
+	}
+
+	function getFlags(flag) {
+		switch(flag) {
+			case 2:
+				return "Questgiver";
+			case 3:
+				return "Questgiver";
+			case 4:
+				return "Vendor";
+			case 5:
+				return "Vendor";
+			case 6:
+				return "Vendor";
+			case 7:
+				return "Vendor";
+			case 11:
+				return "Flightmaster";
+			case 16:
+				return "Trainer";
+			case 17:
+				return "Trainer";
+			case 18:
+				return "Trainer";
+			case 19:
+				return "Trainer";
+			case 21:
+				return "Trainer";
+			case 23:
+				return "Trainer";
+			case 33:
+				return "Spirit Healer"; 
+			case 64:
+				return "Spirit Healer";
+			case 85:
+				return "Vendor";
+			case 133:
+				return "Innkeeper";
+			case 135:
+				return "Innkeeper";
+			case 256:
+				return "Banker";
+			case 257:
+				return "Banker";
+			case 258:
+				return "Banker";
+			case 259:
+				return "Banker";
+			case 1029:
+				return "Tabard Vendor";
+			case 1537:
+				return "Guild Master";
+			case 2049:
+				return "Battlemaster";
+			case 4096:
+				return "Auctioneer";
+			case 4224:
+				return "Vendor";
+			case 8193:
+				return "Stable Master";
+			case 8195:
+				return "Stable Master";
+			case 16388:
+				return "Repair";
+			case 16389:
+				return "Repair";
+			case 16390:
+				return "Repair";
+			case 16391:
+				return "Repair";
+			case 524288:
+				return "Tabard Designer";
+			case 268435456:
+				return "PvP";
+			case 268435457:
+				return "PvP";
+			case 268435458:
+				return "PvP";
+			case 268435459:
+				return "PvP";
+			default:
+				return "None";
+		}
+	}
+
+	function getType(type_id) {
+		switch(type_id) {
+			case 1:
+				return "Beast";
+			case 2:
+				return "Dragonkin";
+			case 3:
+				return "Demon";
+			case 4:
+				return "Elemental";
+			case 5:
+				return "Giant";
+			case 6:
+				return "Undead";
+			case 7:
+				return "Humanoid";
+			case 8: 
+				return "Critter";
+			case 9:
+				return "Mechanical";
+			case 10:
+				return "Not specified";
+			case 11:
+				return "Totem";
+			default:
+				return "Not specified"; 
+		}
 	}
 
 	function getDamageSchool(school) {
@@ -299,7 +613,7 @@ Last Updated: 5/10/2019
 	}
 
 	function getFaction(faction_id) {
-		switch (faction_id - 1) {
+		switch (faction_id) {
 			case 35:
 				return "Friendly";
 			case 168:
@@ -640,8 +954,20 @@ Last Updated: 5/10/2019
 
 		switch (item_class) {
 			case 0:
-				subclass_name = "";
-				break;
+				switch (item_subclass) {
+					case 0:
+						return "Refreshment"
+					case 3:
+						return "Potion"
+					case 4:
+						return "Scroll";
+					case 5:
+						return "Bandage";
+					case 6:
+						return "Healthstone";
+					default:
+						return "";
+				}
 
 			case 1:
 				// This item class contains many subclasses....
@@ -777,11 +1103,10 @@ Last Updated: 5/10/2019
 				break;
 
 			case 7:
-				subclass_name = ""; //Trade goods
-				break;
+				return "Trade Good";
 
 			case 9:
-				slot_name = ""; //Recipes
+				return "Recipe";
 				break;
 
 			case 11:
@@ -793,6 +1118,9 @@ Last Updated: 5/10/2019
 					subclass_name = "Miscellaneous";
 				}
 				break;
+
+			case 12:
+				return "Quest";
 
 			default:
 				subclass_name = ""; //quest,key,lockpick,misc,junk
@@ -808,119 +1136,66 @@ Last Updated: 5/10/2019
 	Returns String
 	***************************************************************************/
 	function findItemSlot(slot) {
-		var slot_name = "";
-		var image_url = "";
-
 		switch (slot) {
-			case 0:
-				slot_name = "";
-				break;
 			case 1:
-				slot_name = "Head";
-				image_url = "https://dl.dropboxusercontent.com/s/o0480p1zmzz623s/INV_Helmet_17.png?dl=0";
-				break;
+				return "Head";
 			case 2:
-				slot_name = "Neck";
-				image_url = "https://dl.dropboxusercontent.com/s/skyovn2hv5fw0rp/INV_Jewelry_Amulet_05.png?dl=0";
-				break;
+				return "Neck";
 			case 3:
-				slot_name = "Shoulder";
-				image_url = "https://dl.dropboxusercontent.com/s/rcgr7tcg84vojuj/INV_Shoulder_25.png?dl=0";
-				break;
+				return "Shoulder";
 			case 4:
-				slot_name = "Body";
-				break;
+				return "Body";
 			case 5:
-				slot_name = "Chest";
-				image_url = "https://dl.dropboxusercontent.com/s/ziheaa27ie4548w/INV_Chest_Chain_15.png?dl=0";
-				break;
+				return "Chest";
 			case 6:
-				slot_name = "Waist";
-				image_url = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
-				break;
+				return "Waist";
 			case 7:
-				slot_name = "Legs";
-				image_url = "https://dl.dropboxusercontent.com/s/fvrhfrjnlltrsig/INV_Pants_01.png?dl=0";
-				break;
+				return "Legs";
 			case 8:
-				slot_name = "Feet";
-				image_url = "https://dl.dropboxusercontent.com/s/0rp3ol14jwu1wry/INV_Boots_Plate_04.png?dl=0";
-				break;
+				return "Feet";
 			case 9:
-				slot_name = "Wrists";
-				image_url = "https://dl.dropboxusercontent.com/s/tbpbzwzzwhozimx/INV_Bracer_13.png?dl=0";
-				break;
+				return "Wrists";
 			case 10:
-				slot_name = "Hands";
-				image_url = "https://dl.dropboxusercontent.com/s/6krajc4k6bcfpeb/INV_Gauntlets_09.png?dl=0";
-				break;
+				return "Hands";
 			case 11:
-				slot_name = "Finger";
-				image_url = "https://dl.dropboxusercontent.com/s/iluy4hhjox90zjd/INV_Jewelry_Ring_14.png?dl=0";
-				break;
+				return "Finger";
 			case 12:
-				slot_name = "Trinket";
-				image_url = "https://dl.dropboxusercontent.com/s/vcim2b0tgfhlt2o/INV_Jewelry_Talisman_09.png?dl=0";
-				break;
+				return "Trinket";
 			case 13:
-				slot_name = "One-hand";
-				break;
+				return "One-hand";
 			case 14:
-				slot_name = "Off hand";
-				break;
+				return "Off hand";
 			case 15:
-				slot_name = "Ranged";
-				break;
+				return "Ranged";
 			case 16:
-				slot_name = "Back";
-				image_url = "https://dl.dropboxusercontent.com/s/xh4uua6b0vibngl/INV_Misc_Cape_20.png?dl=0";
-				break;
+				return "Back";
 			case 17:
-				slot_name = "Two-hand";
-				break;
+				return "Two-hand";
 			case 18:
-				slot_name = ""; //Bag
-				break;
+				return ""; //Bag
 			case 19:
-				slot_name = "Tabard";
-				image_url = "https://dl.dropboxusercontent.com/s/jbgkmdjiwy0a4c2/INV_Shirt_GuildTabard_01.png?dl=0";
-				break;
+				return "Tabard";
 			case 20:
-				slot_name = "Chest";
-				break;
+				return "Chest";
 			case 21:
-				slot_name = "Main Hand";
-				break;
+				return "Main Hand";
 			case 22:
-				slot_name = "Held In Off-Hand";
-				image_url = "https://dl.dropboxusercontent.com/s/h6i5ae2909ahkp5/INV_Shield_15.png?dl=0";
-				break;
+				return "Held In Off-Hand";
 			case 23:
-				slot_name = ""; // Holdable
-				break;
+				return ""; // Holdable
 			case 24:
-				slot_name = "Projectile";
-				break;
+				return "Projectile";
 			case 25:
-				slot_name = "Thrown";
-				break;
+				return "Thrown";
 			case 26:
-				slot_name = "Ranged";
-				break;
+				return "Ranged";
 			case 27:
-				slot_name = "Quiver";
-				image_url = "https://dl.dropboxusercontent.com/s/rt5q5mjjoqzj9cb/INV_Misc_Quiver_05.png?dl=0";
-				break;
+				return "Quiver";
 			case 28:
-				slot_name = "Relic";
-				image_url = "https://www.dropbox.com/s/78rsoi4jbzi5z2j/INV_Jewelry_Talisman_14.png?dl=0";
-				break;
+				return "Relic";
 			default:
-				slot_name = "";
-				image_url = "";
+				return "";
 		}
-
-		return [slot_name, image_url];
 	}
 
 	/***************************************************************************

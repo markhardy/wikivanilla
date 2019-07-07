@@ -6,7 +6,7 @@ CSS for Wiki Vanilla and its associated pages.
 Created by: Mark Hardy
 Last Updated: 4/24/2019
 ***************************************************************************/
-/* Change the white to any color ;) */
+/* Change the white to any color */
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
@@ -14,13 +14,19 @@ input:-webkit-autofill:active  {
     -webkit-box-shadow: 0 0 0 30px black inset !important;
 }
 
-/*Change text in autofill textbox*/
+/* Change text in autofill textbox */
 input:-webkit-autofill {
     -webkit-text-fill-color: yellow !important;
 }
 
 ::placeholder {
 	color: yellow;
+	font-size: 12pt;
+}
+
+a {
+	color: inherit;
+	text-decoration: inherit;
 }
 
 body {
@@ -34,7 +40,15 @@ body {
 button {
 	background-image: url("industrialbg.png");
 	border-color: black;
+	border-radius: 5px;
 	color: yellow;
+	height: 30px;
+	width: 75px;
+}
+
+caption {
+	font-size: 20pt;
+	text-align: center;
 }
 
 h1 {
@@ -49,170 +63,128 @@ h2 {
 input {
 	background-image: url("industrialbg.png");
 	border-color: yellow;
+	border-radius: 5px;
 	border-width: .5px;
 	color: yellow;
+	font-size: 12pt;
+	height: 25px;
+	width: 350px;
 }
 
-#middle {
-	color: #ffff00;
-	font-family: 'Exo', sans-serif;
-	margin-top: 20%;
+.align-left {
+	text-align: left;
+}
+
+.align-right {
+	text-align: right;
+}
+
+.autocomplete-cell {
+	background-color: black;
+	color: white;
+}
+
+
+.box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	font-family: Arial, sans-serif;
+	font-size: 10pt;
+	max-width: 350px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+}
+
+.box-title {
+	font-size: 11pt;
+}
+
+.hidden {
+	display: none;
+}
+
+.HP-box, .mana-box, .item-box, .objectives-box, .quest-box, .small-box {
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	display: block;
+	font-family: Arial, sans-serif;
+}
+
+.HP-box, .mana-box, .item-box, .objectives-box, .small-box {
+	float: left;
+	font-size: 14pt;
+	line-height: 0;
+	margin-right: 1em;
 	text-align: center;
 }
 
-#navigation {
-	color: yellow;
-	margin: auto;
-	position: fixed;
-	top: 0;
-	text-align: center;
+.HP-box, .mana-box {
+	color: black;
 	width: 100%;
 }
 
-#results, #npc_results {
-	color: white;
-	font-family: 'Exo', sans-serif;
-	margin-left: 10%;
-	margin-right: 10%;
+.HP-box {
+	background-color: #00ff00;
+}
+
+.icon {
+	border-color: white;
+	border-style: solid;
+	border-radius: 5px;
+	border-width: 1px;
+	float: left;
+	margin-right: 10px;
+}
+
+.item-box, .objectives-box, .quest-box, .small-box, .box {
+	background-color: black;
+}
+
+.item-box, .quest-box {
+	font-size: 10pt;
+	line-height: 1em;
+	margin-top: 100px;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+	width: 30%;
+}
+
+.item-box {
+	display: grid;
+}
+
+.link {
+	text-decoration: underline;
+}
+
+.mana-box {
+	background-color: #33ccff;
+}
+
+.money-icon {
+	margin-left: 15px;
+	margin-top: 5px;
+	height: 20px;
+	width: 20px;
 }
 
 .push-left > p {
 	float: left;
 }
 
-#links > p {
-	float: left;
-	margin-right: .5em;
-}
-
-.top {
-	margin-top: 100px;
-}
-
-.small-box {
-	background-color: black;
-	border-color: #ffffffff;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
-	display: block;
-	float: left;
-	font-family: Arial, sans-serif;
-	font-size: 14pt;
-	line-height: 0;
-	margin-right: 1em;
-	text-align: center;
-	width: 100px;
-}
-
-.objectives-box {
-	background-color: black;
-	border-color: #ffffffff;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
-	display: block;
-	float: left;
-	font-family: Arial, sans-serif;
-	font-size: 14pt;
-	line-height: 0;
-	margin-right: 1em;
-	text-align: center;
-	width: 250px;
-}
-
-.item-box {
-	background-color: black;
-	border-color: #ffffffff;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
-	display: grid;
-	font-family: Arial, sans-serif;
-	font-size: 10pt;
-	line-height: 1em;
-	
-	margin-top: 100px;
-	padding-left: 3px;
-	padding-right: 3px;
-	padding-top: 1px;
-	width: 30%;
+.push-right {
+	float: right;
 }
 
 .quest-box {
-	background-color: black;
-	border-color: #ffffffff;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
-	display: block;
 	float: right;
-	font-family: Arial, sans-serif;
-	font-size: 10pt;
-	line-height: 1em;
-	margin: auto;
-	margin-top: 100px;
-	padding-left: 3px;
-	padding-right: 3px;
-	padding-top: 1px;
-	width: 30%;
-}
-
-.even-row {
-	background-color: #595959;
-}
-
-.odd-row {
-	background-color: black;
-}
-
-#stat_box {
-	background-color: black;
-	border-color: #ffffffff;
-	border-radius: 5px;
-	border-style: solid;
-	border-width: 1px;
-	display: block;
-	float: left;
-	font-family: Arial, sans-serif;
-	font-size: 13px;
-	line-height: 1.4em;
-	padding-left: 3px;
-	padding-right: 3px;
-	padding-top: 1px;
-	width: 320px;
-}
-
-#loot {
-	margin-top: 400px;
-}
-
-#results {
-	margin-top: 15%;
-}
-
-#tabs {
-	margin-left: 10.3%;
-}
-
-#tabs > p {
-	border-top-style: solid;
-	border-top-color: white;
-	border-top-width: : 1px;
-	border-right-style: solid;
-	border-right-color: white;
-	border-right-width: 1px;
-	border-left-width: 1px;
-	border-left-style: solid;
-	border-left-color: white;
-	border-radius: 5px;
-	float: left;
-	margin-bottom: 0;
-	padding-bottom: 8px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-top: 8px;
-
 }
 
 .questlink {
@@ -220,16 +192,45 @@ input {
 	text-decoration: underline;
 }
 
-.link {
-	text-decoration: underline;
+.resistance-box {
+	background-color: black;
+	border: .2px solid white;
+	border-collapse: collapse;
+	border-radius: 5px;
+	caption-side: top; 
+	float: left;
+	margin: auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
+.resistance-td {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.resistance-icon {
+	height: 30px;
+	width: 30px;
+}
+
+.small-box {
+	width: 100px;
 }
 
 .subclass, .attackspeed {
 	float: right;
 }
 
-table {
-	border: 2px solid white;
+.top {
+	margin-top: 100px;
+}
+
+
+
+/* Table Styling for Search Results */
+.search-table {
+	border: .2px solid white;
 	border-collapse: collapse;
 	caption-side: top; 
 	margin: auto;
@@ -237,35 +238,20 @@ table {
 	width: 80%;
 }
 
-caption {
-	font-size: 20pt;
-	text-align: center;
-}
-
-td {
-	border: 1px solid white;
+.search-td {
+	background-color: black;
+	border: .2px solid white;
 	color: yellow;
 }
 
-th {
-	border: 1px solid white;
+.search-th {
+	background-color: black;
+	border: .2px solid white;
 	color: yellow;
 }
 
-input {
-	border-radius: 5px;
-	height: 25px;
-	width: 350px;
-}
-
-button {
-	border-radius: 5px;
-	height: 30px;
-	width: 75px;
-}
-
-.hidden {
-	display: none;
+.search-tr {
+	border: .2px solid white;
 }
 
 /* Item Colors Corresponding to Quality */
@@ -297,3 +283,162 @@ button {
 	color: #9d9d9d;
 }
 /****************************************/
+
+#links > p {
+	float: left;
+	margin-right: .5em;
+}
+
+#loot {
+	margin-top: 400px;
+}
+
+#main {
+	color: #ffff00;
+	font-family: 'Exo', sans-serif;
+	margin-top: 20%;
+	text-align: center;
+}
+
+#navigation {
+	background-color: black;
+	color: yellow;
+	margin: auto;
+	position: fixed;
+	top: 0;
+	text-align: center;
+	width: 100%;
+}
+
+#stat_box {
+	background-color: black;
+	border-color: #ffffffff;
+	border-radius: 5px;
+	border-style: solid;
+	border-width: 1px;
+	float: left;
+	font-family: Arial, sans-serif;
+	font-size: 13px;
+	line-height: 1.4em;
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 1px;
+	width: 320px;
+}
+
+#tabs {
+	margin-left: 10.3%;
+}
+
+#tabs > p {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: white;
+	border-right-style: solid;
+	border-right-color: white;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-top-color: white;
+	border-top-width: : 1px;
+	border-radius: 5px;
+	float: left;
+	margin-bottom: 0;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 8px;
+}
+
+#results {
+	color: white;
+	font-family: 'Exo', sans-serif;
+	margin-left: 10%;
+	margin-right: 10%;
+	margin-top: 15%;
+}
+
+#search, #search_btn {
+	height: 35px;
+}
+
+#title {
+	font-size: 20pt;
+}
+
+/* jQuery UI Styling */
+.ui-autocomplete-loading {
+	background: white right center no-repeat;
+}
+		
+.ui-state-default {
+	background: white;
+}
+
+#project-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 1em;
+}
+
+#project-icon {
+    float: left;
+    height: 32px;
+    width: 32px;
+}
+
+#project-description {
+    margin: 0;
+    padding: 0;
+}
+
+.ui-autocomplete-loading {
+	background: white url("images/ui-anim_basic_16x16.gif") right center no-repeat;
+}
+
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: block;
+  /*border-bottom: 1px dotted black;  If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}

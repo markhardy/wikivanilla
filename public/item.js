@@ -25,7 +25,7 @@ Last Updated: 5/10/2019
 		return host;
 	}
 
-	//const host = getHost();
+	//const host = "http://127.0.0.1:3000";
 	const host = "https://wikivanilla.herokuapp.com";
 
 	/***************************************************************************
@@ -34,7 +34,6 @@ Last Updated: 5/10/2019
 	forwards that data to be displayed by the client.
 	***************************************************************************/
 	function getItem() {
-		console.log(window.location.search);
 		var item_id = window.location.search.replace("?item=", "");
 		console.log("get");
 
@@ -45,8 +44,7 @@ Last Updated: 5/10/2019
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				console.log(json);
-				displayItem(json, item_id);
+				displayItemTable(json, item_id);
 			})
 
 			.catch(function(error) {
@@ -54,21 +52,15 @@ Last Updated: 5/10/2019
 			});
 	}
 
-	/***************************************************************************
-	getDroppedBy(Integer)
-	Requests information on what creatures drop a particular item and gets data
-	for those creatures.
-	***************************************************************************/
-	function getDroppedBy(item_id) {
-		var url = host + "/loot?item_id=" + item_id;
+	function getSoldBy(item_id) {
+		var url = host + "/soldby?item_id=" + item_id;
 
 		fetch(url, {method : 'GET'})
 
 			.then(checkStatus)
 			.then(function(responseText) {
 				var json = JSON.parse(responseText);
-				console.log(json);
-				displayDroppedBy(json);
+				displaySoldBy(json);
 			})
 
 			.catch(function(error) {
@@ -76,45 +68,355 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	function getSpells(spellid_1, spellid_2, spellid_3, spellid_4, spellid_5) {
+		var url = host + "/spells?spellid_1=" + spellid_1 + "&spellid_2=" + spellid_2 + "&spellid_3=" + spellid_3 + "&spellid_4=" + spellid_4 + "&spellid_5=" + spellid_5;
 
+		fetch(url, {method : 'GET'})
+
+			.then(checkStatus)
+			.then(function(responseText) {
+				var json = JSON.parse(responseText);
+				displaySpells(json);
+			})
+
+			.catch(function(error) {
+
+			});
+	}
+
+	function displaySpells(json) {
+		var item_table = document.getElementById("item_table");
+		var i = 0;
+		for (var spell of json) {
+			var spell_text = "";
+			var spell_dmg = "";
+			var spell_duration = 0;
+			const spell_item_row = document.createElement("tr");
+			const spell_item = document.createElement("td");
+			spell_item.classList.add("uncommon");
+			if (json.length < 2) {
+				spell_text = "Equip: " + String(spell["spell_description"]);
+				spell_dmg = Number(spell["dmg"]) + 1;
+				spell_duration = spell["duration"];
+			} else {
+				spell_text = "Equip: " + String(spell[0]["spell_description"]);
+				spell_dmg = Number(spell[0]["dmg"]) + 1;
+				spell_duration = spell["duration"];
+			}
+			var o1_replace = spell_text.replace("$o1", String(spell_dmg));
+			var s1_replace = o1_replace.replace("$s1", String(spell_dmg));
+			var d_replace = s1_replace.replace("$d", String(spell_duration / 1000) + " sec");
+			spell_item.innerHTML = d_replace;
+			spell_item_row.appendChild(spell_item);
+			item_table.appendChild(spell_item_row);
+			i++;
+		}
+	}
+
+	/***************************************************************************
+	displaySoldBy(JSON Array)
+	Formats data for what NPCs sell the current item.
+	***************************************************************************/
+	function displaySoldBy(vendors) {
+		var vendor_tab = document.createElement("table");
+
+		const vendor_info = vendors[0][0];
+
+		//  Setting up headings for a table
+		const heading_row = document.createElement("tr");
+		const heading_name = document.createElement("th");
+		const heading_level = document.createElement("th");
+		const heading_location = document.createElement("th");
+		const heading_stock = document.createElement("th");
+		const heading_cost = document.createElement("th");
+
+		heading_row.classList += "search-tr";
+		heading_name.classList += "search-th";
+		heading_level.classList += "search-th";
+		heading_location.classList += "search-th";
+		heading_stock.classList += "search-th";
+		heading_cost.classList += "search-th";
+
+		heading_name.innerHTML = "Sold By";
+		heading_level.innerHTML = "Level";
+		heading_location.innerHTML = "Location";
+		heading_stock.innerHTML = "Stock";
+		heading_cost.innerHTML = "Cost";
+
+		heading_row.appendChild(heading_name);
+		heading_row.appendChild(heading_level);
+		heading_row.appendChild(heading_location);
+		heading_row.appendChild(heading_stock);
+		heading_row.appendChild(heading_cost);
+		
+		loot.appendChild(heading_row);
+
+		// For each creature that drops an item, display its name, level and
+		// chance to drop the item into the table
+		for (var vendor of vendors) {
+
+			const row = document.createElement("tr");
+			const name = document.createElement("td");
+			const level = document.createElement("td");
+			const location = document.createElement("td");
+			const stock = document.createElement("td");
+			const cost = document.createElement("td");
+
+			row.classList += "search-tr";
+			name.classList += "search-td";
+			level.classList += "search-td";
+			location.classList += "search-td";
+			stock.classList += "search-td";
+			cost.classList += "search-td";
+		
+			name.innerHTML = vendor["Name"];
+			row.appendChild(name);
+
+			level.innerHTML = vendor["MinLevel"];
+			row.appendChild(level);
+
+			location.innerHTML = "?";
+			row.appendChild(location);
+
+			stock.innerHTML = vendor["maxcount"];
+			row.appendChild(stock);
+
+
+
+			drop.innerHTML = npc["ChanceOrQuestChance"];
+			row.appendChild(drop);
+			loot.appendChild(row);
+		}
+	}
+
+	function displayItemTable(json_results, requested) {
+		const item_query = json_results[0][0][0];
+		var results = document.getElementById("results");
+		var heading = document.createElement("h2");
+
+		heading.innerHTML += item_query["name"];
+
+		results.insertBefore(heading, results.childNodes[0]);
+
+		var item_table = document.getElementById("item_table");
+		item_table.classList += "box";
+		var head_row = document.createElement("tr");
+		var item_name = document.createElement("td");
+		var quality = findItemQuality(item_query["Quality"]);
+		item_name.classList.add(quality);
+		item_name.classList.add("box-title");
+		item_name.innerHTML += item_query["name"];
+		head_row.appendChild(item_name);
+		item_table.appendChild(head_row);
+
+		if (item_query["RequiredSkill"] > 0) {
+			var required_skill = getRequiredSkill(item_query["RequiredSkill"]);
+			var req_skill_row = document.createElement("tr");
+			var req_skill = document.createElement("td");
+			req_skill.innerHTML = "Requires " + required_skill + " (" + item_query["RequiredSkillRank"] + ")";
+			req_skill_row.appendChild(req_skill);
+			item_table.appendChild(req_skill_row);
+		}
+
+		var bind_on_row = document.createElement("tr");
+		var item_bonding = document.createElement("td");
+		item_bonding.innerHTML = findItemBonding(item_query["bonding"]);
+		bind_on_row.appendChild(item_bonding);
+		item_table.appendChild(bind_on_row);
+
+		var second_row = document.createElement("tr");
+		var slot = document.createElement("td");
+		var subclass = document.createElement("td");
+		slot.innerHTML += findItemSlot(item_query["InventoryType"]);
+		subclass.innerHTML += findItemSubclass(item_query["class"], item_query["subclass"]);
+		subclass.classList += "align-right";
+
+		if (slot != "") {
+			second_row.appendChild(slot);
+		}
+
+		if (subclass != "") {
+			second_row.appendChild(subclass);
+		}
+		item_table.appendChild(second_row);
+
+		if (item_query["armor"] > 0) {
+			var armor_row = document.createElement("tr");
+			var armor = document.createElement("td");
+			armor.innerHTML = String(item_query["armor"]) + " Armor";
+			armor_row.appendChild(armor);
+			item_table.appendChild(armor_row);
+		}
+
+		// Getting stat types (stamina, strength etc) from the JSON by incrementing
+		// 1-10 and adding them
+		for (var i = 1; i < 11; i++) {
+			var stat_row = document.createElement("tr");
+			var current_stat_type = "stat_type" + String(i);
+			var current_stat_value = "stat_value" + String(i);
+			var stat_text = findItemStats(item_query[current_stat_type], item_query[current_stat_value]);
+			var item_stats = document.createElement("td");
+			if (item_query[current_stat_value]) {
+				item_stats.innerHTML = stat_text;
+				stat_row.appendChild(item_stats);
+				item_table.appendChild(stat_row);
+			}
+		}
+
+		var third_row = document.createElement("tr");
+		var fourth_row = document.createElement("tr");
+		// Items can have six possible types of damage for various schools of magic
+		// So we have to iterate through each to find which one is active
+		for (var i = 1; i < 6; i++) {
+			var item_damage = document.createElement("td");
+
+			// If this is the column that has damage in it then get the amount of damage and school
+			if (item_query["dmg_min" + String(i)] > 0) {
+				const i_str = String(i);
+				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
+				var out_dmg = "";
+				if (dmg_type) {
+					out_dmg = " " + dmg_type;
+					// 40 - 90 Fire Damage for example:
+					item_damage.innerHTML += item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + 
+					out_dmg + " Damage";
+					third_row.appendChild(item_damage);
+					item_table.appendChild(third_row);
+				} else {
+					item_damage.innerHTML += item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + " Damage";
+					third_row.appendChild(item_damage);
+					item_table.appendChild(third_row);
+				}
+
+				var item_attack_speed = document.createElement("td");
+				const speed = item_query["delay"] / 1000;		// convert from ms
+				item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);	// round two decimal places
+				item_attack_speed.classList += "align-right";
+				third_row.appendChild(item_attack_speed);
+				item_table.appendChild(third_row);
+
+				var dps = document.createElement("td");
+				// Find the mean amount of damage and then divide it by weapon speed to get dps
+				const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min" + i_str]);
+				const damage_per_sec = mean_damage / speed;
+				dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
+				fourth_row.appendChild(dps);
+				item_table.appendChild(fourth_row);
+
+				// We found the damage school we needed so end the loop so we don't overwrite
+				i = 6;
+			}
+		}
+
+		if (item_query["MaxDurability"] > 0) {
+			var durability_row = document.createElement("tr");
+			var durability = document.createElement("td");
+			var durability_val = String(item_query["MaxDurability"]);
+			durability.innerHTML = "Durability " + durability_val + " / " + durability_val;
+			durability_row.appendChild(durability);
+			item_table.appendChild(durability_row);
+		}
+
+		if (item_query["AllowableClass"] > 0 && item_query["AllowableClass"] != 32767) {
+			var class_row = document.createElement("tr");
+			var req_class = document.createElement("td");
+			req_class.innerHTML = "Classes: " + getRequiredClasses(item_query["AllowableClass"]);
+			class_row.appendChild(req_class);
+			item_table.appendChild(class_row);
+		}
+
+		if (item_query["RequiredLevel"] > 0) {
+			var req_level_row = document.createElement("tr");
+			var req_level = document.createElement("td");
+			req_level.innerHTML = "Requires Level " + item_query["RequiredLevel"];
+			item_table.appendChild(req_level);
+		}
+
+		if (item_query["spellid_1"] > 0) {
+			getSpells(item_query["spellid_1"], item_query["spellid_2"], item_query["spellid_3"], item_query["spellid_4"], item_query["spellid_5"]);
+		}
+		
+
+		if (item_query["description"] != "") {
+			var desc_row = document.createElement("tr");
+			var desc = document.createElement("td");
+
+			// Skill IDs for tradeskills/formulas
+			var use = [129, 164, 165, 171, 185, 197, 202, 333];
+
+			if (use.includes(item_query["RequiredSkill"])) {
+				desc.innerHTML += "Use: ";
+				desc.classList.add("uncommon");
+			}
+
+			desc.innerHTML += item_query["description"];
+			desc_row.appendChild(desc);
+			item_table.appendChild(desc_row);
+		}
+
+		if (item_query["icon1"]) {
+			var icon_name = item_query["icon1"];
+			var img = document.createElement("img");
+			img.src = "/icons/" + icon_name + ".png";
+			img.classList += "icon";
+			results.insertBefore(img, results.childNodes[2]);
+		}
+
+		displayDroppedBy(json_results[0][1]);
+	}
 
 	/***************************************************************************
 	displayDroppedBy(Dictionary)
 	Formats data as far as what creature or creatures drop an item. If no 
 	creature drops the item, the table will not exist.
 	***************************************************************************/
-	function displayDroppedBy(npc_loot) {
-		var loot = document.getElementById("loot");
-
-		const npcs = npc_loot["result"];
+	function displayDroppedBy(npcs) {
+		var results = document.getElementById("results");
+		var loot = document.createElement("table");
+		loot.id = "loot";
+		loot.classList.add("search-table");
 
 		//  Setting up headings for a table
 		const heading_row = document.createElement("tr");
 		const heading_name = document.createElement("th");
 		const heading_level = document.createElement("th");
+		const heading_type = document.createElement("th");
 		const heading_chance = document.createElement("th");
+		heading_row.classList.add("search-tr");
+		heading_name.classList.add("search-th");
+		heading_level.classList.add("search-th");
+		heading_type.classList.add("search-th");
+		heading_chance.classList.add("search-th");
 
 		heading_name.innerHTML = "Dropped By";
 		heading_level.innerHTML = "Level";
+		heading_type.innerHTML = "Type";
 		heading_chance.innerHTML = "%";
 
 		heading_row.appendChild(heading_name);
 		heading_row.appendChild(heading_level);
+		heading_row.appendChild(heading_type);
 		heading_row.appendChild(heading_chance);
 		
 		loot.appendChild(heading_row);
-
 		// For each creature that drops an item, display its name, level and
 		// chance to drop the item into the table
 		for (var npc of npcs) {
-
 			const row = document.createElement("tr");
 			const name = document.createElement("td");
 			const level = document.createElement("td");
 			const type = document.createElement("td");
 			const drop = document.createElement("td");
-		
-			name.innerHTML = npc["Name"];
+
+			row.classList.add("search-tr");
+			name.classList.add("search-td");
+			level.classList.add("search-td");
+			type.classList.add("search-td");
+			drop.classList.add("search-td");
+			name.id = "search";
+			name.type = "search";
+			name.name = "search";
+			name.innerHTML = "<a href='#' data-wowhead='npc=" + String(npc["Entry"]) + "&amp;domain=classic'>" + npc["Name"] + "</a>";
 			row.appendChild(name);
 			
 			// If Min and Max levels are the same just say it is that level
@@ -126,116 +428,200 @@ Last Updated: 5/10/2019
 			}
 			
 			row.appendChild(level);
+
+			type.innerHTML = findCreatureType(npc["CreatureType"]);
+			row.appendChild(type);
+
 			drop.innerHTML = npc["ChanceOrQuestChance"];
 			row.appendChild(drop);
+
+			row.addEventListener("click", function() {
+				window.location.href = host + "/npc.html?npc=" + npc["Entry"];
+			});
+
 			loot.appendChild(row);
 
 		}
+		results.appendChild(loot);
 	}
 
-	/***************************************************************************
-	displayItem(Dictionary, Integer)
-	Takes the JSON from a server request and builds a display for an item's
-	stats for the client.
-	***************************************************************************/
-	function displayItem(json_results, requested) {
-		// Set up the table
-		var results = document.getElementById("results");
-		var heading = document.createElement("h2");
-		var stat_box = document.createElement("div");
-		stat_box.id = "stat_box";
-
-		const json = json_results["result"];
-		const item_query = json[0];
-		heading.innerHTML += item_query["name"];
-
-		// Take each item attribute that needs to go into the stat_box and
-		// find its value and put it into the stat_box
-		var quality = findItemQuality(item_query["Quality"]);
-		var item_title = document.createElement("p");
-		item_title.classList += quality;
-		item_title.innerHTML = item_query["name"];
-		stat_box.appendChild(item_title);
-
-		var item_bonding = document.createElement("p");
-		item_bonding.innerHTML = findItemBonding(item_query["bonding"]);
-		stat_box.appendChild(item_bonding);
-
-		var item_slot = document.createElement("p");
-		item_slot.innerHTML = findItemSlot(item_query["InventoryType"])[0];
-		var img = document.createElement("img");
-		img.src = findItemSlot(item_query["InventoryType"])[1];
-		stat_box.appendChild(img);
-		stat_box.appendChild(item_slot);
-
-		var item_subclass = document.createElement("p");
-		item_subclass.innerHTML = findItemSubclass(item_query["class"], item_query["subclass"]);
-		item_subclass.classList += "subclass";
-		stat_box.appendChild(item_subclass);
-
-		if (item_query["armor"] > 0) {
-			var item_armor = document.createElement("p");
-			item_armor.innerHTML = String(item_query["armor"]) + " Armor";
-			stat_box.appendChild(item_armor);
+	function findCreatureType(creature_type) {
+		switch (creature_type) {
+			case 1:
+				return "Beast";
+			case 2:
+				return "Dragonkin";
+			case 3:
+				return "Demon";
+			case 4:
+				return "Elemental";
+			case 5:
+				return "Giant";
+			case 6:
+				return "Undead";
+			case 7:
+				return "Humanoid";
+			case 8:
+				return "Critter";
+			case 9:
+				return "Mechanical";
+			case 10:
+				return "Not Specified";
+			case 11:
+				return "Totem";
+			default:
+				return "Not Specified";
 		}
-
-		// Getting stat types (stamina, strength etc) from the JSON by incrementing
-		// 1-10 and adding them
-		for (var i = 1; i < 11; i++) {
-			var current_stat_type = "stat_type" + String(i);
-			var current_stat_value = "stat_value" + String(i);
-			var stat_text = findItemStats(item_query[current_stat_type], item_query[current_stat_value]);
-			var item_stats = document.createElement("p");
-			item_stats.innerHTML = stat_text;
-			stat_box.appendChild(item_stats);
+	}
+	
+	function getRequiredClasses(class_id) {
+		switch (class_id) {
+			case 1:
+				return "Warrior";
+			case 2:
+				return "Paladin";
+			case 3:
+				return "Warrior, Paladin";
+			case 4:
+				return "Hunter";
+			case 8:
+				return "Rogue";
+			case 9:
+				return "Warrior, Rogue";
+			case 15:
+				return "Warrior, Paladin, Hunter, Rogue";
+			case 16:
+				return "Priest";
+			case 21:
+				return "Warrior, Hunter, Priest";
+			case 28:
+				return "Hunter, Rogue, Priest";
+			case 29:
+				return "Warrior, Hunter, Rogue, Priest";
+			case 32:
+				return "Druid";
+			case 64:
+				return "Shaman";
+			case 68:
+				return "Hunter";
+			case 73:
+				return "Warrior, Rogue, Shaman";
+			case 79:
+				return "Warrior, Paladin, Hunter, Rogue, Shaman";
+			case 128:
+				return "Mage";
+			case 134:
+				return "Paladin, Hunter, Mage";
+			case 140:
+				return "Hunter, Rogue, Mage";
+			case 141:
+				return "Warrior, Hunter, Rogue, Mage";
+			case 153:
+				return "Warrior, Rogue, Priest, Mage";
+			case 210:
+				return "Paladin, Priest, Shaman, Mage";
+			case 256:
+				return "Warlock";
+			case 265:
+				return "Warrior, Rogue, Warlock";
+			case 284:
+				return "Hunter, Rogue, Priest, Warlock";
+			case 326:
+				return "Paladin, Hunter, Shaman, Warlock";
+			case 385:
+				return "Warrior, Mage, Warlock";
+			case 393:
+				return "Warrior, Rogue, Mage, Warlock";
+			case 400:
+				return "Priest, Mage, Warlock";
+			case 401:
+				return "Warrior, Priest, Mage, Warlock";
+			case 466:
+				return "Paladin, Priest, Shaman, Mage, Warlock";
+			case 1024:
+				return "Druid";
+			case 1032:
+				return "Rogue, Druid";
+			case 1037:
+				return "Warrior, Hunter, Rogue, Druid";
+			case 1090:
+				return "Paladin, Shaman, Druid";
+			case 1094:
+				return "Paladin, Hunter, Shaman, Druid";
+			case 1098:
+				return "Paladin, Rogue, Shaman, Druid";
+			case 1102:
+				return "Paladin, Hunter, Rogue, Shaman, Druid";
+			case 1110:
+				return "Paladin, Hunter, Priest, Shaman, Druid";
+			case 1153:
+				return "Warrior, Mage, Druid";
+			case 1219:
+				return "Warrior, Paladin, Shaman, Mage, Druid";
+			case 1296:
+				return "Priest, Warlock, Druid";
+			case 1350:
+				return "Paladin, Hunter, Shaman, Warlock, Druid";
+			case 1362:
+				return "Paladin, Priest, Shaman, Warlock, Druid";
+			case 1424:
+				return "Priest, Mage, Warlock, Druid";
+			case 1474:
+				return "Paladin, Shaman, Mage, Warlock, Druid";
+			case 1488:
+				return "Priest, Shaman, Mage, Warlock, Druid";
+			case 31233:
+				return "Warrior";
+			case 31234:
+				return "Paladin";
+			case 31236:
+				return "Hunter";
+			case 31240:
+				return "Rogue";
+			case 31248:
+				return "Priest";
+			case 31296:
+				return "Shaman";
+			case 31360:
+				return "Mage";
+			case 31488:
+				return "Warlock";
+			case 31632:
+				return "Druid";
+			case 32256:
+				return "Druid";
+			case 260623:
+				return "Warrior, Paladin, Hunter, Rogue";
+			case 261008:
+				return "Priest, Mage, Warlock";
+			case 262096:
+				return "Priest, Shaman, Mage, Warlock, Druid";
+			default:
+				return "None";
 		}
-		
-		for (var i = 1; i < 6; i++) {
-			var item_damage = document.createElement("p");
-			if (item_query["dmg_min" + String(i)] > 0) {
-				const i_str = String(i);
-				var dmg_type = findItemDamage(item_query["dmg_type" + i_str]);
-				var out_dmg = "";
-				if (dmg_type > 0) {
-					out_dmg = " " + dmg_type;
-					item_damage.innerHTML = item_query["dmg_min" + i_str] + " - " + item_query["dmg_max" + i_str] + out_dmg + " Damage";
-					stat_box.appendChild(item_damage);
-				}
+	}
 
-				var item_attack_speed = document.createElement("p");
-				const speed = item_query["delay"] / 1000;
-				item_attack_speed.innerHTML = "Speed " + speed.toFixed(2);
-				item_attack_speed.classList += "attackspeed";
-				stat_box.appendChild(item_attack_speed);
-
-				var dps = document.createElement("p");
-				const mean_damage = ((Number(item_query["dmg_max" + i_str]) - Number(item_query["dmg_min" + i_str])) / 2) + Number(item_query["dmg_min" + i_str]);
-				const damage_per_sec = mean_damage / speed;
-				dps.innerHTML = "(" + damage_per_sec.toFixed(1) + " damage per second)";
-				stat_box.appendChild(dps);
-
-				i = 6;
-				
-			}
+	function getRequiredSkill(skill) {
+		switch (skill) {
+			case 129:
+				return "First Aid";
+			case 164:
+				return "Blacksmithing";
+			case 165:
+				return "Leatherworking";
+			case 171:
+				return "Alchemy";
+			case 185:
+				return "Cooking";
+			case 197:
+				return "Tailoring";
+			case 202:
+				return "Engineering";
+			case 333:
+				return "Enchanting";
+			default:
+				return "Tradeskill";
 		}
-
-		if (item_query["MaxDurability"] > 0) {
-			var item_durability = document.createElement("p");
-			var durability = String(item_query["MaxDurability"]);
-			item_durability.innerHTML = "Durability " + durability + " / " + durability;
-			stat_box.appendChild(item_durability);
-		}
-
-		var item_req_level = document.createElement("p");
-		item_req_level.innerHTML = "Requires Level " + String(item_query["RequiredLevel"]);
-		stat_box.appendChild(item_req_level);
-
-
-
-		results.appendChild(heading);
-		results.appendChild(stat_box);
-
-		getDroppedBy(requested);   // what creatures drop the item?
 	}
 
 	function findItemDamage(dmg_type) {
@@ -454,7 +840,7 @@ Last Updated: 5/10/2019
 				break;
 
 			case 9:
-				slot_name = ""; //Recipes
+				subclass_name = ""; //Recipes
 				break;
 
 			case 11:
@@ -481,119 +867,66 @@ Last Updated: 5/10/2019
 	Returns String
 	***************************************************************************/
 	function findItemSlot(slot) {
-		var slot_name = "";
-		var image_url = "";
-
 		switch (slot) {
-			case 0:
-				slot_name = "";
-				break;
 			case 1:
-				slot_name = "Head";
-				image_url = "https://dl.dropboxusercontent.com/s/o0480p1zmzz623s/INV_Helmet_17.png?dl=0";
-				break;
+				return "Head";
 			case 2:
-				slot_name = "Neck";
-				image_url = "https://dl.dropboxusercontent.com/s/skyovn2hv5fw0rp/INV_Jewelry_Amulet_05.png?dl=0";
-				break;
+				return "Neck";
 			case 3:
-				slot_name = "Shoulder";
-				image_url = "https://dl.dropboxusercontent.com/s/rcgr7tcg84vojuj/INV_Shoulder_25.png?dl=0";
-				break;
+				return "Shoulder";
 			case 4:
-				slot_name = "Body";
-				break;
+				return "Body";
 			case 5:
-				slot_name = "Chest";
-				image_url = "https://dl.dropboxusercontent.com/s/ziheaa27ie4548w/INV_Chest_Chain_15.png?dl=0";
-				break;
+				return "Chest";
 			case 6:
-				slot_name = "Waist";
-				image_url = "https://dl.dropboxusercontent.com/s/m0in7o0lvivro7l/INV_Belt_02.png?dl=0";
-				break;
+				return "Waist";
 			case 7:
-				slot_name = "Legs";
-				image_url = "https://dl.dropboxusercontent.com/s/fvrhfrjnlltrsig/INV_Pants_01.png?dl=0";
-				break;
+				return "Legs";
 			case 8:
-				slot_name = "Feet";
-				image_url = "https://dl.dropboxusercontent.com/s/0rp3ol14jwu1wry/INV_Boots_Plate_04.png?dl=0";
-				break;
+				return "Feet";
 			case 9:
-				slot_name = "Wrists";
-				image_url = "https://dl.dropboxusercontent.com/s/tbpbzwzzwhozimx/INV_Bracer_13.png?dl=0";
-				break;
+				return "Wrists";
 			case 10:
-				slot_name = "Hands";
-				image_url = "https://dl.dropboxusercontent.com/s/6krajc4k6bcfpeb/INV_Gauntlets_09.png?dl=0";
-				break;
+				return "Hands";
 			case 11:
-				slot_name = "Finger";
-				image_url = "https://dl.dropboxusercontent.com/s/iluy4hhjox90zjd/INV_Jewelry_Ring_14.png?dl=0";
-				break;
+				return "Finger";
 			case 12:
-				slot_name = "Trinket";
-				image_url = "https://dl.dropboxusercontent.com/s/vcim2b0tgfhlt2o/INV_Jewelry_Talisman_09.png?dl=0";
-				break;
+				return "Trinket";
 			case 13:
-				slot_name = "One-hand";
-				break;
+				return "One-hand";
 			case 14:
-				slot_name = "Off hand";
-				break;
+				return "Off hand";
 			case 15:
-				slot_name = "Ranged";
-				break;
+				return "Ranged";
 			case 16:
-				slot_name = "Back";
-				image_url = "https://dl.dropboxusercontent.com/s/xh4uua6b0vibngl/INV_Misc_Cape_20.png?dl=0";
-				break;
+				return "Back";
 			case 17:
-				slot_name = "Two-hand";
-				break;
+				return "Two-hand";
 			case 18:
-				slot_name = ""; //Bag
-				break;
+				return ""; //Bag
 			case 19:
-				slot_name = "Tabard";
-				image_url = "https://dl.dropboxusercontent.com/s/jbgkmdjiwy0a4c2/INV_Shirt_GuildTabard_01.png?dl=0";
-				break;
+				return "Tabard";
 			case 20:
-				slot_name = "Chest";
-				break;
+				return "Chest";
 			case 21:
-				slot_name = "Main Hand";
-				break;
+				return "Main Hand";
 			case 22:
-				slot_name = "Held In Off-Hand";
-				image_url = "https://dl.dropboxusercontent.com/s/h6i5ae2909ahkp5/INV_Shield_15.png?dl=0";
-				break;
+				return "Held In Off-Hand";
 			case 23:
-				slot_name = ""; // Holdable
-				break;
+				return ""; // Holdable
 			case 24:
-				slot_name = "Projectile";
-				break;
+				return "Projectile";
 			case 25:
-				slot_name = "Thrown";
-				break;
+				return "Thrown";
 			case 26:
-				slot_name = "Ranged";
-				break;
+				return "Ranged";
 			case 27:
-				slot_name = "Quiver";
-				image_url = "https://dl.dropboxusercontent.com/s/rt5q5mjjoqzj9cb/INV_Misc_Quiver_05.png?dl=0";
-				break;
+				return "Quiver";
 			case 28:
-				slot_name = "Relic";
-				image_url = "https://www.dropbox.com/s/78rsoi4jbzi5z2j/INV_Jewelry_Talisman_14.png?dl=0";
-				break;
+				return "Relic";
 			default:
-				slot_name = "";
-				image_url = "";
+				return "";
 		}
-
-		return [slot_name, image_url];
 	}
 
 	/***************************************************************************

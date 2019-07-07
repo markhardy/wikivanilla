@@ -25,8 +25,8 @@ Last Updated: 5/10/2019
 		return host;
 	}
 
-	//const host = getHost();
-	 const host = "https://wikivanilla.herokuapp.com";
+	//const host = "http://127.0.0.1:3000";
+	const host = "https://wikivanilla.herokuapp.com";
 
 	/***************************************************************************
 	getById(String)
@@ -89,6 +89,10 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	/***************************************************************************
+	getRequiredItems(Array of Strings)
+	Ask the web server for data to display required items for the quest.
+	***************************************************************************/
 	function getRequiredItems(item_ids) {
 		var url = host + "/itemlink?item_id1=" + item_ids["item1"][0] + "&item_id2=" + item_ids["item2"][0] + "&item_id3=" + item_ids["item3"][0] + "&item_id4=" + item_ids["item4"][0];
 
@@ -181,6 +185,10 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	/***************************************************************************
+	getRewardItems(Array of Strings)
+	Queries database for information to display reward items for the quest.
+	***************************************************************************/
 	function getRewardItems(item_ids) {
 		var url = host + "/itemlink?item_id1=" + item_ids["item1"][0] + "&item_id2=" + item_ids["item2"][0] + "&item_id3=" + item_ids["item3"][0] + "&item_id4=" + item_ids["item4"][0];
 
@@ -264,6 +272,11 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	/***************************************************************************
+	getRewardChoiceItems(Array of Strings)
+	Asks web server for data on items a player may choose for rewards for this
+	quest.
+	***************************************************************************/
 	function getRewardChoiceItems(item_ids) {
 		var url = host + "/itemlink?item_id1=" + item_ids["item1"][0] + "&item_id2=" + item_ids["item2"][0] + "&item_id3=" + item_ids["item3"][0] + "&item_id4=" + item_ids["item4"][0] + "&item_id5=" + item_ids["item5"][0] + "&item_id6" + item_ids["item6"][0];
 
@@ -388,6 +401,10 @@ Last Updated: 5/10/2019
 			});
 	}
 
+	/***************************************************************************
+	displayQuest(Array, String)
+	Displays data about the quest to the user.
+	***************************************************************************/
 	function displayQuest(json_results, requested){
 		const quest_query = json_results["result"][0];
 
@@ -812,6 +829,11 @@ Last Updated: 5/10/2019
 		results.appendChild(rew_rep);
 	}
 
+	/***************************************************************************
+	getZone(Integer, Array of Strings)
+	Figures out what zone the quest is in based on its location header in 
+	quest logs. For instance, returns Elywnn Forest for Northshire Valley
+	***************************************************************************/
 	function getZone(areaID, zones) {
 		var area = String(areaID);
 		var zone_data = zones[area];
@@ -825,6 +847,10 @@ Last Updated: 5/10/2019
 		return zone;
 	}
 
+	/***************************************************************************
+	sanitizeText(String)
+	Gets rid of escape characters and replaces them inside quest text.
+	***************************************************************************/
 	function sanitizeText(text) {
 		if (text.includes("$B")) {
 			text = text.replace("$B$B$B", "<br /><br /><br />")
@@ -834,6 +860,10 @@ Last Updated: 5/10/2019
 		return text;
 	}
 
+	/***************************************************************************
+	getQuestType(Integer)
+	Returns what type of quest based on an ID.
+	***************************************************************************/
 	function getQuestType(type) {
 		switch (type) {
 			case 1:
