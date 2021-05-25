@@ -31,4 +31,4 @@ Earthshaker -> Purple epic quality weapon droppped by Magmadar.
 
 Searching for an item currently works but I will be adding many
 more features over the summer and hopefully have a fully functional
-on the web shortly!
+on the web shortly!!
